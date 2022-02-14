@@ -11,10 +11,14 @@ namespace BloonTowerMaker.Data
     class Models
     {
         private string fpath = "../../res/towerfiles/<>.json";
+        private string dpath = "../../userfiles";
+
 
         public BaseModel GetBaseModel()
         {
-            StreamReader r = new StreamReader(fpath.Replace("<>","base"));
+            validate("000");
+            var jsonpath = $"{dpath}/tower_000/data_000.json";
+            StreamReader r = new StreamReader(jsonpath);
             string jsonString = r.ReadToEnd();
             var json = JsonConvert.DeserializeObject<BaseModel>(jsonString);
             r.Close();
@@ -23,7 +27,8 @@ namespace BloonTowerMaker.Data
         public TemplateModel GetTemplateModel(string path)
         {
             validate(path);
-            StreamReader r = new StreamReader(fpath.Replace("<>", path));
+            var jsonpath = $"{dpath}/tower_{path}/data_{path}.json";
+            StreamReader r = new StreamReader(jsonpath);
             string jsonString = r.ReadToEnd();
             var json = JsonConvert.DeserializeObject<TemplateModel>(jsonString);
             r.Close();
@@ -32,29 +37,33 @@ namespace BloonTowerMaker.Data
 
         public void UpdateBaseModel(BaseModel model)
         {
+            var jsonpath = $"{dpath}/tower_000/data_000.json";
             var json = JsonConvert.SerializeObject(model);
-            File.WriteAllText(fpath.Replace("<>","base"),json);
+            File.WriteAllText(jsonpath, json);
         }
         public void UpdateTemplateModel(TemplateModel model, string path)
         {
+            var jsonpath = $"{dpath}/tower_{path}/data_{path}.json";
             var json = JsonConvert.SerializeObject(model);
-            File.WriteAllText(fpath.Replace("<>", path),json);
+            File.WriteAllText(jsonpath, json);
         }
 
         private void validate(string path)
         {
-            StreamReader r;
-            try
+            var filepath = $"{dpath}/tower_{path}";
+            if (!Directory.Exists(filepath))
+                Directory.CreateDirectory(filepath);
+            if (!Directory.Exists(filepath + "/images"))
+                Directory.CreateDirectory(filepath + "/images");
+
+            var datapath = $"{filepath}/data_{path}.json";
+            if (!File.Exists(datapath))
             {
-                r = new StreamReader(fpath.Replace("<>", path));
-            }
-            catch (Exception e)
-            {
-                r = new StreamReader(fpath.Replace("<>", "template"));
+                StreamReader r = new StreamReader(fpath.Replace("<>", "template"));
                 var template = r.ReadToEnd();
-                File.WriteAllText(fpath.Replace("<>", path), template);
+                File.WriteAllText(datapath, template);
+                r.Close();
             }
-            r.Close();
         }
     }
 }

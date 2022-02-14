@@ -39,11 +39,11 @@ namespace BloonTowerMaker
             this.btn_t030 = new System.Windows.Forms.Button();
             this.btn_t040 = new System.Windows.Forms.Button();
             this.btn_t050 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
+            this.btn_t001 = new System.Windows.Forms.Button();
+            this.btn_t002 = new System.Windows.Forms.Button();
+            this.btn_t003 = new System.Windows.Forms.Button();
+            this.btn_t004 = new System.Windows.Forms.Button();
+            this.btn_t005 = new System.Windows.Forms.Button();
             this.btn_t555 = new System.Windows.Forms.Button();
             this.label_cost = new System.Windows.Forms.Label();
             this.img_base = new System.Windows.Forms.PictureBox();
@@ -203,80 +203,80 @@ namespace BloonTowerMaker
             this.btn_t050.Text = "100";
             this.btn_t050.UseVisualStyleBackColor = false;
             // 
-            // button10
+            // btn_t001
             // 
-            this.button10.BackColor = System.Drawing.Color.Transparent;
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.ForeColor = System.Drawing.Color.Transparent;
-            this.button10.Location = new System.Drawing.Point(390, 491);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(111, 105);
-            this.button10.TabIndex = 0;
-            this.button10.Text = "100";
-            this.button10.UseVisualStyleBackColor = false;
+            this.btn_t001.BackColor = System.Drawing.Color.Transparent;
+            this.btn_t001.FlatAppearance.BorderSize = 0;
+            this.btn_t001.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_t001.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_t001.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t001.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_t001.Location = new System.Drawing.Point(390, 491);
+            this.btn_t001.Name = "btn_t001";
+            this.btn_t001.Size = new System.Drawing.Size(111, 105);
+            this.btn_t001.TabIndex = 0;
+            this.btn_t001.Text = "100";
+            this.btn_t001.UseVisualStyleBackColor = false;
             // 
-            // button11
+            // btn_t002
             // 
-            this.button11.BackColor = System.Drawing.Color.Transparent;
-            this.button11.FlatAppearance.BorderSize = 0;
-            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.ForeColor = System.Drawing.Color.Transparent;
-            this.button11.Location = new System.Drawing.Point(536, 491);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(111, 105);
-            this.button11.TabIndex = 0;
-            this.button11.Text = "100";
-            this.button11.UseVisualStyleBackColor = false;
+            this.btn_t002.BackColor = System.Drawing.Color.Transparent;
+            this.btn_t002.FlatAppearance.BorderSize = 0;
+            this.btn_t002.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_t002.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_t002.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t002.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_t002.Location = new System.Drawing.Point(536, 491);
+            this.btn_t002.Name = "btn_t002";
+            this.btn_t002.Size = new System.Drawing.Size(111, 105);
+            this.btn_t002.TabIndex = 0;
+            this.btn_t002.Text = "100";
+            this.btn_t002.UseVisualStyleBackColor = false;
             // 
-            // button12
+            // btn_t003
             // 
-            this.button12.BackColor = System.Drawing.Color.Transparent;
-            this.button12.FlatAppearance.BorderSize = 0;
-            this.button12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.ForeColor = System.Drawing.Color.Transparent;
-            this.button12.Location = new System.Drawing.Point(682, 491);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(111, 105);
-            this.button12.TabIndex = 0;
-            this.button12.Text = "100";
-            this.button12.UseVisualStyleBackColor = false;
+            this.btn_t003.BackColor = System.Drawing.Color.Transparent;
+            this.btn_t003.FlatAppearance.BorderSize = 0;
+            this.btn_t003.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_t003.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_t003.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t003.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_t003.Location = new System.Drawing.Point(682, 491);
+            this.btn_t003.Name = "btn_t003";
+            this.btn_t003.Size = new System.Drawing.Size(111, 105);
+            this.btn_t003.TabIndex = 0;
+            this.btn_t003.Text = "100";
+            this.btn_t003.UseVisualStyleBackColor = false;
             // 
-            // button13
+            // btn_t004
             // 
-            this.button13.BackColor = System.Drawing.Color.Transparent;
-            this.button13.FlatAppearance.BorderSize = 0;
-            this.button13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.ForeColor = System.Drawing.Color.Transparent;
-            this.button13.Location = new System.Drawing.Point(822, 491);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(111, 105);
-            this.button13.TabIndex = 0;
-            this.button13.Text = "100";
-            this.button13.UseVisualStyleBackColor = false;
+            this.btn_t004.BackColor = System.Drawing.Color.Transparent;
+            this.btn_t004.FlatAppearance.BorderSize = 0;
+            this.btn_t004.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_t004.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_t004.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t004.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_t004.Location = new System.Drawing.Point(822, 491);
+            this.btn_t004.Name = "btn_t004";
+            this.btn_t004.Size = new System.Drawing.Size(111, 105);
+            this.btn_t004.TabIndex = 0;
+            this.btn_t004.Text = "100";
+            this.btn_t004.UseVisualStyleBackColor = false;
             // 
-            // button14
+            // btn_t005
             // 
-            this.button14.BackColor = System.Drawing.Color.Transparent;
-            this.button14.FlatAppearance.BorderSize = 0;
-            this.button14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.ForeColor = System.Drawing.Color.Transparent;
-            this.button14.Location = new System.Drawing.Point(972, 491);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(111, 105);
-            this.button14.TabIndex = 0;
-            this.button14.Text = "100";
-            this.button14.UseVisualStyleBackColor = false;
+            this.btn_t005.BackColor = System.Drawing.Color.Transparent;
+            this.btn_t005.FlatAppearance.BorderSize = 0;
+            this.btn_t005.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_t005.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_t005.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t005.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_t005.Location = new System.Drawing.Point(972, 491);
+            this.btn_t005.Name = "btn_t005";
+            this.btn_t005.Size = new System.Drawing.Size(111, 105);
+            this.btn_t005.TabIndex = 0;
+            this.btn_t005.Text = "100";
+            this.btn_t005.UseVisualStyleBackColor = false;
             // 
             // btn_t555
             // 
@@ -365,19 +365,19 @@ namespace BloonTowerMaker
             this.Controls.Add(this.img_base);
             this.Controls.Add(this.label_cost);
             this.Controls.Add(this.btn_t555);
-            this.Controls.Add(this.button14);
+            this.Controls.Add(this.btn_t005);
             this.Controls.Add(this.btn_t050);
             this.Controls.Add(this.btn_t500);
-            this.Controls.Add(this.button13);
+            this.Controls.Add(this.btn_t004);
             this.Controls.Add(this.btn_t040);
             this.Controls.Add(this.btn_t400);
-            this.Controls.Add(this.button12);
+            this.Controls.Add(this.btn_t003);
             this.Controls.Add(this.btn_t030);
             this.Controls.Add(this.btn_t300);
-            this.Controls.Add(this.button11);
+            this.Controls.Add(this.btn_t002);
             this.Controls.Add(this.btn_t020);
             this.Controls.Add(this.btn_t200);
-            this.Controls.Add(this.button10);
+            this.Controls.Add(this.btn_t001);
             this.Controls.Add(this.btn_t010);
             this.Controls.Add(this.btn_t100);
             this.DoubleBuffered = true;
@@ -407,11 +407,11 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Button btn_t030;
         private System.Windows.Forms.Button btn_t040;
         private System.Windows.Forms.Button btn_t050;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button btn_t001;
+        private System.Windows.Forms.Button btn_t002;
+        private System.Windows.Forms.Button btn_t003;
+        private System.Windows.Forms.Button btn_t004;
+        private System.Windows.Forms.Button btn_t005;
         private System.Windows.Forms.Button btn_t555;
         private System.Windows.Forms.Label label_cost;
         private System.Windows.Forms.PictureBox img_base;
