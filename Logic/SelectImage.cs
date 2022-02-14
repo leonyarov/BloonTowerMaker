@@ -7,10 +7,12 @@ using System.Windows.Forms;
 
 namespace BloonTowerMaker.Logic
 {
-    class UpdateForm
+    class SelectImage
     {
-        public void UpdateFormDetails(ref Form form)
+        public static void SelectIcon()
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.ShowDialog();
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BloonTowerMaker.res.towerfiles
+namespace BloonTowerMaker.res.csTemplate
 {
-    class Base
+    class PathTemplate
     {
     }
 }

@@ -50,6 +50,7 @@ namespace BloonTowerMaker
             this.label_description = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.combo_type = new System.Windows.Forms.ComboBox();
+            this.btn_generate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.img_base)).BeginInit();
             this.SuspendLayout();
             // 
@@ -353,12 +354,28 @@ namespace BloonTowerMaker
             this.combo_type.TabIndex = 7;
             this.combo_type.SelectedIndexChanged += new System.EventHandler(this.combo_type_SelectedIndexChanged);
             // 
+            // btn_generate
+            // 
+            this.btn_generate.BackColor = System.Drawing.Color.LawnGreen;
+            this.btn_generate.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_generate.FlatAppearance.BorderSize = 5;
+            this.btn_generate.Font = new System.Drawing.Font("Luckiest Guy", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_generate.ForeColor = System.Drawing.Color.White;
+            this.btn_generate.Location = new System.Drawing.Point(1155, 668);
+            this.btn_generate.Name = "btn_generate";
+            this.btn_generate.Size = new System.Drawing.Size(166, 49);
+            this.btn_generate.TabIndex = 8;
+            this.btn_generate.Text = "Generate";
+            this.btn_generate.UseVisualStyleBackColor = false;
+            this.btn_generate.Click += new System.EventHandler(this.btn_generate_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloonTowerMaker.Properties.Resources.primary;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.btn_generate);
             this.Controls.Add(this.combo_type);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_description);
@@ -418,6 +435,7 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label_description;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox combo_type;
+        private System.Windows.Forms.Button btn_generate;
     }
 }
 

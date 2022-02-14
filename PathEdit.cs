@@ -65,5 +65,15 @@ namespace BloonTowerMaker
                 models.UpdateTemplateModel(templateModel, path);
             MainForm.ActiveForm.Update();
         }
+
+        private void img_display_Click(object sender, EventArgs e)
+        {
+            image_select_dialog.ShowDialog();
+        }
+
+        private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

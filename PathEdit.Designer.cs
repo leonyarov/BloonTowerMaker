@@ -50,6 +50,7 @@ namespace BloonTowerMaker
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
@@ -144,6 +145,7 @@ namespace BloonTowerMaker
             this.img_display.Size = new System.Drawing.Size(137, 129);
             this.img_display.TabIndex = 3;
             this.img_display.TabStop = false;
+            this.img_display.Click += new System.EventHandler(this.img_display_Click);
             // 
             // label4
             // 
@@ -280,6 +282,12 @@ namespace BloonTowerMaker
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
             // 
+            // image_select_dialog
+            // 
+            this.image_select_dialog.FileName = "openFileDialog1";
+            this.image_select_dialog.Filter = "Image Files|*.png|jpeg files|*.jpeg ";
+            this.image_select_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.image_select_dialog_FileOk);
+            // 
             // PathEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,5 +345,6 @@ namespace BloonTowerMaker
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.OpenFileDialog image_select_dialog;
     }
 }

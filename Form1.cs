@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using BloonTowerMaker.Data;
+using BloonTowerMaker.Logic;
 
 namespace BloonTowerMaker
 {
@@ -85,6 +86,20 @@ namespace BloonTowerMaker
                 default:
                     break;
             }
+        }
+
+        private void btn_generate_Click(object sender, EventArgs e)
+        {
+            Compile cmp = new Compile();
+            try
+            {
+                cmp.CompileTower();
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString(),"Failed to compile",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            MessageBox.Show("Tower Created");
         }
     }
 }

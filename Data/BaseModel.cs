@@ -15,5 +15,6 @@ namespace BloonTowerMaker.Data
         public string description;
         public string paragon;
         public string type;
+        public string name;
     }
 }
