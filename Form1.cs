@@ -18,6 +18,9 @@ namespace BloonTowerMaker
     {
         BaseModel data;
         Models models;
+
+        public object ImageSelect { get; private set; }
+
         public MainForm()
         {
             InitializeComponent();
@@ -45,7 +48,7 @@ namespace BloonTowerMaker
             var model = models.GetTemplateModel(name);
             label_cost.Text = model.cost;
             label_description.Text = model.description;
-            //img_base.Image = model.display;
+            img_base.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
         }
         private void img_base_Click(object sender, EventArgs e)
         {
@@ -61,6 +64,9 @@ namespace BloonTowerMaker
                     item.Click += PathSelect;
                     item.MouseEnter += PathHover;
                     item.MouseLeave += MainForm_Enter;
+                    item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
+                    item.BackgroundImageLayout = ImageLayout.Stretch;
+                    item.Text = "";
                 }
             }
 
@@ -71,6 +77,18 @@ namespace BloonTowerMaker
             data = models.GetBaseModel();
             label_cost.Text = data.cost;
             label_description.Text = data.description;
+            img_base.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
+
+            foreach (var item in this.Controls.OfType<Button>())
+            {
+                if (item.Name.Contains("btn_t"))
+                {
+                    if (item.BackgroundImage != null)
+                        item.BackgroundImage.Dispose();
+                    item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
+                }
+            }
+
         }
 
         private void combo_type_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,8 +97,8 @@ namespace BloonTowerMaker
             ComboBox box = sender as ComboBox;
             switch (box.SelectedIndex)
             {
-                case 0: this.BackgroundImage = (Image)Properties.Resources.primary;  break;
-                case 1: this.BackgroundImage = (Image)Properties.Resources.army; break;
+                case 0: this.BackgroundImage = Properties.Resources.primary;  break;
+                case 1: this.BackgroundImage = Properties.Resources.army; break;
                 case 2: this.BackgroundImage = Properties.Resources.magic; break;
                 case 3: this.BackgroundImage = Properties.Resources.support; break;
                 default:

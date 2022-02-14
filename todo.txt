@@ -4,3 +4,4 @@ TODO: 3. See if monkey can be ranged or melee
 TODO: 4. Image in json file
 TODO: 5. tower save option
 TODO: 6. author information on parser
+TODO: 7. FIX IMAGE USED BY PROCESS

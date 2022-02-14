@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BloonTowerMaker.Data;
+using BloonTowerMaker.Logic;
+
 namespace BloonTowerMaker
 {
     public partial class PathEdit : Form
@@ -18,6 +20,7 @@ namespace BloonTowerMaker
         TemplateModel templateModel;
         bool isBase = false;
         Models models;
+        string lastImage = "";
         public PathEdit(string path = "000")
         {
             InitializeComponent();
@@ -41,8 +44,16 @@ namespace BloonTowerMaker
                 input_cost.Text = templateModel.cost;
                 input_desc.Text = templateModel.description;
             }
+            UpdateImages(); //Update images on form
         }
 
+        private void UpdateImages()
+        {
+       
+            img_display.Image =       SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
+            img_icon.Image =          SelectImage.GetImage(SelectImage.image_type.ICON, path);
+            img_projectile.Image =    SelectImage.GetImage(SelectImage.image_type.PROJECTILE, path);
+        }
         private void button_ok_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -67,17 +78,73 @@ namespace BloonTowerMaker
             MainForm.ActiveForm.Update();
         }
 
-        private void img_display_Click(object sender, EventArgs e)
+
+        private void RemoveImage(object sender,string path)
         {
-            image_select_dialog.ShowDialog();
+            var img = sender as PictureBox;
+            try
+            {
+                if (img.Image != null)
+                    img.Dispose();
+                File.Delete(Models.getImagesPath(path) + $"{lastImage}.png");
+            }
+            catch (Exception err){
+                MessageBox.Show(err.ToString(), "Cant delete Image");
+            }
+            UpdateImages();
         }
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
-            
             var file = image_select_dialog.FileName;
-            string dpath = $"../../userfiles/tower_{path}/images";
-            File.Copy(file,Models.getImagesPath(path) + "display.png");
+            try
+            {
+                File.Copy(file, Models.getImagesPath(path) + $"{lastImage}.png", true);
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(err.ToString(), "Error getting image", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            UpdateImages(); //Update images on form
+
+        }
+
+        private void PathEdit_Enter(object sender, EventArgs e)
+        {
+            PathEdit_Load(sender,e);
+        }
+
+        private void img_display_MouseClick(object sender, MouseEventArgs e)
+        {
+            lastImage = "portrait";
+            if (e.Button == MouseButtons.Right)
+            {
+                RemoveImage(sender,path);
+                return;
+            }
+            image_select_dialog.ShowDialog();
+        }
+
+        private void img_projectile_MouseClick(object sender, MouseEventArgs e)
+        {
+            lastImage = "projectile";
+            if (e.Button == MouseButtons.Right)
+            {
+                RemoveImage(sender,path);
+                return;
+            }
+            image_select_dialog.ShowDialog();
+        }
+
+        private void img_icon_MouseClick(object sender, MouseEventArgs e)
+        {
+            lastImage = "icon";
+            if (e.Button == MouseButtons.Right)
+            {
+                RemoveImage(sender,path);
+                return;
+            }
+            image_select_dialog.ShowDialog();
         }
     }
 }

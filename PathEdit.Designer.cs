@@ -107,8 +107,10 @@ namespace BloonTowerMaker
             this.img_projectile.Location = new System.Drawing.Point(3, 33);
             this.img_projectile.Name = "img_projectile";
             this.img_projectile.Size = new System.Drawing.Size(89, 81);
+            this.img_projectile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img_projectile.TabIndex = 3;
             this.img_projectile.TabStop = false;
+            this.img_projectile.MouseClick += new System.Windows.Forms.MouseEventHandler(this.img_projectile_MouseClick);
             // 
             // label2
             // 
@@ -125,8 +127,10 @@ namespace BloonTowerMaker
             this.img_icon.Location = new System.Drawing.Point(116, 33);
             this.img_icon.Name = "img_icon";
             this.img_icon.Size = new System.Drawing.Size(92, 81);
+            this.img_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img_icon.TabIndex = 3;
             this.img_icon.TabStop = false;
+            this.img_icon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.img_icon_MouseClick);
             // 
             // label3
             // 
@@ -143,9 +147,10 @@ namespace BloonTowerMaker
             this.img_display.Location = new System.Drawing.Point(17, 66);
             this.img_display.Name = "img_display";
             this.img_display.Size = new System.Drawing.Size(137, 129);
+            this.img_display.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img_display.TabIndex = 3;
             this.img_display.TabStop = false;
-            this.img_display.Click += new System.EventHandler(this.img_display_Click);
+            this.img_display.MouseClick += new System.Windows.Forms.MouseEventHandler(this.img_display_MouseClick);
             // 
             // label4
             // 
@@ -306,6 +311,7 @@ namespace BloonTowerMaker
             this.Text = "PathEdit";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PathEdit_FormClosing);
             this.Load += new System.EventHandler(this.PathEdit_Load);
+            this.Enter += new System.EventHandler(this.PathEdit_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).EndInit();
