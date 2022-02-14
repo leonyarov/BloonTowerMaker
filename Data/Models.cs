@@ -65,5 +65,14 @@ namespace BloonTowerMaker.Data
                 r.Close();
             }
         }
-    }
+
+        public static string getImagesPath(string path)
+        {
+            return $"../../userfiles/tower_{path}/images/";
+        }
+        public static string getTowerPath(string path)
+        {
+            return $"../../userfiles/tower_{path}/";
+        }
+}
 }

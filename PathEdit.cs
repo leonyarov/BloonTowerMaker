@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,7 +74,10 @@ namespace BloonTowerMaker
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
-
+            
+            var file = image_select_dialog.FileName;
+            string dpath = $"../../userfiles/tower_{path}/images";
+            File.Copy(file,Models.getImagesPath(path) + "display.png");
         }
     }
 }
