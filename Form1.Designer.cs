@@ -45,6 +45,13 @@ namespace BloonTowerMaker
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
+            this.btn_t555 = new System.Windows.Forms.Button();
+            this.label_cost = new System.Windows.Forms.Label();
+            this.img_base = new System.Windows.Forms.PictureBox();
+            this.label_description = new System.Windows.Forms.Label();
+            this.combo_type = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.img_base)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_t100
@@ -77,7 +84,7 @@ namespace BloonTowerMaker
             this.btn_t200.TabIndex = 0;
             this.btn_t200.Text = "100";
             this.btn_t200.UseVisualStyleBackColor = false;
-            this.btn_t200.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t200.Click += new System.EventHandler(this.btn_t200_Click);
             // 
             // btn_t300
             // 
@@ -93,7 +100,7 @@ namespace BloonTowerMaker
             this.btn_t300.TabIndex = 0;
             this.btn_t300.Text = "100";
             this.btn_t300.UseVisualStyleBackColor = false;
-            this.btn_t300.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t300.Click += new System.EventHandler(this.btn_t300_Click);
             // 
             // btn_t400
             // 
@@ -109,7 +116,7 @@ namespace BloonTowerMaker
             this.btn_t400.TabIndex = 0;
             this.btn_t400.Text = "100";
             this.btn_t400.UseVisualStyleBackColor = false;
-            this.btn_t400.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t400.Click += new System.EventHandler(this.btn_t400_Click);
             // 
             // btn_t500
             // 
@@ -125,7 +132,7 @@ namespace BloonTowerMaker
             this.btn_t500.TabIndex = 0;
             this.btn_t500.Text = "100";
             this.btn_t500.UseVisualStyleBackColor = false;
-            this.btn_t500.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t500.Click += new System.EventHandler(this.btn_t500_Click);
             // 
             // btn_t010
             // 
@@ -141,7 +148,7 @@ namespace BloonTowerMaker
             this.btn_t010.TabIndex = 0;
             this.btn_t010.Text = "100";
             this.btn_t010.UseVisualStyleBackColor = false;
-            this.btn_t010.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t010.Click += new System.EventHandler(this.btn_t010_Click);
             // 
             // btn_t020
             // 
@@ -157,7 +164,7 @@ namespace BloonTowerMaker
             this.btn_t020.TabIndex = 0;
             this.btn_t020.Text = "100";
             this.btn_t020.UseVisualStyleBackColor = false;
-            this.btn_t020.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t020.Click += new System.EventHandler(this.btn_t020_Click);
             // 
             // btn_t030
             // 
@@ -173,7 +180,7 @@ namespace BloonTowerMaker
             this.btn_t030.TabIndex = 0;
             this.btn_t030.Text = "100";
             this.btn_t030.UseVisualStyleBackColor = false;
-            this.btn_t030.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t030.Click += new System.EventHandler(this.btn_t030_Click);
             // 
             // btn_t040
             // 
@@ -189,7 +196,7 @@ namespace BloonTowerMaker
             this.btn_t040.TabIndex = 0;
             this.btn_t040.Text = "100";
             this.btn_t040.UseVisualStyleBackColor = false;
-            this.btn_t040.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t040.Click += new System.EventHandler(this.btn_t040_Click);
             // 
             // btn_t050
             // 
@@ -205,7 +212,7 @@ namespace BloonTowerMaker
             this.btn_t050.TabIndex = 0;
             this.btn_t050.Text = "100";
             this.btn_t050.UseVisualStyleBackColor = false;
-            this.btn_t050.Click += new System.EventHandler(this.btn_t100_Click);
+            this.btn_t050.Click += new System.EventHandler(this.btn_t050_Click);
             // 
             // button10
             // 
@@ -221,7 +228,6 @@ namespace BloonTowerMaker
             this.button10.TabIndex = 0;
             this.button10.Text = "100";
             this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.btn_t100_Click);
             // 
             // button11
             // 
@@ -237,7 +243,6 @@ namespace BloonTowerMaker
             this.button11.TabIndex = 0;
             this.button11.Text = "100";
             this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.btn_t100_Click);
             // 
             // button12
             // 
@@ -253,7 +258,6 @@ namespace BloonTowerMaker
             this.button12.TabIndex = 0;
             this.button12.Text = "100";
             this.button12.UseVisualStyleBackColor = false;
-            this.button12.Click += new System.EventHandler(this.btn_t100_Click);
             // 
             // button13
             // 
@@ -269,7 +273,6 @@ namespace BloonTowerMaker
             this.button13.TabIndex = 0;
             this.button13.Text = "100";
             this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(this.btn_t100_Click);
             // 
             // button14
             // 
@@ -285,7 +288,79 @@ namespace BloonTowerMaker
             this.button14.TabIndex = 0;
             this.button14.Text = "100";
             this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(this.btn_t100_Click);
+            // 
+            // btn_t555
+            // 
+            this.btn_t555.BackColor = System.Drawing.Color.Transparent;
+            this.btn_t555.FlatAppearance.BorderSize = 0;
+            this.btn_t555.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_t555.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_t555.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t555.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_t555.Location = new System.Drawing.Point(1098, 162);
+            this.btn_t555.Name = "btn_t555";
+            this.btn_t555.Size = new System.Drawing.Size(137, 457);
+            this.btn_t555.TabIndex = 1;
+            this.btn_t555.Text = "555";
+            this.btn_t555.UseVisualStyleBackColor = false;
+            // 
+            // label_cost
+            // 
+            this.label_cost.AutoSize = true;
+            this.label_cost.Location = new System.Drawing.Point(289, 569);
+            this.label_cost.Name = "label_cost";
+            this.label_cost.Size = new System.Drawing.Size(13, 13);
+            this.label_cost.TabIndex = 2;
+            this.label_cost.Text = "0";
+            // 
+            // img_base
+            // 
+            this.img_base.BackColor = System.Drawing.Color.Transparent;
+            this.img_base.Location = new System.Drawing.Point(135, 217);
+            this.img_base.Name = "img_base";
+            this.img_base.Size = new System.Drawing.Size(219, 268);
+            this.img_base.TabIndex = 3;
+            this.img_base.TabStop = false;
+            this.img_base.Click += new System.EventHandler(this.img_base_Click);
+            // 
+            // label_description
+            // 
+            this.label_description.BackColor = System.Drawing.Color.Transparent;
+            this.label_description.Font = new System.Drawing.Font("Luckiest Guy", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_description.ForeColor = System.Drawing.Color.White;
+            this.label_description.Location = new System.Drawing.Point(354, 9);
+            this.label_description.Name = "label_description";
+            this.label_description.Size = new System.Drawing.Size(675, 77);
+            this.label_description.TabIndex = 4;
+            this.label_description.Text = "This is a very long desciption of a monkey tower inside btd6 tower editor";
+            // 
+            // combo_type
+            // 
+            this.combo_type.BackColor = System.Drawing.SystemColors.Window;
+            this.combo_type.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.combo_type.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.combo_type.Font = new System.Drawing.Font("Luckiest Guy", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combo_type.FormattingEnabled = true;
+            this.combo_type.Items.AddRange(new object[] {
+            "Primary",
+            "Military",
+            "Magic",
+            "Support"});
+            this.combo_type.Location = new System.Drawing.Point(217, 183);
+            this.combo_type.Name = "combo_type";
+            this.combo_type.Size = new System.Drawing.Size(137, 28);
+            this.combo_type.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Luckiest Guy", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(140, 183);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 28);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Type:";
             // 
             // MainForm
             // 
@@ -293,6 +368,12 @@ namespace BloonTowerMaker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.combo_type);
+            this.Controls.Add(this.label_description);
+            this.Controls.Add(this.img_base);
+            this.Controls.Add(this.label_cost);
+            this.Controls.Add(this.btn_t555);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.btn_t050);
             this.Controls.Add(this.btn_t500);
@@ -314,7 +395,12 @@ namespace BloonTowerMaker
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Form1";
+            this.Activated += new System.EventHandler(this.MainForm_Enter);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Enter += new System.EventHandler(this.MainForm_Enter);
+            ((System.ComponentModel.ISupportInitialize)(this.img_base)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -335,6 +421,12 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button btn_t555;
+        private System.Windows.Forms.Label label_cost;
+        private System.Windows.Forms.PictureBox img_base;
+        private System.Windows.Forms.Label label_description;
+        private System.Windows.Forms.ComboBox combo_type;
+        private System.Windows.Forms.Label label1;
     }
 }
 
