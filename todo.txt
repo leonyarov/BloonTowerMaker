@@ -1,3 +1,4 @@
 ﻿TODO: 1. Finish button naming on row 3
 TODO: 2. template.json requires tower defence params
 TODO: 3. See if monkey can be ranged or melee
+TODO: 4. Image in json file

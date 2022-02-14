@@ -17,17 +17,3 @@ namespace BloonTowerMaker.Data
         public string type;
     }
 }
-
-/*
- * {
-  "set": "PRIMARY",
-  "base": "",
-  "cost": "0",
-  "top": "0",
-  "buttom": "0",
-  "middle": "0",
-  "description": "",
-  "paragon": "555",
-  "type": "ranged",
-}
- */

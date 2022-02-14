@@ -27,7 +27,7 @@ namespace BloonTowerMaker
 
         private void PathEdit_Load(object sender, EventArgs e)
         {
-            label_path.Text = path;
+            label_path.Text = path; //get tower path from calling button
             if (isBase)
             {
                 baseModel = models.GetBaseModel();
@@ -37,8 +37,8 @@ namespace BloonTowerMaker
             else
             {
                 templateModel = models.GetTemplateModel(path);
-                //input_cost.Text = templateModel.cost;
-                //input_desc.Text = templateModel.description;
+                input_cost.Text = templateModel.cost;
+                input_desc.Text = templateModel.description;
             }
         }
 
@@ -49,8 +49,16 @@ namespace BloonTowerMaker
 
         private void PathEdit_FormClosing(object sender, FormClosingEventArgs e)
         {
-            baseModel.cost = input_cost.Text;
-            baseModel.description = input_desc.Text;
+            if (isBase)
+            {
+                baseModel.cost = input_cost.Text;
+                baseModel.description = input_desc.Text;
+            }
+            else
+            {
+                templateModel.cost = input_cost.Text;
+                templateModel.description = input_desc.Text;
+            }
             if (isBase)
                 models.UpdateBaseModel(baseModel);
             else

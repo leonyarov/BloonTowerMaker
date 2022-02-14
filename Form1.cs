@@ -6,8 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
-using BloonTowerMaker.Data;
+using System.Windows.Media;
 using BloonTowerMaker.Data;
 
 namespace BloonTowerMaker
@@ -20,6 +21,7 @@ namespace BloonTowerMaker
         {
             InitializeComponent();
             models = new Models();
+            combo_type.SelectedIndex = 0;
         }
 
 
@@ -29,58 +31,21 @@ namespace BloonTowerMaker
             edit.ShowDialog();
             edit.Focus();
         }
-
-        #region Buttons
-        private void btn_t100_Click(object sender, EventArgs e)
+        private void PathSelect(object sender, EventArgs e)
         {
-            Edit("100");
+            Button b = sender as Button;
+            var name = b.Name.Replace("btn_t", "");
+            Edit(name);
         }
-        private void btn_t020_Click(object sender, EventArgs e)
+        private void PathHover(object sender, EventArgs e)
         {
-            Edit("020");
+            Button b = sender as Button;
+            var name = b.Name.Replace("btn_t", "");
+            var model = models.GetTemplateModel(name);
+            label_cost.Text = model.cost;
+            label_description.Text = model.description;
+            //img_base.Image = model.display;
         }
-
-        private void btn_t300_Click(object sender, EventArgs e)
-        {
-            Edit("300");
-        }
-
-        private void btn_t400_Click(object sender, EventArgs e)
-        {
-            Edit("400");
-        }
-
-        private void btn_t500_Click(object sender, EventArgs e)
-        {
-            Edit("500");
-        }
-
-        private void btn_t050_Click(object sender, EventArgs e)
-        {
-            Edit("050");
-        }
-
-        private void btn_t040_Click(object sender, EventArgs e)
-        {
-            Edit("040");
-        }
-
-        private void btn_t030_Click(object sender, EventArgs e)
-        {
-            Edit("030");
-        }
-
-        private void btn_t200_Click(object sender, EventArgs e)
-        {
-            Edit("200");
-        }
-
-        private void btn_t010_Click(object sender, EventArgs e)
-        {
-            Edit("010");
-        }
-        #endregion
-
         private void img_base_Click(object sender, EventArgs e)
         {
             Edit("000");
@@ -88,6 +53,15 @@ namespace BloonTowerMaker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            foreach (var item in this.Controls.OfType<Button>())
+            {
+                if (item.Name.Contains("btn_t"))
+                {
+                    item.Click += PathSelect;
+                    item.MouseEnter += PathHover;
+                    item.MouseLeave += MainForm_Enter;
+                }
+            }
 
         }
 
@@ -95,6 +69,22 @@ namespace BloonTowerMaker
         {
             data = models.GetBaseModel();
             label_cost.Text = data.cost;
+            label_description.Text = data.description;
+        }
+
+        private void combo_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            ComboBox box = sender as ComboBox;
+            switch (box.SelectedIndex)
+            {
+                case 0: this.BackgroundImage = (Image)Properties.Resources.primary;  break;
+                case 1: this.BackgroundImage = (Image)Properties.Resources.army; break;
+                case 2: this.BackgroundImage = Properties.Resources.magic; break;
+                case 3: this.BackgroundImage = Properties.Resources.support; break;
+                default:
+                    break;
+            }
         }
     }
 }

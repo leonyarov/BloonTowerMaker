@@ -8,5 +8,12 @@ namespace BloonTowerMaker.Data
 {
     class TemplateModel
     {
+        public string path;
+        public string tier;
+        public string cost;
+        public string priority;
+        public string description;
+        public string portrait;
+        public string display;
     }
 }
