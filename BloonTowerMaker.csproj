@@ -69,6 +69,9 @@
       <HintPath>J:\Bloons TD 6\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>J:\Bloons TD 6\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>

@@ -17,28 +17,34 @@ namespace BloonTowerMaker.Logic
         public void CompileTower()
         {
             string[] files = {Parser.ParseMain(),Parser.ParseBase() };
-            CSharpCodeProvider cscp = new CSharpCodeProvider(
-                new Dictionary<string,string>() { {"CompilerVersion", Parser.ParseMain()} }
-                );
+            CSharpCodeProvider csc = new CSharpCodeProvider();
+            CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CompilerParameters parameters = new CompilerParameters();
-            parameters.ReferencedAssemblies.Add("mscorelib.dll");
-            parameters.ReferencedAssemblies.Add("System.Core.dll");
+            //parameters.ReferencedAssemblies.Add("mscorlib.dll");
+            //parameters.ReferencedAssemblies.Add("System.Core.dll");
             parameters.ReferencedAssemblies.Add("NKHook6.dll");
-            parameters.ReferencedAssemblies.Add("BTD_Mod_Helper.dll");
+            parameters.ReferencedAssemblies.Add("BloonsTD6 Mod Helper.dll");
             parameters.ReferencedAssemblies.Add("MelonLoader.dll");
             parameters.ReferencedAssemblies.Add("Il2Cppmscorlib.dll");
+            parameters.ReferencedAssemblies.Add("UnhollowerBaseLib.dll");
+            //parameters.ReferencedAssemblies.Add("NinjaKiwi.LiNK.dll");
+            //parameters.ReferencedAssemblies.Add("Unity.ResourceManager.dll");
+            parameters.ReferencedAssemblies.Add("UnityEngine.CoreModule.dll");
+            parameters.ReferencedAssemblies.Add("Assembly-CSharp.dll");
             parameters.IncludeDebugInformation = false;
             parameters.GenerateExecutable = false;
+            parameters.GenerateInMemory = false;
+            parameters.TreatWarningsAsErrors = false;
             parameters.OutputAssembly = $"{new Models().GetBaseModel().name.Replace(" ","")}.dll";
-
-            CompilerResults results = cscp.CompileAssemblyFromSource(parameters,files);
+             
+            CompilerResults results = provider.CompileAssemblyFromSource(parameters,files);
             if (results.Errors.Count > 0)
             {
                 var error = "";
                 foreach (CompilerError CompErr in results.Errors)
                 {
-                    error += 
-                        "Line number " + CompErr.Line +
+                    error += CompErr.FileName + 
+                        ": Line number " + CompErr.Line+ " " + CompErr.Column+
                         ", Error Number: " + CompErr.ErrorNumber +
                         ", '" + CompErr.ErrorText + ";" +
                         Environment.NewLine + Environment.NewLine;

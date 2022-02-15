@@ -25,7 +25,6 @@ namespace BloonTowerMaker
         {
             InitializeComponent();
             models = new Models();
-            combo_type.SelectedIndex = 0;
         }
 
 
@@ -48,7 +47,7 @@ namespace BloonTowerMaker
             var model = models.GetTemplateModel(name);
             label_cost.Text = model.cost;
             label_description.Text = model.description;
-            img_base.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
+            img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
         }
         private void img_base_Click(object sender, EventArgs e)
         {
@@ -97,10 +96,18 @@ namespace BloonTowerMaker
             ComboBox box = sender as ComboBox;
             switch (box.SelectedIndex)
             {
-                case 0: this.BackgroundImage = Properties.Resources.primary;  break;
-                case 1: this.BackgroundImage = Properties.Resources.army; break;
-                case 2: this.BackgroundImage = Properties.Resources.magic; break;
-                case 3: this.BackgroundImage = Properties.Resources.support; break;
+                case 0: this.BackgroundImage = Properties.Resources.primary;
+                    data.set = "PRIMARY";
+                    break;
+                case 1: this.BackgroundImage = Properties.Resources.army;
+                    data.set = "MILITARY";
+                    break;
+                case 2: this.BackgroundImage = Properties.Resources.magic; 
+                    data.set = "MAGIC";
+                    break;
+                case 3: this.BackgroundImage = Properties.Resources.support; 
+                    data.set = "SUPPORT";
+                    break;
                 default:
                     break;
             }
@@ -112,12 +119,12 @@ namespace BloonTowerMaker
             try
             {
                 cmp.CompileTower();
+                MessageBox.Show("Tower Created");
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.ToString(),"Failed to compile",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            MessageBox.Show("Tower Created");
         }
     }
 }

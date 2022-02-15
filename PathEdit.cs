@@ -37,22 +37,25 @@ namespace BloonTowerMaker
                 baseModel = models.GetBaseModel();
                 input_cost.Text = baseModel.cost;
                 input_desc.Text = baseModel.description;
+                input_name.Text = baseModel.name;
+
             }
             else
             {
                 templateModel = models.GetTemplateModel(path);
                 input_cost.Text = templateModel.cost;
                 input_desc.Text = templateModel.description;
+                input_name.Text = templateModel.name;
             }
             UpdateImages(); //Update images on form
         }
 
         private void UpdateImages()
         {
-       
-            img_display.Image =       SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
-            img_icon.Image =          SelectImage.GetImage(SelectImage.image_type.ICON, path);
-            img_projectile.Image =    SelectImage.GetImage(SelectImage.image_type.PROJECTILE, path);
+
+            img_display.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
+            img_icon.Image = SelectImage.GetImage(SelectImage.image_type.ICON, path);
+            img_projectile.Image = SelectImage.GetImage(SelectImage.image_type.PROJECTILE, path);
         }
         private void button_ok_Click(object sender, EventArgs e)
         {
@@ -65,11 +68,14 @@ namespace BloonTowerMaker
             {
                 baseModel.cost = input_cost.Text;
                 baseModel.description = input_desc.Text;
+                baseModel.name = input_name.Text;
+
             }
             else
             {
                 templateModel.cost = input_cost.Text;
                 templateModel.description = input_desc.Text;
+                templateModel.name = input_name.Text;
             }
             if (isBase)
                 models.UpdateBaseModel(baseModel);
@@ -79,16 +85,17 @@ namespace BloonTowerMaker
         }
 
 
-        private void RemoveImage(object sender,string path)
+        private void RemoveImage(object sender, string path)
         {
             var img = sender as PictureBox;
             try
             {
                 if (img.Image != null)
-                    img.Dispose();
+                    img.Image.Dispose();
                 File.Delete(Models.getImagesPath(path) + $"{lastImage}.png");
             }
-            catch (Exception err){
+            catch (Exception err)
+            {
                 MessageBox.Show(err.ToString(), "Cant delete Image");
             }
             UpdateImages();
@@ -111,7 +118,7 @@ namespace BloonTowerMaker
 
         private void PathEdit_Enter(object sender, EventArgs e)
         {
-            PathEdit_Load(sender,e);
+            PathEdit_Load(sender, e);
         }
 
         private void img_display_MouseClick(object sender, MouseEventArgs e)
@@ -119,7 +126,7 @@ namespace BloonTowerMaker
             lastImage = "portrait";
             if (e.Button == MouseButtons.Right)
             {
-                RemoveImage(sender,path);
+                RemoveImage(sender, path);
                 return;
             }
             image_select_dialog.ShowDialog();
@@ -130,7 +137,7 @@ namespace BloonTowerMaker
             lastImage = "projectile";
             if (e.Button == MouseButtons.Right)
             {
-                RemoveImage(sender,path);
+                RemoveImage(sender, path);
                 return;
             }
             image_select_dialog.ShowDialog();
@@ -141,7 +148,7 @@ namespace BloonTowerMaker
             lastImage = "icon";
             if (e.Button == MouseButtons.Right)
             {
-                RemoveImage(sender,path);
+                RemoveImage(sender, path);
                 return;
             }
             image_select_dialog.ShowDialog();

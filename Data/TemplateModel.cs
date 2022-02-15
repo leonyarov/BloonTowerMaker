@@ -15,5 +15,6 @@ namespace BloonTowerMaker.Data
         public string description;
         public string portrait;
         public string display;
+        public string name;
     }
 }
