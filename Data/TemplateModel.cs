@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace BloonTowerMaker.Data
 {
-    class TemplateModel
+    class TemplateModel : BaseModel
     {
+        //Path row
         public string path;
+
+        //Upgrade tier in row
         public string tier;
-        public string cost;
+
+        //change upgrade position in row
         public string priority;
-        public string description;
-        public string portrait;
-        public string display;
-        public string name;
+
     }
 }

@@ -16,6 +16,7 @@ namespace BloonTowerMaker
     public partial class PathEdit : Form
     {
         string path;
+        BaseModel model; //inheritance changes
         BaseModel baseModel;
         TemplateModel templateModel;
         bool isBase = false;
@@ -31,23 +32,41 @@ namespace BloonTowerMaker
 
         private void PathEdit_Load(object sender, EventArgs e)
         {
-            label_path.Text = path; //get tower path from calling button
             if (isBase)
-            {
-                baseModel = models.GetBaseModel();
-                input_cost.Text = baseModel.cost;
-                input_desc.Text = baseModel.description;
-                input_name.Text = baseModel.name;
-
-            }
+                model = models.GetBaseModel();
             else
+                model = models.GetTemplateModel(path);
+
+            label_path.Text = path; //get tower path from calling button
+
+            //input_cost.Text = model.cost;
+            //input_description.Text = model.description;
+            //input_name.Text = model.name;
+            //input_damage.Text = model.damage;
+            //input_pierce.Text = model.pierce;
+            //input_projectile_range.Text = model.projectile_range;
+            //input_projectile_speed.Text = model.pro;
+
+            foreach (var item in this.Controls.OfType<TextBox>())
             {
+                try { 
+                var extracted_name = item.Name.Replace("input_", "");
+                var model_value = typeof(BaseModel).GetProperty(extracted_name).GetValue(model);
+                item.Text = model_value.ToString();
+                } catch
+                {
+                    item.Text = "0";
+                }
+            }
+
+                //load all not base params
+                if (!isBase) { 
                 templateModel = models.GetTemplateModel(path);
                 input_cost.Text = templateModel.cost;
-                input_desc.Text = templateModel.description;
+                input_description.Text = templateModel.description;
                 input_name.Text = templateModel.name;
             }
-            UpdateImages(); //Update images on form
+                UpdateImages(); //Update images on form
         }
 
         private void UpdateImages()
@@ -67,16 +86,30 @@ namespace BloonTowerMaker
             if (isBase)
             {
                 baseModel.cost = input_cost.Text;
-                baseModel.description = input_desc.Text;
+                baseModel.description = input_description.Text;
                 baseModel.name = input_name.Text;
 
             }
             else
             {
                 templateModel.cost = input_cost.Text;
-                templateModel.description = input_desc.Text;
+                templateModel.description = input_description.Text;
                 templateModel.name = input_name.Text;
             }
+
+            foreach (var item in this.Controls.OfType<TextBox>())
+            {
+                try
+                {
+                    var extracted_name = item.Name.Replace("input_", "");
+                    typeof(BaseModel).GetProperty(extracted_name).SetValue(model, item.Text);
+                }
+                catch
+                {
+                    //property not found
+                }
+            }
+
             if (isBase)
                 models.UpdateBaseModel(baseModel);
             else

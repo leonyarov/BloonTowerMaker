@@ -6,3 +6,4 @@ TODO: 5. tower save option
 TODO: 6. author information on parser
 TODO: 7. FIX IMAGE USED BY PROCESS
 TODO: 8. Copy tower properties.
+TODO: 9. Stopped woring in PathEdit_FormClosing -> implement dynamic values save

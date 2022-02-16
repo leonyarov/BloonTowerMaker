@@ -37,7 +37,7 @@ namespace BloonTowerMaker
             this.label3 = new System.Windows.Forms.Label();
             this.img_display = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.input_desc = new System.Windows.Forms.RichTextBox();
+            this.input_description = new System.Windows.Forms.RichTextBox();
             this.Description = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combo_model = new System.Windows.Forms.ComboBox();
@@ -54,9 +54,9 @@ namespace BloonTowerMaker
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.additive_damage = new System.Windows.Forms.CheckBox();
+            this.additive_projectile_range = new System.Windows.Forms.CheckBox();
+            this.additive_speed = new System.Windows.Forms.CheckBox();
             this.input_range = new System.Windows.Forms.TextBox();
             this.input_damage = new System.Windows.Forms.TextBox();
             this.input_projectile_range = new System.Windows.Forms.TextBox();
@@ -65,7 +65,10 @@ namespace BloonTowerMaker
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.input_projectile_speed = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.additive_range = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.input_pierce = new System.Windows.Forms.TextBox();
+            this.additive_pierce = new System.Windows.Forms.CheckBox();
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
@@ -164,15 +167,15 @@ namespace BloonTowerMaker
             this.label4.TabIndex = 4;
             this.label4.Text = "Portrait";
             // 
-            // input_desc
+            // input_description
             // 
-            this.input_desc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.input_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_desc.Location = new System.Drawing.Point(5, 31);
-            this.input_desc.Name = "input_desc";
-            this.input_desc.Size = new System.Drawing.Size(252, 73);
-            this.input_desc.TabIndex = 5;
-            this.input_desc.Text = "description";
+            this.input_description.Dock = System.Windows.Forms.DockStyle.Top;
+            this.input_description.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.input_description.Location = new System.Drawing.Point(5, 31);
+            this.input_description.Name = "input_description";
+            this.input_description.Size = new System.Drawing.Size(252, 73);
+            this.input_description.TabIndex = 5;
+            this.input_description.Text = "description";
             // 
             // Description
             // 
@@ -286,7 +289,7 @@ namespace BloonTowerMaker
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.input_cost);
             this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.input_desc);
+            this.groupBox4.Controls.Add(this.input_description);
             this.groupBox4.Controls.Add(this.Description);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox4.ForeColor = System.Drawing.Color.Black;
@@ -301,7 +304,7 @@ namespace BloonTowerMaker
             // input_name
             // 
             this.input_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_name.Location = new System.Drawing.Point(154, 148);
+            this.input_name.Location = new System.Drawing.Point(154, 125);
             this.input_name.Name = "input_name";
             this.input_name.Size = new System.Drawing.Size(100, 20);
             this.input_name.TabIndex = 1;
@@ -310,7 +313,7 @@ namespace BloonTowerMaker
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label1.Location = new System.Drawing.Point(9, 132);
+            this.label1.Location = new System.Drawing.Point(9, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 0;
@@ -319,7 +322,7 @@ namespace BloonTowerMaker
             // input_cost
             // 
             this.input_cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_cost.Location = new System.Drawing.Point(9, 148);
+            this.input_cost.Location = new System.Drawing.Point(9, 125);
             this.input_cost.Name = "input_cost";
             this.input_cost.Size = new System.Drawing.Size(100, 20);
             this.input_cost.TabIndex = 1;
@@ -329,7 +332,7 @@ namespace BloonTowerMaker
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label5.Location = new System.Drawing.Point(151, 132);
+            this.label5.Location = new System.Drawing.Point(151, 109);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 13);
             this.label5.TabIndex = 0;
@@ -368,9 +371,9 @@ namespace BloonTowerMaker
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.checkBox4, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox3, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.additive_damage, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.additive_projectile_range, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.additive_speed, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.input_range, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.input_damage, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.input_projectile_range, 1, 2);
@@ -379,50 +382,54 @@ namespace BloonTowerMaker
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.input_projectile_speed, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.additive_range, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.input_pierce, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.additive_pierce, 2, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 5;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(338, 325);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // checkBox4
+            // additive_damage
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.checkBox4.Location = new System.Drawing.Point(166, 81);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(64, 17);
-            this.checkBox4.TabIndex = 5;
-            this.checkBox4.Text = "Additive";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.additive_damage.AutoSize = true;
+            this.additive_damage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.additive_damage.Location = new System.Drawing.Point(166, 81);
+            this.additive_damage.Name = "additive_damage";
+            this.additive_damage.Size = new System.Drawing.Size(64, 17);
+            this.additive_damage.TabIndex = 5;
+            this.additive_damage.Text = "Additive";
+            this.additive_damage.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // additive_projectile_range
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.checkBox3.Location = new System.Drawing.Point(166, 55);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(64, 17);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Additive";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.additive_projectile_range.AutoSize = true;
+            this.additive_projectile_range.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.additive_projectile_range.Location = new System.Drawing.Point(166, 55);
+            this.additive_projectile_range.Name = "additive_projectile_range";
+            this.additive_projectile_range.Size = new System.Drawing.Size(64, 17);
+            this.additive_projectile_range.TabIndex = 4;
+            this.additive_projectile_range.Text = "Additive";
+            this.additive_projectile_range.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // additive_speed
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.checkBox2.Location = new System.Drawing.Point(166, 29);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(64, 17);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "Additive";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.additive_speed.AutoSize = true;
+            this.additive_speed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.additive_speed.Location = new System.Drawing.Point(166, 29);
+            this.additive_speed.Name = "additive_speed";
+            this.additive_speed.Size = new System.Drawing.Size(64, 17);
+            this.additive_speed.TabIndex = 3;
+            this.additive_speed.Text = "Additive";
+            this.additive_speed.UseVisualStyleBackColor = true;
             // 
             // input_range
             // 
@@ -440,6 +447,7 @@ namespace BloonTowerMaker
             this.input_damage.Name = "input_damage";
             this.input_damage.Size = new System.Drawing.Size(66, 20);
             this.input_damage.TabIndex = 1;
+            this.input_damage.Text = "0";
             // 
             // input_projectile_range
             // 
@@ -448,6 +456,7 @@ namespace BloonTowerMaker
             this.input_projectile_range.Name = "input_projectile_range";
             this.input_projectile_range.Size = new System.Drawing.Size(66, 20);
             this.input_projectile_range.TabIndex = 1;
+            this.input_projectile_range.Text = "0";
             // 
             // label6
             // 
@@ -502,16 +511,47 @@ namespace BloonTowerMaker
             this.input_projectile_speed.TabIndex = 1;
             this.input_projectile_speed.Text = "0";
             // 
-            // checkBox1
+            // additive_range
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.checkBox1.Location = new System.Drawing.Point(166, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(64, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Additive";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.additive_range.AutoSize = true;
+            this.additive_range.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.additive_range.Location = new System.Drawing.Point(166, 3);
+            this.additive_range.Name = "additive_range";
+            this.additive_range.Size = new System.Drawing.Size(64, 17);
+            this.additive_range.TabIndex = 2;
+            this.additive_range.Text = "Additive";
+            this.additive_range.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(3, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Pierce";
+            // 
+            // input_pierce
+            // 
+            this.input_pierce.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.input_pierce.Location = new System.Drawing.Point(94, 107);
+            this.input_pierce.Name = "input_pierce";
+            this.input_pierce.Size = new System.Drawing.Size(66, 20);
+            this.input_pierce.TabIndex = 1;
+            this.input_pierce.Text = "0";
+            // 
+            // additive_pierce
+            // 
+            this.additive_pierce.AutoSize = true;
+            this.additive_pierce.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.additive_pierce.Location = new System.Drawing.Point(166, 107);
+            this.additive_pierce.Name = "additive_pierce";
+            this.additive_pierce.Size = new System.Drawing.Size(64, 17);
+            this.additive_pierce.TabIndex = 5;
+            this.additive_pierce.Text = "Additive";
+            this.additive_pierce.UseVisualStyleBackColor = true;
             // 
             // image_select_dialog
             // 
@@ -567,7 +607,7 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox img_display;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RichTextBox input_desc;
+        private System.Windows.Forms.RichTextBox input_description;
         private System.Windows.Forms.Label Description;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
@@ -581,9 +621,9 @@ namespace BloonTowerMaker
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox additive_damage;
+        private System.Windows.Forms.CheckBox additive_projectile_range;
+        private System.Windows.Forms.CheckBox additive_speed;
         private System.Windows.Forms.TextBox input_range;
         private System.Windows.Forms.TextBox input_damage;
         private System.Windows.Forms.TextBox input_projectile_range;
@@ -592,10 +632,13 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox input_projectile_speed;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox additive_range;
         private System.Windows.Forms.TextBox input_name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox input_cost;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox input_pierce;
+        private System.Windows.Forms.CheckBox additive_pierce;
     }
 }

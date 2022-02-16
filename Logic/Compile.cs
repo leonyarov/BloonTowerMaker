@@ -16,28 +16,47 @@ namespace BloonTowerMaker.Logic
     {
         public void CompileTower()
         {
-            string[] files = {Parser.ParseMain(),Parser.ParseBase() };
-            CSharpCodeProvider csc = new CSharpCodeProvider();
+            //Get all files as array of strings
+            List<string> files = new List<string>();
+            try
+            {
+                files.Add(Parser.ParseMain());
+                files.Add(Parser.ParseBase());
+                files.AddRange(Parser.ParsePath());
+            } catch (Exception e) {throw e;}
+            //Create provider
+            //CSharpCodeProvider csc = new CSharpCodeProvider();
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CompilerParameters parameters = new CompilerParameters();
-            //parameters.ReferencedAssemblies.Add("mscorlib.dll");
-            //parameters.ReferencedAssemblies.Add("System.Core.dll");
-            parameters.ReferencedAssemblies.Add("NKHook6.dll");
-            parameters.ReferencedAssemblies.Add("BloonsTD6 Mod Helper.dll");
-            parameters.ReferencedAssemblies.Add("MelonLoader.dll");
-            parameters.ReferencedAssemblies.Add("Il2Cppmscorlib.dll");
-            parameters.ReferencedAssemblies.Add("UnhollowerBaseLib.dll");
-            //parameters.ReferencedAssemblies.Add("NinjaKiwi.LiNK.dll");
-            //parameters.ReferencedAssemblies.Add("Unity.ResourceManager.dll");
-            parameters.ReferencedAssemblies.Add("UnityEngine.CoreModule.dll");
-            parameters.ReferencedAssemblies.Add("Assembly-CSharp.dll");
+            try
+            {
+                //parameters.ReferencedAssemblies.Add("mscorlib.dll");
+                //parameters.ReferencedAssemblies.Add("System.Core.dll");
+                parameters.ReferencedAssemblies.Add("NKHook6.dll");
+                parameters.ReferencedAssemblies.Add("BloonsTD6 Mod Helper.dll");
+                parameters.ReferencedAssemblies.Add("MelonLoader.dll");
+                parameters.ReferencedAssemblies.Add("Il2Cppmscorlib.dll");
+                parameters.ReferencedAssemblies.Add("UnhollowerBaseLib.dll");
+                //parameters.ReferencedAssemblies.Add("NinjaKiwi.LiNK.dll");
+                //parameters.ReferencedAssemblies.Add("Unity.ResourceManager.dll");
+                parameters.ReferencedAssemblies.Add("UnityEngine.CoreModule.dll");
+                parameters.ReferencedAssemblies.Add("Assembly-CSharp.dll");
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show(e.Message, "Error getting library files",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                throw e;
+            }
+
+            //Compile parameters
             parameters.IncludeDebugInformation = false;
             parameters.GenerateExecutable = false;
             parameters.GenerateInMemory = false;
             parameters.TreatWarningsAsErrors = false;
             parameters.OutputAssembly = $"{new Models().GetBaseModel().name.Replace(" ","")}.dll";
              
-            CompilerResults results = provider.CompileAssemblyFromSource(parameters,files);
+            //Compile
+            CompilerResults results = provider.CompileAssemblyFromSource(parameters,files.ToArray());
             if (results.Errors.Count > 0)
             {
                 var error = "";

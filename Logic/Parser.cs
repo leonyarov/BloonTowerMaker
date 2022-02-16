@@ -62,7 +62,7 @@ namespace BloonTowerMaker.Logic
             file = file.Replace("/*BottomPathUpgrades*/", model.buttom);
             file = file.Replace("/*Description*/", model.description);
             file = file.Replace("/*ParagonMode*/", model.paragon);
-            file = file.Replace("/*range*/", "0");
+            file = file.Replace("/*range*/", model.range);
             file = file.Replace("/*attack_range*/", "0");
             file = file.Replace("/*projectile*/", "null");
             file = file.Replace("/*pierce*/", "0");
@@ -72,9 +72,29 @@ namespace BloonTowerMaker.Logic
             return file;
         }
 
-        public static void ParsePath()
+        //TODO: test this function 
+        public static string[] ParsePath()
         {
-
+            List<string> sources = new List<string>();
+            var pathfiles = $"{Environment.CurrentDirectory}/../../userfiles";
+            if (!Directory.Exists(pathfiles)) throw new DirectoryNotFoundException("Cant find project folder");
+            foreach (var towerfile in Directory.GetFiles(pathfiles, "*.json", SearchOption.AllDirectories))
+            {
+                if (towerfile.Contains("000")) continue; //skip base file
+                var model = models.GetTemplateModel(towerfile.Replace("data_",""));
+                var basefile = $"{Environment.CurrentDirectory}/../../res/csTemplate/TemplateModel.cs";
+                try
+                {
+                    StreamReader r = new StreamReader(basefile);
+                    sources.Add(r.ReadToEnd());
+                    r.Close();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Error Parsing {towerfile} data: {e.Message}");
+                }
+            }
+            return sources.ToArray();
         }
     }
 }

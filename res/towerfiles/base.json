@@ -8,5 +8,11 @@
   "description": "",
   "paragon": "ParagonMode.None",
   "type": "ranged",
-  "name": ""
+  "name": "",
+
+  "damage": "",
+  "range": "",
+  "projectile_range": "",
+  "pierce": "",
+  "projectile_speed": ""
 }
