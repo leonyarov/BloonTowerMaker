@@ -49,7 +49,7 @@ namespace BloonTowerMaker
             this.img_base = new System.Windows.Forms.PictureBox();
             this.label_description = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.combo_type = new System.Windows.Forms.ComboBox();
+            this.input_type = new System.Windows.Forms.ComboBox();
             this.btn_generate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.img_base)).BeginInit();
             this.SuspendLayout();
@@ -312,6 +312,7 @@ namespace BloonTowerMaker
             this.img_base.Location = new System.Drawing.Point(135, 217);
             this.img_base.Name = "img_base";
             this.img_base.Size = new System.Drawing.Size(219, 268);
+            this.img_base.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img_base.TabIndex = 3;
             this.img_base.TabStop = false;
             this.img_base.Click += new System.EventHandler(this.img_base_Click);
@@ -339,20 +340,20 @@ namespace BloonTowerMaker
             this.label1.TabIndex = 6;
             this.label1.Text = "Type:";
             // 
-            // combo_type
+            // input_type
             // 
-            this.combo_type.Font = new System.Drawing.Font("Luckiest Guy", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combo_type.FormattingEnabled = true;
-            this.combo_type.Items.AddRange(new object[] {
+            this.input_type.Font = new System.Drawing.Font("Luckiest Guy", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.input_type.FormattingEnabled = true;
+            this.input_type.Items.AddRange(new object[] {
             "Primary",
             "Military",
             "Magic",
             "Support"});
-            this.combo_type.Location = new System.Drawing.Point(202, 183);
-            this.combo_type.Name = "combo_type";
-            this.combo_type.Size = new System.Drawing.Size(121, 24);
-            this.combo_type.TabIndex = 7;
-            this.combo_type.SelectedIndexChanged += new System.EventHandler(this.combo_type_SelectedIndexChanged);
+            this.input_type.Location = new System.Drawing.Point(202, 183);
+            this.input_type.Name = "input_type";
+            this.input_type.Size = new System.Drawing.Size(121, 24);
+            this.input_type.TabIndex = 7;
+            this.input_type.SelectedIndexChanged += new System.EventHandler(this.combo_type_SelectedIndexChanged);
             // 
             // btn_generate
             // 
@@ -376,7 +377,7 @@ namespace BloonTowerMaker
             this.BackgroundImage = global::BloonTowerMaker.Properties.Resources.primary;
             this.ClientSize = new System.Drawing.Size(1350, 729);
             this.Controls.Add(this.btn_generate);
-            this.Controls.Add(this.combo_type);
+            this.Controls.Add(this.input_type);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_description);
             this.Controls.Add(this.img_base);
@@ -433,7 +434,7 @@ namespace BloonTowerMaker
         private System.Windows.Forms.PictureBox img_base;
         private System.Windows.Forms.Label label_description;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox combo_type;
+        private System.Windows.Forms.ComboBox input_type;
         private System.Windows.Forms.Button btn_generate;
     }
 }

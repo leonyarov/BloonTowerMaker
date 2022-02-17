@@ -9,6 +9,7 @@ namespace BloonTowerMaker.Logic
     internal class Builder
     {
         private const string VARIABLE = @"public override $type$ $name$ {get { return $value$;}}";
+        private const string FUNCTION_VARIABLE = @"$type$ $name$ {get { return $value$;}}";
         private const string MAIN_CLASS = @"using BTD_Mod_Helper;
                                             using MelonLoader;
                                             [assembly: MelonInfo(typeof($tower$.Main), $towername$, $version$, $author$)]
@@ -67,6 +68,7 @@ namespace BloonTowerMaker.Logic
 
             return stringBuilder.ToString();
         }
+
         //TODO: implement version and author
         public static string BuildMain(string tower, string version , string author)
         {
@@ -87,7 +89,7 @@ namespace BloonTowerMaker.Logic
 
         public static string BuildPath(string tower, string upgrade)
         {
-            StringBuilder stringBuilder = new StringBuilder(BASE_CLASS);
+            StringBuilder stringBuilder = new StringBuilder(PATH_CLASS);
             stringBuilder.Replace("$tower$", tower.Replace(" ", ""));
             stringBuilder.Replace("$upgrade$", upgrade);
             return stringBuilder.ToString();

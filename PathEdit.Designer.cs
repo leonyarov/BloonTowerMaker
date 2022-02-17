@@ -37,7 +37,6 @@ namespace BloonTowerMaker
             this.label3 = new System.Windows.Forms.Label();
             this.img_display = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.input_description = new System.Windows.Forms.RichTextBox();
             this.Description = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combo_model = new System.Windows.Forms.ComboBox();
@@ -70,6 +69,10 @@ namespace BloonTowerMaker
             this.input_pierce = new System.Windows.Forms.TextBox();
             this.additive_pierce = new System.Windows.Forms.CheckBox();
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.input_basetower = new System.Windows.Forms.ComboBox();
+            this.input_description = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
@@ -81,6 +84,7 @@ namespace BloonTowerMaker
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_path
@@ -107,7 +111,7 @@ namespace BloonTowerMaker
             // 
             // img_projectile
             // 
-            this.img_projectile.Location = new System.Drawing.Point(201, 27);
+            this.img_projectile.Location = new System.Drawing.Point(201, 110);
             this.img_projectile.Name = "img_projectile";
             this.img_projectile.Size = new System.Drawing.Size(67, 60);
             this.img_projectile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -128,7 +132,7 @@ namespace BloonTowerMaker
             // 
             // img_icon
             // 
-            this.img_icon.Location = new System.Drawing.Point(201, 110);
+            this.img_icon.Location = new System.Drawing.Point(201, 27);
             this.img_icon.Name = "img_icon";
             this.img_icon.Size = new System.Drawing.Size(67, 64);
             this.img_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -166,16 +170,6 @@ namespace BloonTowerMaker
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Portrait";
-            // 
-            // input_description
-            // 
-            this.input_description.Dock = System.Windows.Forms.DockStyle.Top;
-            this.input_description.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_description.Location = new System.Drawing.Point(5, 31);
-            this.input_description.Name = "input_description";
-            this.input_description.Size = new System.Drawing.Size(252, 73);
-            this.input_description.TabIndex = 5;
-            this.input_description.Text = "description";
             // 
             // Description
             // 
@@ -285,11 +279,8 @@ namespace BloonTowerMaker
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.input_name);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.input_cost);
-            this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.input_description);
+            this.groupBox4.Controls.Add(this.tableLayoutPanel2);
             this.groupBox4.Controls.Add(this.Description);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox4.ForeColor = System.Drawing.Color.Black;
@@ -304,7 +295,7 @@ namespace BloonTowerMaker
             // input_name
             // 
             this.input_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_name.Location = new System.Drawing.Point(154, 125);
+            this.input_name.Location = new System.Drawing.Point(109, 16);
             this.input_name.Name = "input_name";
             this.input_name.Size = new System.Drawing.Size(100, 20);
             this.input_name.TabIndex = 1;
@@ -313,7 +304,7 @@ namespace BloonTowerMaker
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label1.Location = new System.Drawing.Point(9, 109);
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(28, 13);
             this.label1.TabIndex = 0;
@@ -322,7 +313,7 @@ namespace BloonTowerMaker
             // input_cost
             // 
             this.input_cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_cost.Location = new System.Drawing.Point(9, 125);
+            this.input_cost.Location = new System.Drawing.Point(3, 16);
             this.input_cost.Name = "input_cost";
             this.input_cost.Size = new System.Drawing.Size(100, 20);
             this.input_cost.TabIndex = 1;
@@ -332,7 +323,7 @@ namespace BloonTowerMaker
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label5.Location = new System.Drawing.Point(151, 109);
+            this.label5.Location = new System.Drawing.Point(109, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 13);
             this.label5.TabIndex = 0;
@@ -559,6 +550,58 @@ namespace BloonTowerMaker
             this.image_select_dialog.Filter = "Image Files|*.png|jpeg files|*.jpeg ";
             this.image_select_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.image_select_dialog_FileOk);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(3, 39);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(67, 13);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Tower Base:";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.input_cost, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.input_name, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.input_basetower, 1, 2);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 108);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(252, 69);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // input_basetower
+            // 
+            this.input_basetower.FormattingEnabled = true;
+            this.input_basetower.Items.AddRange(new object[] {
+            "TowerType.DartMonkey"});
+            this.input_basetower.Location = new System.Drawing.Point(109, 39);
+            this.input_basetower.Name = "input_basetower";
+            this.input_basetower.Size = new System.Drawing.Size(141, 21);
+            this.input_basetower.TabIndex = 7;
+            this.input_basetower.SelectedIndexChanged += new System.EventHandler(this.input_basetower_SelectedIndexChanged);
+            // 
+            // input_description
+            // 
+            this.input_description.Dock = System.Windows.Forms.DockStyle.Top;
+            this.input_description.Location = new System.Drawing.Point(5, 31);
+            this.input_description.Multiline = true;
+            this.input_description.Name = "input_description";
+            this.input_description.Size = new System.Drawing.Size(252, 57);
+            this.input_description.TabIndex = 1;
+            // 
             // PathEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -592,6 +635,8 @@ namespace BloonTowerMaker
             this.groupBox5.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -607,7 +652,6 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox img_display;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RichTextBox input_description;
         private System.Windows.Forms.Label Description;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
@@ -640,5 +684,9 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox input_pierce;
         private System.Windows.Forms.CheckBox additive_pierce;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox input_basetower;
+        private System.Windows.Forms.TextBox input_description;
     }
 }

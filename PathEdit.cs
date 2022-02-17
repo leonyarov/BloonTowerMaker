@@ -33,15 +33,6 @@ namespace BloonTowerMaker
             model = models.GetBaseModel(path);
 
             label_path.Text = path; //get tower path from calling button
-
-            //input_cost.Text = model.cost;
-            //input_description.Text = model.description;
-            //input_name.Text = model.name;
-            //input_damage.Text = model.damage;
-            //input_pierce.Text = model.pierce;
-            //input_projectile_range.Text = model.projectile_range;
-            //input_projectile_speed.Text = model.pro;
-
             foreach (var item in GetAllTextBoxControls(this))
             {
                 try 
@@ -55,10 +46,14 @@ namespace BloonTowerMaker
                     //Cant get property from Model
                     item.Text = "0";
                 }
-                //TODO: Do another GetProperty for the TempalteModel class
             }
-              
-                UpdateImages(); //Update images on form
+            UpdateImages(); //Update images on form
+
+            //Update Tower base for the 000 path
+            if (!isBase)
+                input_basetower.Enabled = false;
+            if (models.GetBaseModel("000").basetower != null)
+                input_basetower.SelectedIndex = input_basetower.Items.IndexOf(models.GetBaseModel("000").basetower);
         }
 
         private void UpdateImages()
@@ -180,5 +175,16 @@ namespace BloonTowerMaker
             return controlList;
         }
 
+        private void input_basetower_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (input_basetower.SelectedIndex)
+            {
+                case 0: model.basetower = "TowerType.DartMonkey"; break;
+                default:
+                        model.basetower = "TowerType.DartMonkey"; break;
+
+            }
+            models.UpdateBaseModel(model,path);
+        }
     }
 }

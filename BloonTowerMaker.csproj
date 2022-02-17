@@ -134,7 +134,6 @@
     </Compile>
     <None Include="res\font\LuckiestGuy-Regular.ttf" />
     <None Include="res\towerfiles\base.json" />
-    <None Include="res\towerfiles\template.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

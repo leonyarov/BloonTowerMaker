@@ -47,6 +47,8 @@ namespace BloonTowerMaker
             var model = models.GetBaseModel(name);
             label_cost.Text = model.cost;
             label_description.Text = model.description;
+            if (img_base.Image != null)
+                img_base.Image.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
         }
         private void img_base_Click(object sender, EventArgs e)
@@ -62,22 +64,30 @@ namespace BloonTowerMaker
                 {
                     item.Click += PathSelect;
                     item.MouseEnter += PathHover;
-                    item.MouseLeave += MainForm_Enter;
+                    item.MouseLeave += MouseLeaveIcon;
                     item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
                     item.BackgroundImageLayout = ImageLayout.Stretch;
                     item.TextAlign = ContentAlignment.BottomCenter;
                 }
             }
 
+            input_type.SelectedIndex = models.GetBaseModel("000").set != null
+                ? input_type.Items.IndexOf(models.GetBaseModel("000").set)
+                : 0;
         }
 
-        private void MainForm_Enter(object sender, EventArgs e)
+        private void MouseLeaveIcon(object sender, EventArgs e)
         {
             data = models.GetBaseModel("000");
             label_cost.Text = data.cost;
             label_description.Text = data.description;
-            img_base.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
-
+            if (img_base.Image != null)
+                img_base.Image.Dispose();
+            img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
+        }
+        private void MainForm_Enter(object sender, EventArgs e)
+        {
+            MouseLeaveIcon(sender,e);
             foreach (var item in this.Controls.OfType<Button>())
             {
                 if (item.Name.Contains("btn_t"))
@@ -89,7 +99,6 @@ namespace BloonTowerMaker
                     item.Text = models.GetBaseModel(path).name;
                 }
             }
-
         }
 
         private void combo_type_SelectedIndexChanged(object sender, EventArgs e)
@@ -111,8 +120,11 @@ namespace BloonTowerMaker
                     data.set = "SUPPORT";
                     break;
                 default:
+                    this.BackgroundImage = Properties.Resources.primary;
+                    data.set = "PRIMARY";
                     break;
             }
+            models.UpdateBaseModel(data,"000");
         }
 
         private void btn_generate_Click(object sender, EventArgs e)
