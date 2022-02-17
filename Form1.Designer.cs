@@ -400,7 +400,6 @@ namespace BloonTowerMaker
             this.DoubleBuffered = true;
             this.Name = "MainForm";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Form1";
             this.Activated += new System.EventHandler(this.MainForm_Enter);

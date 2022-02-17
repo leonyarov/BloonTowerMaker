@@ -8,6 +8,15 @@ namespace BloonTowerMaker.Data
 {
     class BaseModel
     {
+        //Path row
+        public string path;
+
+        //Upgrade tier in row
+        public string tier;
+
+        //change upgrade position in row
+        public string priority;
+
         //tower category
         public string set; 
         //base tower to inherit from

@@ -44,7 +44,7 @@ namespace BloonTowerMaker
         {
             Button b = sender as Button;
             var name = b.Name.Replace("btn_t", "");
-            var model = models.GetTemplateModel(name);
+            var model = models.GetBaseModel(name);
             label_cost.Text = model.cost;
             label_description.Text = model.description;
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
@@ -65,7 +65,7 @@ namespace BloonTowerMaker
                     item.MouseLeave += MainForm_Enter;
                     item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
                     item.BackgroundImageLayout = ImageLayout.Stretch;
-                    item.Text = "";
+                    item.TextAlign = ContentAlignment.BottomCenter;
                 }
             }
 
@@ -73,7 +73,7 @@ namespace BloonTowerMaker
 
         private void MainForm_Enter(object sender, EventArgs e)
         {
-            data = models.GetBaseModel();
+            data = models.GetBaseModel("000");
             label_cost.Text = data.cost;
             label_description.Text = data.description;
             img_base.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
@@ -82,9 +82,11 @@ namespace BloonTowerMaker
             {
                 if (item.Name.Contains("btn_t"))
                 {
+                    string path = item.Name.Replace("btn_t", "");
                     if (item.BackgroundImage != null)
                         item.BackgroundImage.Dispose();
-                    item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
+                    item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
+                    item.Text = models.GetBaseModel(path).name;
                 }
             }
 

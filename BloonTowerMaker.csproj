@@ -78,7 +78,6 @@
     <Compile Include="Data\BaseModel.cs" />
     <Compile Include="Data\Conventions.cs" />
     <Compile Include="Data\Models.cs" />
-    <Compile Include="Data\TemplateModel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +89,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Form1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Builder.cs" />
     <Compile Include="Logic\Compile.cs" />
     <Compile Include="Logic\Parser.cs" />
     <Compile Include="Logic\SelectImage.cs" />

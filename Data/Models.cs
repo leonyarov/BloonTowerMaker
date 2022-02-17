@@ -14,37 +14,26 @@ namespace BloonTowerMaker.Data
         private string dpath = "../../userfiles";
 
 
-        public BaseModel GetBaseModel()
-        {
-            validate("000");
-            var jsonpath = $"{dpath}/tower_000/data_000.json";
-            StreamReader r = new StreamReader(jsonpath);
-            string jsonString = r.ReadToEnd();
-            var json = JsonConvert.DeserializeObject<BaseModel>(jsonString);
-            r.Close();
-            return json;
-        } 
-        public TemplateModel GetTemplateModel(string path)
+        public BaseModel GetBaseModel(string path)
         {
             validate(path);
             var jsonpath = $"{dpath}/tower_{path}/data_{path}.json";
             StreamReader r = new StreamReader(jsonpath);
             string jsonString = r.ReadToEnd();
-            var json = JsonConvert.DeserializeObject<TemplateModel>(jsonString);
+            var json = JsonConvert.DeserializeObject<BaseModel>(jsonString);
             r.Close();
             return json;
         }
 
-        public void UpdateBaseModel(BaseModel model)
-        {
-            var jsonpath = $"{dpath}/tower_000/data_000.json";
-            var json = JsonConvert.SerializeObject(model);
-            File.WriteAllText(jsonpath, json);
-        }
-        public void UpdateTemplateModel(TemplateModel model, string path)
+        public void UpdateBaseModel(BaseModel model, string path)
         {
             var jsonpath = $"{dpath}/tower_{path}/data_{path}.json";
             var json = JsonConvert.SerializeObject(model);
+            
+            if (json == null)
+            {
+                throw new Exception("Failed to convert data to json");   
+            }
             File.WriteAllText(jsonpath, json);
         }
 
@@ -59,10 +48,8 @@ namespace BloonTowerMaker.Data
             var datapath = $"{filepath}/data_{path}.json";
             if (!File.Exists(datapath))
             {
-                StreamReader r = new StreamReader(fpath.Replace("<>", "template"));
-                var template = r.ReadToEnd();
-                File.WriteAllText(datapath, template);
-                r.Close();
+                var json = JsonConvert.SerializeObject(new BaseModel());
+                File.WriteAllText(datapath, json);
             }
         }
 

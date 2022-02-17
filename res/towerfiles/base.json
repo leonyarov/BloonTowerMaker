@@ -1,14 +1,24 @@
 ﻿{
   "set": "",
   "basetower": "TowerType.DartMonkey",
-  "cost": "",
+
+  "priority": "",
+  "path": "",
+  "tier": "",
   "top": "0",
   "buttom": "0",
   "middle": "0",
-  "description": "",
+
   "paragon": "ParagonMode.None",
   "type": "ranged",
+
   "name": "",
+  "description": "",
+  "cost": "",
+
+  "portrait": "",
+  "projectile": "",
+  "display": "",
 
   "damage": "",
   "range": "",

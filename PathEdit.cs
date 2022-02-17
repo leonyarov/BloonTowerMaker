@@ -16,9 +16,7 @@ namespace BloonTowerMaker
     public partial class PathEdit : Form
     {
         string path;
-        BaseModel model; //inheritance changes
-        BaseModel baseModel;
-        TemplateModel templateModel;
+        BaseModel model;
         bool isBase = false;
         Models models;
         string lastImage = "";
@@ -32,10 +30,7 @@ namespace BloonTowerMaker
 
         private void PathEdit_Load(object sender, EventArgs e)
         {
-            if (isBase)
-                model = models.GetBaseModel();
-            else
-                model = models.GetTemplateModel(path);
+            model = models.GetBaseModel(path);
 
             label_path.Text = path; //get tower path from calling button
 
@@ -47,25 +42,22 @@ namespace BloonTowerMaker
             //input_projectile_range.Text = model.projectile_range;
             //input_projectile_speed.Text = model.pro;
 
-            foreach (var item in this.Controls.OfType<TextBox>())
+            foreach (var item in GetAllTextBoxControls(this))
             {
-                try { 
-                var extracted_name = item.Name.Replace("input_", "");
-                var model_value = typeof(BaseModel).GetProperty(extracted_name).GetValue(model);
-                item.Text = model_value.ToString();
+                try 
+                { 
+                    var extracted_name = item.Name.Replace("input_", "");
+                    var property = model.GetType().GetField(extracted_name);
+                    var value = property.GetValue(model);
+                    item.Text = (string)value;
                 } catch
                 {
+                    //Cant get property from Model
                     item.Text = "0";
                 }
+                //TODO: Do another GetProperty for the TempalteModel class
             }
-
-                //load all not base params
-                if (!isBase) { 
-                templateModel = models.GetTemplateModel(path);
-                input_cost.Text = templateModel.cost;
-                input_description.Text = templateModel.description;
-                input_name.Text = templateModel.name;
-            }
+              
                 UpdateImages(); //Update images on form
         }
 
@@ -83,37 +75,26 @@ namespace BloonTowerMaker
 
         private void PathEdit_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isBase)
-            {
-                baseModel.cost = input_cost.Text;
-                baseModel.description = input_description.Text;
-                baseModel.name = input_name.Text;
 
-            }
-            else
-            {
-                templateModel.cost = input_cost.Text;
-                templateModel.description = input_description.Text;
-                templateModel.name = input_name.Text;
-            }
-
-            foreach (var item in this.Controls.OfType<TextBox>())
+            foreach (var item in GetAllTextBoxControls(this))
             {
                 try
                 {
                     var extracted_name = item.Name.Replace("input_", "");
-                    typeof(BaseModel).GetProperty(extracted_name).SetValue(model, item.Text);
+                    var property = model.GetType().GetField(extracted_name);
+                    property.SetValue(model,item.Text);
                 }
                 catch
                 {
-                    //property not found
+                    MessageBox.Show("Error saving value");
                 }
             }
 
-            if (isBase)
-                models.UpdateBaseModel(baseModel);
-            else
-                models.UpdateTemplateModel(templateModel, path);
+            //if (isBase)
+            //    models.UpdateBaseModel(model);
+            //else
+            models.UpdateBaseModel(model, path);
+
             MainForm.ActiveForm.Update();
         }
 
@@ -186,5 +167,18 @@ namespace BloonTowerMaker
             }
             image_select_dialog.ShowDialog();
         }
+
+        private IEnumerable<Control> GetAllTextBoxControls(Control container)
+        {
+            List<Control> controlList = new List<Control>();
+            foreach (Control c in container.Controls)
+            {
+                controlList.AddRange(GetAllTextBoxControls(c));
+                if (c is TextBox)
+                    controlList.Add(c);
+            }
+            return controlList;
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace /*tower*/
     {
         // public override string Portrait { get { return "/*LatestURL*/"; } } "Don't need to override this, using the default of Name-Portrait";
         // public override string Icon { get { return "/*LatestURL*/"; } } "Don't need to override this, using the default of Name-Icon";
-
+        /*VARIABLES*/
         public override string TowerSet { get { return /*TowerSet*/; } } 
         public override string BaseTower { get { return /*BaseTower*/; } } 
         public override int Cost { get { return /*Cost*/; } } 

@@ -53,7 +53,7 @@ namespace BloonTowerMaker.Logic
             parameters.GenerateExecutable = false;
             parameters.GenerateInMemory = false;
             parameters.TreatWarningsAsErrors = false;
-            parameters.OutputAssembly = $"{new Models().GetBaseModel().name.Replace(" ","")}.dll";
+            parameters.OutputAssembly = $"{new Models().GetBaseModel("000").name.Replace(" ","")}.dll";
              
             //Compile
             CompilerResults results = provider.CompileAssemblyFromSource(parameters,files.ToArray());
