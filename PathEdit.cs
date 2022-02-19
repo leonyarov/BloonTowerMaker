@@ -85,6 +85,9 @@ namespace BloonTowerMaker
                 }
             }
 
+            model.tier = Models.GetPathTier(path).ToString();
+            model.path = Models.GetPathRow(path);
+
             //if (isBase)
             //    models.UpdateBaseModel(model);
             //else

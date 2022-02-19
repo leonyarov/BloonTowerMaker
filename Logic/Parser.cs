@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Assets.Scripts.Models;
 
 namespace BloonTowerMaker.Logic
 {
@@ -30,17 +31,17 @@ namespace BloonTowerMaker.Logic
             var model = models.GetBaseModel("000");
             StringBuilder file = new StringBuilder(Builder.BuildBase(model.name));
             StringBuilder vars = new StringBuilder();
-            vars.Append(Builder.BuildVariable("string", "TowerSet", model.set));
-            vars.Append(Builder.BuildVariable("string", "BaseTower", model.basetower));
+            vars.Append(Builder.BuildVariable("string?", "TowerSet", model.set));
+            vars.Append(Builder.BuildVariable("string?", "BaseTower", model.basetower));
             vars.Append(Builder.BuildVariable("string", "Description", model.description));
             vars.Append(Builder.BuildVariable("int", "Cost", model.cost));
             vars.Append(Builder.BuildVariable("int", "TopPathUpgrades", model.top));
             vars.Append(Builder.BuildVariable("int", "MiddlePathUpgrades", model.middle));
             vars.Append(Builder.BuildVariable("int", "BottomPathUpgrades", model.buttom));
-            vars.Append(Builder.BuildVariable("ParagonMode", "ParagonMode", "ParagonMode.None"));
+            //vars.Append(Builder.BuildVariable("ParagonMode", "ParagonMode", "ParagonMode.None"));
             StringBuilder func = new StringBuilder(Builder.BuildFunction("ModifyBaseTowerModel", "TowerModel towerModel"));
-            file.Replace("VARIABLES", vars.ToString());
-            file.Replace("FUNCTIONS", func.ToString());
+            file.Replace("/*VARIABLES*/", vars.ToString());
+            file.Replace("/*FUNCTIONS*/", func.ToString());
             return file.ToString();
         }
 
@@ -50,17 +51,33 @@ namespace BloonTowerMaker.Logic
             var pathfiles = $"{Environment.CurrentDirectory}/../../userfiles";
             var tower_name = models.GetBaseModel("000").name;
             if (!Directory.Exists(pathfiles)) throw new DirectoryNotFoundException("Cant find project folder");
-            foreach (var towerfile in Directory.GetFiles(pathfiles, "*.json", SearchOption.AllDirectories))
+            try
             {
-                if (towerfile.Contains("000")) continue; //skip base file
-                var model = models.GetBaseModel(towerfile.Replace("data_",""));
-                StringBuilder file = new StringBuilder(Builder.BuildPath(tower_name,model.name));
-                StringBuilder vars = new StringBuilder();
-                vars.Append(Builder.BuildVariable("int", "Cost", model.cost));
-                vars.Append(Builder.BuildVariable("string", "Description", model.description));
-                file.Replace("/*VARIABLES*/", vars.ToString());
-                sources.Append(file.ToString());
+                foreach (var towerfile in Directory.GetFiles(pathfiles, "*.json", SearchOption.AllDirectories))
+                {
+                    var path = towerfile.Substring(towerfile.Length - 8, 3);
+                    if (path == "000" || !models.isAllowed(path)) continue; //skip base file
+                    var model = models.GetBaseModel(path);
+                    if (!models.PathExist(model)) continue; //if files is not edited enought skip it
+                    StringBuilder file = new StringBuilder(Builder.BuildPath(tower_name, model.name));
+                    StringBuilder vars = new StringBuilder();
+                    vars.Append(Builder.BuildVariable("int", "Cost", model.cost));
+                    vars.Append(Builder.BuildVariable("string", "Description", model.description));
+                    vars.Append(Builder.BuildVariable("int", "Path", model.path));
+                    vars.Append(Builder.BuildVariable("int", "Tier", model.tier));
+                    StringBuilder func = new StringBuilder();
+                    func.Append(Builder.BuildFunction("ApplyUpgrade", "TowerModel tower"));
+
+                    file.Replace("/*VARIABLES*/", vars.ToString());
+                    file.Replace("/*FUNCTIONS*/", func.ToString());
+                    sources.Add(file.ToString());
+                }
             }
+            catch (Exception e)
+            {
+                throw new Exception("Cannot open .json file");
+            }
+
             return sources.ToArray();
         }
     }

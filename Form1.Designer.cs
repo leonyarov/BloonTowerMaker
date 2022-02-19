@@ -29,6 +29,7 @@ namespace BloonTowerMaker
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btn_t100 = new System.Windows.Forms.Button();
             this.btn_t200 = new System.Windows.Forms.Button();
             this.btn_t300 = new System.Windows.Forms.Button();
@@ -51,7 +52,25 @@ namespace BloonTowerMaker
             this.label1 = new System.Windows.Forms.Label();
             this.input_type = new System.Windows.Forms.ComboBox();
             this.btn_generate = new System.Windows.Forms.Button();
+            this.input_top = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.input_middle = new System.Windows.Forms.NumericUpDown();
+            this.input_buttom = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.img_base)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.input_top)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.input_middle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.input_buttom)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_t100
@@ -370,12 +389,143 @@ namespace BloonTowerMaker
             this.btn_generate.UseVisualStyleBackColor = false;
             this.btn_generate.Click += new System.EventHandler(this.btn_generate_Click);
             // 
+            // input_top
+            // 
+            this.input_top.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.input_top.Location = new System.Drawing.Point(50, 3);
+            this.input_top.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.input_top.Name = "input_top";
+            this.input_top.Size = new System.Drawing.Size(69, 20);
+            this.input_top.TabIndex = 9;
+            this.input_top.ValueChanged += new System.EventHandler(this.input_top_ValueChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
+            this.groupBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.groupBox1.Location = new System.Drawing.Point(39, 33);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(123, 117);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Paths";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.input_top, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.input_middle, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.input_buttom, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(117, 98);
+            this.tableLayoutPanel1.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 26);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Top:";
+            // 
+            // input_middle
+            // 
+            this.input_middle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.input_middle.Location = new System.Drawing.Point(50, 29);
+            this.input_middle.Name = "input_middle";
+            this.input_middle.Size = new System.Drawing.Size(69, 20);
+            this.input_middle.TabIndex = 9;
+            this.input_middle.ValueChanged += new System.EventHandler(this.input_middle_ValueChanged);
+            // 
+            // input_buttom
+            // 
+            this.input_buttom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.input_buttom.Location = new System.Drawing.Point(50, 55);
+            this.input_buttom.Name = "input_buttom";
+            this.input_buttom.Size = new System.Drawing.Size(69, 20);
+            this.input_buttom.TabIndex = 9;
+            this.input_buttom.ValueChanged += new System.EventHandler(this.input_buttom_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 26);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Middle:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(3, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 46);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Buttom";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(1);
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton2});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(1350, 25);
+            this.toolStrip1.Stretch = true;
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem1});
+            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(38, 22);
+            this.toolStripDropDownButton2.Text = "File";
+            this.toolStripDropDownButton2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem1.Text = "Save";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloonTowerMaker.Properties.Resources.primary;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_generate);
             this.Controls.Add(this.input_type);
             this.Controls.Add(this.label1);
@@ -407,6 +557,14 @@ namespace BloonTowerMaker
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Enter += new System.EventHandler(this.MainForm_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.img_base)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.input_top)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.input_middle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.input_buttom)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,6 +594,18 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox input_type;
         private System.Windows.Forms.Button btn_generate;
+        private System.Windows.Forms.NumericUpDown input_top;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown input_middle;
+        private System.Windows.Forms.NumericUpDown input_buttom;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
     }
 }
 

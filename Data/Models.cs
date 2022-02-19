@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Il2CppSystem.Diagnostics.Tracing;
 using Newtonsoft.Json;
 
 namespace BloonTowerMaker.Data
@@ -13,15 +14,25 @@ namespace BloonTowerMaker.Data
         private string fpath = "../../res/towerfiles/<>.json";
         private string dpath = "../../userfiles";
 
-
         public BaseModel GetBaseModel(string path)
         {
+            BaseModel json;
             validate(path);
             var jsonpath = $"{dpath}/tower_{path}/data_{path}.json";
             StreamReader r = new StreamReader(jsonpath);
-            string jsonString = r.ReadToEnd();
-            var json = JsonConvert.DeserializeObject<BaseModel>(jsonString);
-            r.Close();
+            try
+            {
+                string jsonString = r.ReadToEnd();
+                json = JsonConvert.DeserializeObject<BaseModel>(jsonString);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Cannot read file of path: " + path);
+            }
+            finally
+            {
+                r.Close();
+            }
             return json;
         }
 
@@ -52,6 +63,27 @@ namespace BloonTowerMaker.Data
                 File.WriteAllText(datapath, json);
             }
         }
+        public static int[] PathLengths()
+        {
+            Models models = new Models();
+            int[] paths = new int[] {0,0,0};
+            for (int i = 1; i < 5; i++)
+            {
+                if (models.PathExist(models.GetBaseModel($"{i}00")))
+                    paths[0]++;
+            }
+            for (int i = 1; i < 5; i++)
+            {
+                if(models.PathExist(models.GetBaseModel($"0{i}0")))
+                    paths[1]++;
+            }
+            for (int i = 1; i < 5; i++)
+            {
+                if (models.PathExist(models.GetBaseModel($"00{i}")))
+                    paths[2]++;
+            }
+            return paths;
+        }
 
         public static string getImagesPath(string path)
         {
@@ -61,5 +93,49 @@ namespace BloonTowerMaker.Data
         {
             return $"../../userfiles/tower_{path}/";
         }
-}
+
+        public bool PathExist(BaseModel model)
+        {
+            return model.description != null && model.cost != null && model.name != null;
+        }
+
+        public static string GetPathRow(string path)
+        {
+            if (path[0] != '0')
+                return "TOP";
+            return path[1] != '0' ? "MIDDLE" : "BOTTOM";
+        }
+
+        public  bool isAllowed(string path)
+        {
+            var @base = GetBaseModel("000");
+            var t = int.Parse(@base.top);
+            var m = int.Parse(@base.middle);
+            var b = int.Parse(@base.buttom);
+            var tier = GetPathTier(path);
+            var row = GetPathRow(path);
+            switch (row)
+            {
+                case "TOP" when tier <= t:
+                case "MIDDLE" when tier <= m:
+                case "BOTTOM" when tier <= b:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        public static int GetPathTier(string path)
+        {
+            foreach (var t in path)
+            {
+                if (t == '0') continue;
+                return int.Parse(t.ToString());
+            }
+
+            return 0;
+        }
+
+
+    }
 }

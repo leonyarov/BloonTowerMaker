@@ -12,15 +12,35 @@ namespace BloonTowerMaker.Logic
         private const string FUNCTION_VARIABLE = @"$type$ $name$ {get { return $value$;}}";
         private const string MAIN_CLASS = @"using BTD_Mod_Helper;
                                             using MelonLoader;
+                                            using System.Reflection;
+                                            using System.Runtime.InteropServices;
+                                            using System.Runtime.CompilerServices;
                                             [assembly: MelonInfo(typeof($tower$.Main), $towername$, $version$, $author$)]
-                                            [assembly: MelonGame(""Ninja Kiwi "", ""BloonsTD6"")]
+                                            [assembly: MelonGame(""Ninja Kiwi"", ""BloonsTD6"")]
+                                            [assembly: AssemblyTitle(""BloonTowerMaker"")]
+                                            [assembly: AssemblyDescription("""")]
+                                            [assembly: AssemblyConfiguration("""")]
+                                            [assembly: AssemblyCompany("""")]
+                                            [assembly: AssemblyProduct(""BloonTowerMaker"")]
+                                            [assembly: AssemblyCopyright(""Copyright ©  2022"")]
+                                            [assembly: AssemblyTrademark("""")]
+                                            [assembly: AssemblyCulture("""")]
+                                            [assembly: ComVisible(false)]
+                                            [assembly: AssemblyVersion(""1.0.0.0"")]
+                                            [assembly: AssemblyFileVersion(""1.0.0.0"")]
                                             namespace $tower$
                                             {
                                                     public class Main : BloonsTD6Mod
                                                     {
                                                        /*VARIABLES*/
+                                                        public override void OnApplicationStart()
+                                                        {
+                                                            LoggerInstance.Msg(""$tower$ In Shop mod loaded"");
+                                                        }
                                                     }
-                                            }";
+                                                    
+                                            }
+";
         private const string BASE_CLASS = @"using Assets.Scripts.Models.Towers;
                                             using Assets.Scripts.Models.TowerSets;
                                             using BTD_Mod_Helper;
@@ -29,7 +49,7 @@ namespace BloonTowerMaker.Logic
                                             using MelonLoader;
                                             namespace $tower$
                                             {
-                                                    public class Base : BloonsTD6Mod
+                                                    public class $tower$ : ModTower
                                                     {
                                                        /*VARIABLES*/
                                                        /*FUNCTIONS*/
@@ -42,7 +62,7 @@ namespace BloonTowerMaker.Logic
                                             using BTD_Mod_Helper.Extensions;
                                             namespace $tower$
                                             {
-                                                    public class $upgrade$ : BloonsTD6Mod
+                                                    public class $upgrade$ : ModUpgrade<$tower$>
                                                     {
                                                        /*VARIABLES*/
                                                        /*FUNCTIONS*/
@@ -60,9 +80,9 @@ namespace BloonTowerMaker.Logic
         public static string BuildVariable(string type, string name, string value)
         {
             StringBuilder stringBuilder = new StringBuilder(VARIABLE);
-            stringBuilder.Replace("$type$", type);
+            stringBuilder.Replace("$type$", type.Replace("?", ""));
             stringBuilder.Replace("$name$", name);
-            if (type == "string" && !value.Contains("\\\"")) //check if string has special \"
+            if (type == "string" && !type.Contains('?'))
                 value = Stringify(value);
             stringBuilder.Replace("$value$", value);
 
@@ -91,7 +111,7 @@ namespace BloonTowerMaker.Logic
         {
             StringBuilder stringBuilder = new StringBuilder(PATH_CLASS);
             stringBuilder.Replace("$tower$", tower.Replace(" ", ""));
-            stringBuilder.Replace("$upgrade$", upgrade);
+            stringBuilder.Replace("$upgrade$", upgrade.Replace(" ", ""));
             return stringBuilder.ToString();
         }
 

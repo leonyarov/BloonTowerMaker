@@ -20,9 +20,9 @@ namespace BloonTowerMaker.Logic
             List<string> files = new List<string>();
             try
             {
-                files.Add(Parser.ParseMain());
-                files.Add(Parser.ParseBase());
                 files.AddRange(Parser.ParsePath());
+                files.Add(Parser.ParseBase());
+                files.Add(Parser.ParseMain());
             } catch (Exception e) {throw e;}
             //Create provider
             //CSharpCodeProvider csc = new CSharpCodeProvider();
@@ -59,6 +59,10 @@ namespace BloonTowerMaker.Logic
             CompilerResults results = provider.CompileAssemblyFromSource(parameters,files.ToArray());
             if (results.Errors.Count > 0)
             {
+                foreach (var file in files)
+                {
+                    NotepadHelper.ShowMessage(file,"Error");
+                }
                 var error = "";
                 foreach (CompilerError CompErr in results.Errors)
                 {

@@ -58,6 +58,7 @@ namespace BloonTowerMaker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            data = models.GetBaseModel("000");
             foreach (var item in this.Controls.OfType<Button>())
             {
                 if (item.Name.Contains("btn_t"))
@@ -71,14 +72,24 @@ namespace BloonTowerMaker
                 }
             }
 
-            input_type.SelectedIndex = models.GetBaseModel("000").set != null
-                ? input_type.Items.IndexOf(models.GetBaseModel("000").set)
+            input_type.SelectedIndex = data.set != null
+                ? input_type.Items.IndexOf(data.set) +1
                 : 0;
+
+            int path = 0;
+            if (int.TryParse(data.top, out path))
+                input_top.Value = path;
+            disablePathButton(0,path);
+            if (int.TryParse(data.middle, out path))
+                input_middle.Value = path;
+            disablePathButton(1,path);
+            if (int.TryParse(data.buttom, out path))
+                input_buttom.Value = path;
+            disablePathButton(2,path);
         }
 
         private void MouseLeaveIcon(object sender, EventArgs e)
         {
-            data = models.GetBaseModel("000");
             label_cost.Text = data.cost;
             label_description.Text = data.description;
             if (img_base.Image != null)
@@ -129,6 +140,7 @@ namespace BloonTowerMaker
 
         private void btn_generate_Click(object sender, EventArgs e)
         {
+            models.UpdateBaseModel(data,"000");
             Compile cmp = new Compile();
             try
             {
@@ -138,6 +150,38 @@ namespace BloonTowerMaker
             catch (Exception err)
             {
                 MessageBox.Show(err.ToString(),"Failed to compile",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+        private void input_top_ValueChanged(object sender, EventArgs e)
+        {
+            data.top = input_top.Value.ToString();
+            disablePathButton(0,(int)input_top.Value);
+        }
+
+        private void input_middle_ValueChanged(object sender, EventArgs e)
+        {
+            data.middle = input_middle.Value.ToString();
+            disablePathButton(1,(int)input_middle.Value);
+        }
+
+        private void input_buttom_ValueChanged(object sender, EventArgs e)
+        {
+            data.buttom = input_buttom.Value.ToString();
+            disablePathButton(2,(int)input_buttom.Value);
+        }
+
+        private void disablePathButton(int index,int max)
+        {
+            foreach (var item in this.Controls.OfType<Button>())
+            {
+                var is_btn = item.Name.Contains("btn_t");
+                var i = -1;
+                int.TryParse(item.Name.Replace("btn_t", "").Substring(index,1),out i);
+                if (is_btn && i > max)
+                    item.Enabled = false;
+                else if (is_btn && (int) i <= max)
+                    item.Enabled = true;
             }
         }
     }
