@@ -32,6 +32,7 @@ namespace BloonTowerMaker.Logic
             var model = models.GetBaseModel(Resources.Base);
             StringBuilder file = new StringBuilder(Builder.BuildBase(project.projectName));
             StringBuilder vars = new StringBuilder();
+            file.Replace("$towerclass$",model.name.Replace(" ",""));
             vars.Append(Builder.BuildVariable("string?", "TowerSet", model.set));
             vars.Append(Builder.BuildVariable("string?", "BaseTower", model.basetower));
             vars.Append(Builder.BuildVariable("string", "Description", model.description));
@@ -46,11 +47,10 @@ namespace BloonTowerMaker.Logic
             return file.ToString();
         }
 
-        public static string[] ParsePath()
+        public static string[] ParsePath(Project project)
         {
             List<string> sources = new List<string>();
             var pathfiles = $"{Environment.CurrentDirectory}/../../userfiles";
-            var tower_name = models.GetBaseModel("000").name;
             if (!Directory.Exists(pathfiles)) throw new DirectoryNotFoundException("Cant find project folder");
             try
             {
@@ -60,8 +60,9 @@ namespace BloonTowerMaker.Logic
                     if (path == "000" || !models.isAllowed(path)) continue; //skip base file
                     var model = models.GetBaseModel(path);
                     if (!models.PathExist(model)) continue; //if files is not edited enought skip it
-                    StringBuilder file = new StringBuilder(Builder.BuildPath(tower_name, model.name));
+                    StringBuilder file = new StringBuilder(Builder.BuildPath(project.projectName, model.name));
                     StringBuilder vars = new StringBuilder();
+                    file.Replace("$basetower$", models.GetBaseModel("000").name.Replace(" ", ""));
                     vars.Append(Builder.BuildVariable("int", "Cost", model.cost));
                     vars.Append(Builder.BuildVariable("string", "Description", model.description));
                     vars.Append(Builder.BuildVariable("int", "Path", model.path));

@@ -9,18 +9,20 @@ using System.Windows.Forms;
 using System.CodeDom.Compiler;
 using System.IO;
 using BloonTowerMaker.Data;
+using BloonTowerMaker.Properties;
 
 namespace BloonTowerMaker.Logic
 {
     class Compile
     {
+        //TODO: compile stats view constructor
         public void CompileTower(Project project)
         {
             //Get all files as array of strings
             List<string> files = new List<string>();
             try
             {
-                files.AddRange(Parser.ParsePath());
+                files.AddRange(Parser.ParsePath(project));
                 files.Add(Parser.ParseBase(project));
                 files.Add(Parser.ParseMain(project));
             } catch (Exception e) {throw e;}
@@ -45,7 +47,19 @@ namespace BloonTowerMaker.Logic
             catch (Exception e)
             {
                 //MessageBox.Show(e.Message, "Error getting library files",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                throw e;
+                throw new Exception("Error Getting DLL: " + e.Message);
+            }
+
+            //Image include in project
+            try
+            {
+                foreach (var directory in Directory.GetDirectories(project.projectPath))
+                    foreach (var images in Directory.GetDirectories(directory))
+                        parameters.EmbeddedResources.AddRange(Directory.GetFiles(images,"*.png"));
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error compiling image: " + e.Message);
             }
 
             //Compile parameters

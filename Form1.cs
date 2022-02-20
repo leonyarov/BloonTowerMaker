@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
+using Assets.Scripts.Models.ServerEvents;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
@@ -60,6 +62,7 @@ namespace BloonTowerMaker
         private void MainForm_Load(object sender, EventArgs e)
         {
             towerProject = Project.Load();
+            currdir.Text = towerProject.projectPath;
             data = models.GetBaseModel(Resources.Base);
             foreach (var item in this.Controls.OfType<Button>())
             {
@@ -76,16 +79,26 @@ namespace BloonTowerMaker
                 ? input_type.Items.IndexOf(data.set) +1
                 : 0;
 
-            int path = 0;
-            if (int.TryParse(data.top, out path))
-                input_top.Value = path;
-            disablePathButton(0,path);
-            if (int.TryParse(data.middle, out path))
-                input_middle.Value = path;
-            disablePathButton(1,path);
-            if (int.TryParse(data.buttom, out path))
-                input_buttom.Value = path;
-            disablePathButton(2,path);
+            int[] path = new int[3];
+            if (int.TryParse(data.top, out path[0]))
+                input_top.Value = path[0];
+            if (int.TryParse(data.middle, out path[1]))
+                input_middle.Value = path[1];
+            if (int.TryParse(data.buttom, out path[2]))
+                input_buttom.Value = path[2];
+            disablePathButton(path);
+            recentToolStripMenuItem.DropDown = new ToolStripDropDown();
+            foreach (var defaultRecentPath in Settings.Default.RecentPaths ?? new StringCollection())
+            {
+                if (defaultRecentPath == "none") continue;
+                var dropdown = new ToolStripMenuItem(defaultRecentPath);
+                dropdown.Click += (o, args) =>
+                {
+                    Project.LoadFromRecent(Settings.Default.RecentPaths.IndexOf(defaultRecentPath));
+                    Application.Restart();
+                };
+                recentToolStripMenuItem.DropDownItems.Add(dropdown);
+            }
         }
 
         private void MouseLeaveIcon(object sender, EventArgs e)
@@ -136,7 +149,6 @@ namespace BloonTowerMaker
 
         private void btn_generate_Click(object sender, EventArgs e)
         {
-            models.UpdateBaseModel(data,"000");
             var cmp = new Compile();
             try
             {
@@ -152,32 +164,40 @@ namespace BloonTowerMaker
         private void input_top_ValueChanged(object sender, EventArgs e)
         {
             data.top = input_top.Value.ToString();
-            disablePathButton(0,(int)input_top.Value);
+            disablePathButton( new[] {(int)input_top.Value , (int)input_middle.Value, (int)input_buttom.Value});
+            models.UpdateBaseModel(data, Resources.Base);
         }
 
         private void input_middle_ValueChanged(object sender, EventArgs e)
         {
             data.middle = input_middle.Value.ToString();
-            disablePathButton(1,(int)input_middle.Value);
+            disablePathButton(new[] { (int)input_top.Value, (int)input_middle.Value, (int)input_buttom.Value });
+            models.UpdateBaseModel(data, Resources.Base);
         }
 
         private void input_buttom_ValueChanged(object sender, EventArgs e)
         {
             data.buttom = input_buttom.Value.ToString();
-            disablePathButton(2,(int)input_buttom.Value);
+            disablePathButton(new[] { (int)input_top.Value, (int)input_middle.Value, (int)input_buttom.Value });
+            models.UpdateBaseModel(data, Resources.Base);
         }
 
-        private void disablePathButton(int index,int max)
+        private void disablePathButton(int[] max)
         {
             foreach (var item in this.Controls.OfType<Button>())
             {
-                var is_btn = item.Name.Contains("btn_t");
-                var i = -1;
-                int.TryParse(item.Name.Replace("btn_t", "").Substring(index,1),out i);
-                if (is_btn && i > max)
-                    item.Enabled = false;
-                else if (is_btn && (int) i <= max)
-                    item.Enabled = true;
+                if (!item.Name.Contains("btn_t")) continue;
+                var path = item.Name.Replace("btn_t", "");
+                var row = Models.GetPathRow(path);
+                var tier = Models.GetPathTier(path);
+                var allowed = 0;
+                switch (row)
+                {
+                    case "TOP":    allowed = max[0]; break;
+                    case "MIDDLE": allowed = max[1]; break;
+                    case "BOTTOM": allowed = max[2]; break;
+                }
+                item.Enabled = allowed >= tier;
             }
         }
 

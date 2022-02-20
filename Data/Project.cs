@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,16 @@ namespace BloonTowerMaker.Data
         }
         public static Project Load()
         {
-            var last = Settings.Default?.LastTowerPath ?? GetFolder();
+            var last = Settings.Default.LastTowerPath ?? GetFolder();
+            var path = Path.Combine(last, Resources.ProjectMainFile);
+            if (!File.Exists(path))
+                return New(true);
+            var proj = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<Project>(proj);
+        }
+        public static Project LoadFromRecent(int index)
+        {
+            var last = Settings.Default.RecentPaths[index];
             var path = Path.Combine(last, Resources.ProjectMainFile);
             if (!File.Exists(path))
                 return New(true);
@@ -70,6 +80,7 @@ namespace BloonTowerMaker.Data
                 {
                     Settings.Default.LastTowerPath = fbd.SelectedPath;
                     Settings.Default.Save();
+                    AddToRecent(fbd.SelectedPath);
                     return fbd.SelectedPath;
                 }
                 else if (result == DialogResult.Cancel || result == DialogResult.Abort)
@@ -78,5 +89,15 @@ namespace BloonTowerMaker.Data
                     throw new Exception("Error retrieving folder");
             }
         }
+
+        private static void AddToRecent(string value)
+        {
+            if (!Settings.Default.RecentPaths.Contains(value))
+                Settings.Default.RecentPaths.Add(value);
+            if (Settings.Default.RecentPaths.Count > Settings.Default.MaxRecentPaths)
+                Settings.Default.RecentPaths.RemoveAt(1);
+            Settings.Default.Save();
+        }
+
     }
 }

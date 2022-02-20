@@ -91,6 +91,7 @@
       <DependentUpon>Form1.resx</DependentUpon>
     </Compile>
     <Compile Include="Logic\Builder.cs" />
+    <Compile Include="Logic\BuilderStrings.cs" />
     <Compile Include="Logic\Compile.cs" />
     <Compile Include="Logic\NotepadHelper.cs" />
     <Compile Include="Logic\Parser.cs" />

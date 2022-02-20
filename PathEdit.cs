@@ -60,7 +60,9 @@ namespace BloonTowerMaker
 
         private void UpdateImages()
         {
-
+            img_display.Image?.Dispose();
+            img_icon.Image?.Dispose();
+            img_projectile.Image?.Dispose();
             img_display.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
             img_icon.Image = SelectImage.GetImage(SelectImage.image_type.ICON, path);
             img_projectile.Image = SelectImage.GetImage(SelectImage.image_type.PROJECTILE, path);
@@ -101,11 +103,16 @@ namespace BloonTowerMaker
 
         private void RemoveImage(object sender, string path)
         {
+            if (string.IsNullOrWhiteSpace(model.name))
+            {
+                MessageBox.Show("Path name cannot be empty to remove an image");
+                return;
+            }
             var img = sender as PictureBox;
             try
             {
-                img.Image?.Dispose();
-                File.Delete(Models.getImagesPath(path) + $"{lastImage}.png");
+                var filename = Models.getImagesPath(path) + model.name.Replace(" ", "") + $"{lastImage}.png";
+                File.Delete(filename);
             }
             catch (Exception err)
             {
@@ -116,10 +123,16 @@ namespace BloonTowerMaker
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(model.name))
+            {
+                MessageBox.Show("Path name cannot be empty to set an image");
+                return;
+            }
             var file = image_select_dialog.FileName;
             try
             {
-                File.Copy(file, Models.getImagesPath(path) + $"{lastImage}.png", true);
+                var new_filename = Models.getImagesPath(path) + model.name.Replace(" ", "") + $"{lastImage}.png";
+                File.Copy(file,new_filename , true);
             }
             catch (Exception err)
             {
@@ -136,7 +149,7 @@ namespace BloonTowerMaker
 
         private void img_display_MouseClick(object sender, MouseEventArgs e)
         {
-            lastImage = "portrait";
+            lastImage = "-Portrait";
             if (e.Button == MouseButtons.Right)
             {
                 RemoveImage(sender, path);
@@ -147,7 +160,7 @@ namespace BloonTowerMaker
 
         private void img_projectile_MouseClick(object sender, MouseEventArgs e)
         {
-            lastImage = "projectile";
+            lastImage = "-Projectile";
             if (e.Button == MouseButtons.Right)
             {
                 RemoveImage(sender, path);
@@ -158,7 +171,7 @@ namespace BloonTowerMaker
 
         private void img_icon_MouseClick(object sender, MouseEventArgs e)
         {
-            lastImage = "icon";
+            lastImage = "-Icon";
             if (e.Button == MouseButtons.Right)
             {
                 RemoveImage(sender, path);
