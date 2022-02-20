@@ -61,17 +61,7 @@ namespace BloonTowerMaker {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Point similar to {X=17,Y=17}.
-        /// </summary>
-        internal static System.Drawing.Point backgroundWorker1_TrayLocation {
-            get {
-                object obj = ResourceManager.GetObject("backgroundWorker1.TrayLocation", resourceCulture);
-                return ((System.Drawing.Point)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Point similar to {X=181,Y=17}.
+        ///   Looks up a localized resource of type System.Drawing.Point similar to {X=43,Y=15}.
         /// </summary>
         internal static System.Drawing.Point toolStrip1_TrayLocation {
             get {

@@ -89,14 +89,13 @@ namespace BloonTowerMaker.Logic
             return stringBuilder.ToString();
         }
 
-        //TODO: implement version and author
         public static string BuildMain(string tower, string version , string author)
         {
             StringBuilder stringBuilder = new StringBuilder(MAIN_CLASS);
             stringBuilder.Replace("$tower$", tower.Replace(" ",""));
             stringBuilder.Replace("$towername$", Stringify(tower,true));
-            stringBuilder.Replace("$version$", Stringify("0.0.1",true));
-            stringBuilder.Replace("$author$", Stringify("Unknown Author",true));
+            stringBuilder.Replace("$version$", Stringify(version,true));
+            stringBuilder.Replace("$author$", Stringify(author,true));
             return stringBuilder.ToString();
         }
 

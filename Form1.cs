@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
+using BloonTowerMaker.Properties;
 
 namespace BloonTowerMaker
 {
@@ -18,6 +19,7 @@ namespace BloonTowerMaker
     {
         BaseModel data;
         Models models;
+        private Project towerProject;
 
         public object ImageSelect { get; private set; }
 
@@ -30,25 +32,24 @@ namespace BloonTowerMaker
 
         private void Edit(string path)
         {
-            PathEdit edit = new PathEdit(path);
+            var edit = new PathEdit(path);
             edit.ShowDialog();
             edit.Focus();
         }
         private void PathSelect(object sender, EventArgs e)
         {
-            Button b = sender as Button;
+            var b = sender as Button;
             var name = b.Name.Replace("btn_t", "");
             Edit(name);
         }
         private void PathHover(object sender, EventArgs e)
         {
-            Button b = sender as Button;
+            var b = sender as Button;
             var name = b.Name.Replace("btn_t", "");
             var model = models.GetBaseModel(name);
             label_cost.Text = model.cost;
             label_description.Text = model.description;
-            if (img_base.Image != null)
-                img_base.Image.Dispose();
+            img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
         }
         private void img_base_Click(object sender, EventArgs e)
@@ -58,18 +59,17 @@ namespace BloonTowerMaker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            data = models.GetBaseModel("000");
+            towerProject = Project.Load();
+            data = models.GetBaseModel(Resources.Base);
             foreach (var item in this.Controls.OfType<Button>())
             {
-                if (item.Name.Contains("btn_t"))
-                {
-                    item.Click += PathSelect;
-                    item.MouseEnter += PathHover;
-                    item.MouseLeave += MouseLeaveIcon;
-                    item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
-                    item.BackgroundImageLayout = ImageLayout.Stretch;
-                    item.TextAlign = ContentAlignment.BottomCenter;
-                }
+                if (!item.Name.Contains("btn_t")) continue;
+                item.Click += PathSelect;
+                item.MouseEnter += PathHover;
+                item.MouseLeave += MouseLeaveIcon;
+                item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
+                item.BackgroundImageLayout = ImageLayout.Stretch;
+                item.TextAlign = ContentAlignment.BottomCenter;
             }
 
             input_type.SelectedIndex = data.set != null
@@ -92,8 +92,7 @@ namespace BloonTowerMaker
         {
             label_cost.Text = data.cost;
             label_description.Text = data.description;
-            if (img_base.Image != null)
-                img_base.Image.Dispose();
+            img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
         }
         private void MainForm_Enter(object sender, EventArgs e)
@@ -101,21 +100,18 @@ namespace BloonTowerMaker
             MouseLeaveIcon(sender,e);
             foreach (var item in this.Controls.OfType<Button>())
             {
-                if (item.Name.Contains("btn_t"))
-                {
-                    string path = item.Name.Replace("btn_t", "");
-                    if (item.BackgroundImage != null)
-                        item.BackgroundImage.Dispose();
-                    item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
-                    item.Text = models.GetBaseModel(path).name;
-                }
+                if (!item.Name.Contains("btn_t")) continue;
+                var path = item.Name.Replace("btn_t", "");
+                item.BackgroundImage?.Dispose();
+                item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
+                item.Text = models.GetBaseModel(path).name;
             }
         }
 
         private void combo_type_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            ComboBox box = sender as ComboBox;
+            var box = sender as ComboBox;
             switch (box.SelectedIndex)
             {
                 case 0: this.BackgroundImage = Properties.Resources.primary;
@@ -141,10 +137,10 @@ namespace BloonTowerMaker
         private void btn_generate_Click(object sender, EventArgs e)
         {
             models.UpdateBaseModel(data,"000");
-            Compile cmp = new Compile();
+            var cmp = new Compile();
             try
             {
-                cmp.CompileTower();
+                cmp.CompileTower(towerProject);
                 MessageBox.Show("Tower Created");
             }
             catch (Exception err)
@@ -183,6 +179,24 @@ namespace BloonTowerMaker
                 else if (is_btn && (int) i <= max)
                     item.Enabled = true;
             }
+        }
+
+        private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Project.Save(towerProject);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var path = Project.GetFolder();
+            towerProject = Project.New(true);
+            Application.Restart();
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Project.GetFolder();
+            Application.Restart();
         }
     }
 }

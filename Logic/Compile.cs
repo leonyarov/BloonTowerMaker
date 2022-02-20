@@ -14,15 +14,15 @@ namespace BloonTowerMaker.Logic
 {
     class Compile
     {
-        public void CompileTower()
+        public void CompileTower(Project project)
         {
             //Get all files as array of strings
             List<string> files = new List<string>();
             try
             {
                 files.AddRange(Parser.ParsePath());
-                files.Add(Parser.ParseBase());
-                files.Add(Parser.ParseMain());
+                files.Add(Parser.ParseBase(project));
+                files.Add(Parser.ParseMain(project));
             } catch (Exception e) {throw e;}
             //Create provider
             //CSharpCodeProvider csc = new CSharpCodeProvider();
@@ -53,7 +53,7 @@ namespace BloonTowerMaker.Logic
             parameters.GenerateExecutable = false;
             parameters.GenerateInMemory = false;
             parameters.TreatWarningsAsErrors = false;
-            parameters.OutputAssembly = $"{new Models().GetBaseModel("000").name.Replace(" ","")}.dll";
+            parameters.OutputAssembly = $"{project.projectName.Replace(" ", "")}.dll";
              
             //Compile
             CompilerResults results = provider.CompileAssemblyFromSource(parameters,files.ToArray());

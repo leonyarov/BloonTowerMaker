@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
+using BloonTowerMaker.Properties;
+using Mono.Cecil;
 
 namespace BloonTowerMaker
 {
@@ -24,7 +26,7 @@ namespace BloonTowerMaker
         {
             InitializeComponent();
             this.path = path;
-            isBase = path == "000";
+            isBase = path == Resources.Base;
             models = new Models();
         }
 
@@ -102,8 +104,7 @@ namespace BloonTowerMaker
             var img = sender as PictureBox;
             try
             {
-                if (img.Image != null)
-                    img.Image.Dispose();
+                img.Image?.Dispose();
                 File.Delete(Models.getImagesPath(path) + $"{lastImage}.png");
             }
             catch (Exception err)

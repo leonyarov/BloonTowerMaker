@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Assets.Scripts.Models;
+using BloonTowerMaker.Properties;
 
 namespace BloonTowerMaker.Logic
 {
@@ -15,10 +16,10 @@ namespace BloonTowerMaker.Logic
         private static Models models = new Models();
 
         //TODO: implement URLS
-        public static string ParseMain()
+        public static string ParseMain(Project project)
         {
-            var model = models.GetBaseModel("000");
-            StringBuilder file = new StringBuilder(Builder.BuildMain(model.name,"a","a"));
+            var model = models.GetBaseModel(Resources.Base);
+            StringBuilder file = new StringBuilder(Builder.BuildMain(project.projectName,project.version,project.author));
             StringBuilder vars = new StringBuilder();
             vars.Append(Builder.BuildVariable("string", "MelonInfoCsURL", "url1"));
             vars.Append(Builder.BuildVariable("string", "LatestURL", "url2"));
@@ -26,10 +27,10 @@ namespace BloonTowerMaker.Logic
             return file.ToString() ;
         }
 
-        public static string ParseBase()
+        public static string ParseBase(Project project)
         {
-            var model = models.GetBaseModel("000");
-            StringBuilder file = new StringBuilder(Builder.BuildBase(model.name));
+            var model = models.GetBaseModel(Resources.Base);
+            StringBuilder file = new StringBuilder(Builder.BuildBase(project.projectName));
             StringBuilder vars = new StringBuilder();
             vars.Append(Builder.BuildVariable("string?", "TowerSet", model.set));
             vars.Append(Builder.BuildVariable("string?", "BaseTower", model.basetower));

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Il2CppSystem.Diagnostics.Tracing;
+﻿using BloonTowerMaker.Properties;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace BloonTowerMaker.Data
 {
     class Models
     {
-        private string fpath = "../../res/towerfiles/<>.json";
-        private string dpath = "../../userfiles";
+        private string dpath = Settings.Default.LastTowerPath;
 
         public BaseModel GetBaseModel(string path)
         {
@@ -59,7 +54,9 @@ namespace BloonTowerMaker.Data
             var datapath = $"{filepath}/data_{path}.json";
             if (!File.Exists(datapath))
             {
-                var json = JsonConvert.SerializeObject(new BaseModel());
+                var model = new BaseModel();
+                model.path = model.cost = model.top = model.buttom = model.middle = model.tier = "0";
+                var json = JsonConvert.SerializeObject(model);
                 File.WriteAllText(datapath, json);
             }
         }
@@ -87,7 +84,7 @@ namespace BloonTowerMaker.Data
 
         public static string getImagesPath(string path)
         {
-            return $"../../userfiles/tower_{path}/images/";
+            return Path.Combine(Settings.Default.LastTowerPath, $"tower_{path}/images/");
         }
         public static string getTowerPath(string path)
         {
