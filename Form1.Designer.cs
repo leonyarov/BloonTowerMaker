@@ -67,6 +67,9 @@ namespace BloonTowerMaker
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currdir = new System.Windows.Forms.Label();
+            this.btn_projectile_editor = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.img_base)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.input_top)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -554,6 +557,46 @@ namespace BloonTowerMaker
             this.currdir.TabIndex = 12;
             this.currdir.Text = "label5";
             // 
+            // btn_projectile_editor
+            // 
+            this.btn_projectile_editor.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.btn_projectile_editor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_projectile_editor.FlatAppearance.BorderSize = 5;
+            this.btn_projectile_editor.Font = new System.Drawing.Font("Luckiest Guy", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_projectile_editor.ForeColor = System.Drawing.Color.White;
+            this.btn_projectile_editor.Location = new System.Drawing.Point(12, 668);
+            this.btn_projectile_editor.Name = "btn_projectile_editor";
+            this.btn_projectile_editor.Size = new System.Drawing.Size(325, 49);
+            this.btn_projectile_editor.TabIndex = 8;
+            this.btn_projectile_editor.Text = "Projectile Editor";
+            this.btn_projectile_editor.UseVisualStyleBackColor = false;
+            this.btn_projectile_editor.Click += new System.EventHandler(this.btn_projectile_editor_Click);
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Luckiest Guy", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(140, 150);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 28);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Base:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("Luckiest Guy", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Primary",
+            "Military",
+            "Magic",
+            "Support"});
+            this.comboBox1.Location = new System.Drawing.Point(202, 150);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.TabIndex = 7;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -563,8 +606,11 @@ namespace BloonTowerMaker
             this.Controls.Add(this.currdir);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btn_projectile_editor);
             this.Controls.Add(this.btn_generate);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.input_type);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_description);
             this.Controls.Add(this.img_base);
@@ -647,6 +693,9 @@ namespace BloonTowerMaker
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem recentToolStripMenuItem;
         private System.Windows.Forms.Label currdir;
+        private System.Windows.Forms.Button btn_projectile_editor;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

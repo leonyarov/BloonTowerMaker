@@ -14,12 +14,13 @@ using Assets.Scripts.Models.ServerEvents;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
+using Mono.Cecil;
 
 namespace BloonTowerMaker
 {
     public partial class MainForm : Form
     {
-        BaseModel data;
+        Dictionary<string,string> data;
         Models models;
         private Project towerProject;
 
@@ -41,16 +42,16 @@ namespace BloonTowerMaker
         private void PathSelect(object sender, EventArgs e)
         {
             var b = sender as Button;
-            var name = b.Name.Replace("btn_t", "");
+            var name = b.Name.Replace(Resources.PathButtonIndentifier, "");
             Edit(name);
         }
         private void PathHover(object sender, EventArgs e)
         {
             var b = sender as Button;
-            var name = b.Name.Replace("btn_t", "");
-            var model = models.GetBaseModel(name);
-            label_cost.Text = model.cost;
-            label_description.Text = model.description;
+            var name = b.Name.Replace(Resources.PathButtonIndentifier, "");
+            var model = models.GetTowerModel(name);
+            label_cost.Text = model["cost"];
+            label_description.Text = model["description"];
             img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
         }
@@ -63,30 +64,27 @@ namespace BloonTowerMaker
         {
             towerProject = Project.Load();
             currdir.Text = towerProject.projectPath;
-            data = models.GetBaseModel(Resources.Base);
+            data = models.GetTowerModel(Resources.Base);
             foreach (var item in this.Controls.OfType<Button>())
             {
-                if (!item.Name.Contains("btn_t")) continue;
+                if (!item.Name.Contains(Resources.PathButtonIndentifier)) continue;
                 item.Click += PathSelect;
                 item.MouseEnter += PathHover;
                 item.MouseLeave += MouseLeaveIcon;
-                item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace("btn_t", ""));
+                item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace(Resources.PathButtonIndentifier, ""));
                 item.BackgroundImageLayout = ImageLayout.Stretch;
                 item.TextAlign = ContentAlignment.BottomCenter;
             }
 
-            input_type.SelectedIndex = data.set != null
-                ? input_type.Items.IndexOf(data.set) +1
-                : 0;
+            //TODO: data["set"] may be string
+            //input_type.SelectedIndex = data["set"] != null
+            //    ? input_type.Items.IndexOf(data["set"]) +1
+            //    : 0;
 
-            int[] path = new int[3];
-            if (int.TryParse(data.top, out path[0]))
-                input_top.Value = path[0];
-            if (int.TryParse(data.middle, out path[1]))
-                input_middle.Value = path[1];
-            if (int.TryParse(data.buttom, out path[2]))
-                input_buttom.Value = path[2];
-            disablePathButton(path);
+                input_top.Value = Project.instance.TopPathUpgrade;
+                input_middle.Value = Project.instance.MiddlePathUpgrades;
+                input_buttom.Value = Project.instance.BottomPathUpgrades;
+            disablePathButton();
             recentToolStripMenuItem.DropDown = new ToolStripDropDown();
             foreach (var defaultRecentPath in Settings.Default.RecentPaths ?? new StringCollection())
             {
@@ -103,8 +101,8 @@ namespace BloonTowerMaker
 
         private void MouseLeaveIcon(object sender, EventArgs e)
         {
-            label_cost.Text = data.cost;
-            label_description.Text = data.description;
+            label_cost.Text = data["cost"];
+            label_description.Text = data["description"];
             img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
         }
@@ -117,7 +115,7 @@ namespace BloonTowerMaker
                 var path = item.Name.Replace("btn_t", "");
                 item.BackgroundImage?.Dispose();
                 item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
-                item.Text = models.GetBaseModel(path).name;
+                item.Text = models.GetTowerModel(path)["name"];
             }
         }
 
@@ -128,20 +126,20 @@ namespace BloonTowerMaker
             switch (box.SelectedIndex)
             {
                 case 0: this.BackgroundImage = Properties.Resources.primary;
-                    data.set = "PRIMARY";
+                    data["towerSet"] = "PRIMARY";
                     break;
                 case 1: this.BackgroundImage = Properties.Resources.army;
-                    data.set = "MILITARY";
+                    data["towerSet"] = "MILITARY";
                     break;
                 case 2: this.BackgroundImage = Properties.Resources.magic; 
-                    data.set = "MAGIC";
+                    data["towerSet"] = "MAGIC";
                     break;
                 case 3: this.BackgroundImage = Properties.Resources.support; 
-                    data.set = "SUPPORT";
+                    data["towerSet"] = "SUPPORT";
                     break;
                 default:
                     this.BackgroundImage = Properties.Resources.primary;
-                    data.set = "PRIMARY";
+                    data["towerSet"] = "PRIMARY";
                     break;
             }
             models.UpdateBaseModel(data,"000");
@@ -163,26 +161,26 @@ namespace BloonTowerMaker
 
         private void input_top_ValueChanged(object sender, EventArgs e)
         {
-            data.top = input_top.Value.ToString();
-            disablePathButton( new[] {(int)input_top.Value , (int)input_middle.Value, (int)input_buttom.Value});
-            models.UpdateBaseModel(data, Resources.Base);
+            Project.instance.TopPathUpgrade = (int)input_top.Value;
+            disablePathButton();
+            Project.Save();
         }
 
         private void input_middle_ValueChanged(object sender, EventArgs e)
         {
-            data.middle = input_middle.Value.ToString();
-            disablePathButton(new[] { (int)input_top.Value, (int)input_middle.Value, (int)input_buttom.Value });
-            models.UpdateBaseModel(data, Resources.Base);
+            Project.instance.MiddlePathUpgrades = (int)input_top.Value;
+            disablePathButton();
+            Project.Save();
         }
 
         private void input_buttom_ValueChanged(object sender, EventArgs e)
         {
-            data.buttom = input_buttom.Value.ToString();
-            disablePathButton(new[] { (int)input_top.Value, (int)input_middle.Value, (int)input_buttom.Value });
-            models.UpdateBaseModel(data, Resources.Base);
+            Project.instance.BottomPathUpgrades = (int)input_top.Value;
+            disablePathButton();
+            Project.Save();
         }
 
-        private void disablePathButton(int[] max)
+        private void disablePathButton()
         {
             foreach (var item in this.Controls.OfType<Button>())
             {
@@ -193,9 +191,9 @@ namespace BloonTowerMaker
                 var allowed = 0;
                 switch (row)
                 {
-                    case "TOP":    allowed = max[0]; break;
-                    case "MIDDLE": allowed = max[1]; break;
-                    case "BOTTOM": allowed = max[2]; break;
+                    case "TOP":    allowed = Project.instance.TopPathUpgrade; break;
+                    case "MIDDLE": allowed = Project.instance.MiddlePathUpgrades; break;
+                    case "BOTTOM": allowed = Project.instance.BottomPathUpgrades; break;
                 }
                 item.Enabled = allowed >= tier;
             }
@@ -203,7 +201,7 @@ namespace BloonTowerMaker
 
         private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Project.Save(towerProject);
+            Project.Save();
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -217,6 +215,12 @@ namespace BloonTowerMaker
         {
             Project.GetFolder();
             Application.Restart();
+        }
+
+        private void btn_projectile_editor_Click(object sender, EventArgs e)
+        {
+            ProjectileEditor editor = new ProjectileEditor();
+            editor.ShowDialog();
         }
     }
 }

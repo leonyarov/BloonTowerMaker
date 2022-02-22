@@ -22,8 +22,8 @@ namespace BloonTowerMaker.Logic
 
         public static Image GetImage(image_type img, string path)
         {
-            var filename = Models.getImagesPath(path);
-            var files = Directory.GetFiles(filename).ToList();
+            var filename = Path.Combine(Project.instance.projectPath, Models.ParsePath(path));
+            var files = Directory.GetFiles(filename,"*.png").ToList();
             try
             {
                 switch (img)

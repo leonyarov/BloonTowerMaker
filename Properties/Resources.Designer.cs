@@ -80,6 +80,33 @@ namespace BloonTowerMaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (none).
+        /// </summary>
+        internal static string EmptyPropertyValue {
+            get {
+                return ResourceManager.GetString("EmptyPropertyValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ImageIcon {
+            get {
+                return ResourceManager.GetString("ImageIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ImagePortrait {
+            get {
+                return ResourceManager.GetString("ImagePortrait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap magic {
@@ -90,12 +117,39 @@ namespace BloonTowerMaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to btn_t.
+        /// </summary>
+        internal static string PathButtonIndentifier {
+            get {
+                return ResourceManager.GetString("PathButtonIndentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap primary {
             get {
                 object obj = ResourceManager.GetObject("primary", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to projectiles.
+        /// </summary>
+        internal static string ProjectileFolder {
+            get {
+                return ResourceManager.GetString("ProjectileFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to projectiles.json.
+        /// </summary>
+        internal static string ProjectileJson {
+            get {
+                return ResourceManager.GetString("ProjectileJson", resourceCulture);
             }
         }
         
@@ -115,6 +169,15 @@ namespace BloonTowerMaker.Properties {
             get {
                 object obj = ResourceManager.GetObject("support", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to path.json.
+        /// </summary>
+        internal static string TowerPathJsonFile {
+            get {
+                return ResourceManager.GetString("TowerPathJsonFile", resourceCulture);
             }
         }
     }

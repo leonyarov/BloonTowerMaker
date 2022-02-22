@@ -22,9 +22,9 @@ namespace BloonTowerMaker.Logic
             List<string> files = new List<string>();
             try
             {
-                files.AddRange(Parser.ParsePath(project));
-                files.Add(Parser.ParseBase(project));
-                files.Add(Parser.ParseMain(project));
+                files.AddRange(Parser.ParsePath());
+                files.Add(Parser.ParseBase());
+                files.Add(Parser.ParseMain());
             } catch (Exception e) {throw e;}
             //Create provider
             //CSharpCodeProvider csc = new CSharpCodeProvider();

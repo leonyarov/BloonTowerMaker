@@ -5,20 +5,23 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Assets.Scripts.Models;
+using Assets.Scripts.Models.Towers;
+using Assets.Scripts.Simulation.Towers;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
-using Mono.Cecil;
 
 namespace BloonTowerMaker
 {
     public partial class PathEdit : Form
     {
         string path;
-        BaseModel model;
+        Dictionary<string, string> model;
         bool isBase = false;
         Models models;
         string lastImage = "";
@@ -32,40 +35,27 @@ namespace BloonTowerMaker
 
         private void PathEdit_Load(object sender, EventArgs e)
         {
-            model = models.GetBaseModel(path);
-
-            label_path.Text = path; //get tower path from calling button
-            foreach (var item in GetAllTextBoxControls(this))
+            var dict = Models.ExtractPropertiesFromTowerModel(); 
+            model = models.GetTowerModel(path); //get model path
+            foreach (var key in dict.Keys.ToArray())
             {
-                try 
-                { 
-                    var extracted_name = item.Name.Replace("input_", "");
-                    var property = model.GetType().GetField(extracted_name);
-                    var value = property.GetValue(model);
-                    item.Text = (string)value;
-                } catch
-                {
-                    //Cant get property from Model
-                    item.Text = "0";
-                }
+                var item = new ListViewItem(key);
+                item.SubItems.Add(model[key]);
+                item.SubItems.Add(dict[key]);
+                propertiesList.Items.Add(item);
             }
+            label_path.Text = path; //get tower path from calling button
+           
             UpdateImages(); //Update images on form
 
-            //Update Tower base for the 000 path
-            if (!isBase)
-                input_basetower.Enabled = false;
-            if (models.GetBaseModel("000").basetower != null)
-                input_basetower.SelectedIndex = input_basetower.Items.IndexOf(models.GetBaseModel("000").basetower);
         }
 
         private void UpdateImages()
         {
             img_display.Image?.Dispose();
             img_icon.Image?.Dispose();
-            img_projectile.Image?.Dispose();
             img_display.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
             img_icon.Image = SelectImage.GetImage(SelectImage.image_type.ICON, path);
-            img_projectile.Image = SelectImage.GetImage(SelectImage.image_type.PROJECTILE, path);
         }
         private void button_ok_Click(object sender, EventArgs e)
         {
@@ -75,26 +65,15 @@ namespace BloonTowerMaker
         private void PathEdit_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-            foreach (var item in GetAllTextBoxControls(this))
+            foreach (ListViewItem key in propertiesList.Items)
             {
-                try
-                {
-                    var extracted_name = item.Name.Replace("input_", "");
-                    var property = model.GetType().GetField(extracted_name);
-                    property.SetValue(model,item.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Error saving value");
-                }
+                var value = key.SubItems[1].Text;
+                model[key.Text] = value;
             }
 
-            model.tier = Models.GetPathTier(path).ToString();
-            model.path = Models.GetPathRow(path);
+            model["tier"]= Models.GetPathTier(path).ToString();
+            model["path"] = Models.GetPathRow(path);
 
-            //if (isBase)
-            //    models.UpdateBaseModel(model);
-            //else
             models.UpdateBaseModel(model, path);
 
             MainForm.ActiveForm.Update();
@@ -103,7 +82,8 @@ namespace BloonTowerMaker
 
         private void RemoveImage(object sender, string path)
         {
-            if (string.IsNullOrWhiteSpace(model.name))
+            var imagename = propertiesList.Items["name"].SubItems[1].Text;
+            if (string.IsNullOrWhiteSpace(imagename))
             {
                 MessageBox.Show("Path name cannot be empty to remove an image");
                 return;
@@ -111,8 +91,7 @@ namespace BloonTowerMaker
             var img = sender as PictureBox;
             try
             {
-                var filename = Models.getImagesPath(path) + model.name.Replace(" ", "") + $"{lastImage}.png";
-                File.Delete(filename);
+                File.Delete(Path.Combine(Project.instance.projectPath,Models.ParsePath(path),$"{imagename}{lastImage}.png"));
             }
             catch (Exception err)
             {
@@ -123,7 +102,8 @@ namespace BloonTowerMaker
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(model.name))
+            var imagename = propertiesList.Items["name"].SubItems[1].Text;
+            if (string.IsNullOrWhiteSpace(imagename))
             {
                 MessageBox.Show("Path name cannot be empty to set an image");
                 return;
@@ -131,7 +111,8 @@ namespace BloonTowerMaker
             var file = image_select_dialog.FileName;
             try
             {
-                var new_filename = Models.getImagesPath(path) + model.name.Replace(" ", "") + $"{lastImage}.png";
+                var new_filename = Path.Combine(Project.instance.projectPath, Models.ParsePath(path),
+                    $"{imagename}{lastImage}.png");
                 File.Copy(file,new_filename , true);
             }
             catch (Exception err)
@@ -157,18 +138,6 @@ namespace BloonTowerMaker
             }
             image_select_dialog.ShowDialog();
         }
-
-        private void img_projectile_MouseClick(object sender, MouseEventArgs e)
-        {
-            lastImage = "-Projectile";
-            if (e.Button == MouseButtons.Right)
-            {
-                RemoveImage(sender, path);
-                return;
-            }
-            image_select_dialog.ShowDialog();
-        }
-
         private void img_icon_MouseClick(object sender, MouseEventArgs e)
         {
             lastImage = "-Icon";
@@ -192,16 +161,10 @@ namespace BloonTowerMaker
             return controlList;
         }
 
-        private void input_basetower_SelectedIndexChanged(object sender, EventArgs e)
+        private void btn_Edit_Click(object sender, EventArgs e)
         {
-            switch (input_basetower.SelectedIndex)
-            {
-                case 0: model.basetower = "TowerType.DartMonkey"; break;
-                default:
-                        model.basetower = "TowerType.DartMonkey"; break;
-
-            }
-            models.UpdateBaseModel(model,path);
+            if (propertiesList.SelectedItems.Count != 1) return;
+            propertiesList.SelectedItems[0].SubItems[1].Text = input_property.Text;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics.PerformanceData;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Windows;
 using BloonTowerMaker.Properties;
 using System.IO;
 using System.Windows.Forms;
+using Assets.Scripts.Models.Towers;
 using Newtonsoft.Json;
 
 namespace BloonTowerMaker.Data
@@ -18,6 +20,9 @@ namespace BloonTowerMaker.Data
         public string version;
         public string projectName;
         public string projectPath;
+        public string baseTower;
+        public int TopPathUpgrade, MiddlePathUpgrades, BottomPathUpgrades;
+
 
         public Project(string projectPath, string projectName, string version, string author)
         {
@@ -25,17 +30,54 @@ namespace BloonTowerMaker.Data
             this.projectName = projectName ?? "New Tower";
             this.version = version ?? "1.0.0";
             this.author = author ?? "Unknown Author";
+            TopPathUpgrade = MiddlePathUpgrades = BottomPathUpgrades = 0;
+            instance = this;
+            baseTower = "TowerType.DartMonkey";
         }
 
-        public static Project New(bool justFile = false)
+        public static Project instance = null;
+
+        public static void GenerateProjectFiles(string initialDirectory)
         {
+            //Create Path files
+            for (var i = 1; i <= 5; i++)
+            {
+                var towerFolder = Path.Combine(initialDirectory, $"path_{i}00");
+                Directory.CreateDirectory(towerFolder);
+            }
+            for (var i = 1; i <= 5; i++)
+            {
+                var towerFolder = Path.Combine(initialDirectory, $"path_0{i}0");
+                Directory.CreateDirectory(towerFolder);
+            }
+            for (var i = 1; i <= 5; i++)
+            {
+                var towerFolder = Path.Combine(initialDirectory, $"path_00{i}");
+                Directory.CreateDirectory(towerFolder);
+            }
+            //Create paragon and base folder
+            Directory.CreateDirectory(Path.Combine(initialDirectory, "path_555"));
+            Directory.CreateDirectory(Path.Combine(initialDirectory, "path_000"));
+            //Create projectile folder
+            Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectileFolder));
+            //Create project.json
+            File.Create(Path.Combine(initialDirectory, Resources.ProjectileJson));
+            //Create projectile.json
+            //File.Create(Path.Combine(initialDirectory, Resources.ProjectMainFile));
+        }
+        public static Project New(bool pathFromLast = false)
+        {
+            //Create new init form
             using (var form = new NewProject())
             {
-                if (justFile) form.path.Text = Settings.Default.LastTowerPath;
+                if (pathFromLast) form.path.Text = Settings.Default.LastTowerPath;
+                //
+
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Save(form.proj);
+                    GenerateProjectFiles(instance.projectPath);
+                    Save();
                     return form.proj;
                 }
                 Application.Exit();
@@ -45,10 +87,13 @@ namespace BloonTowerMaker.Data
         }
         public static Project Load()
         {
-            var last = Settings.Default.LastTowerPath ?? GetFolder();
+            //Get last used path or open folder
+            var last = Settings.Default.LastTowerPath ?? GetFolder(); 
             var path = Path.Combine(last, Resources.ProjectMainFile);
+            //Create new project if main project does not exist
             if (!File.Exists(path))
                 return New(true);
+            //Load project.json from folder
             var proj = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<Project>(proj);
         }
@@ -62,11 +107,12 @@ namespace BloonTowerMaker.Data
             return JsonConvert.DeserializeObject<Project>(proj);
         }
 
-        public static void Save(Project project)
+        public static void Save()
         {
+
             var last = Settings.Default?.LastTowerPath ?? GetFolder();
             var path = Path.Combine(last, Resources.ProjectMainFile);
-            var json = JsonConvert.SerializeObject(project);
+            var json = JsonConvert.SerializeObject(instance);
             File.WriteAllText(path, json);
         }
 

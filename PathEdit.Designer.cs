@@ -31,8 +31,6 @@ namespace BloonTowerMaker
         {
             this.label_path = new System.Windows.Forms.Label();
             this.button_ok = new System.Windows.Forms.Button();
-            this.img_projectile = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.img_icon = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.img_display = new System.Windows.Forms.PictureBox();
@@ -48,32 +46,19 @@ namespace BloonTowerMaker
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.input_description = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.input_cost = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.input_name = new System.Windows.Forms.TextBox();
-            this.input_basetower = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_Edit = new System.Windows.Forms.Button();
+            this.propertiesList = new System.Windows.Forms.ListView();
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.input_property = new System.Windows.Forms.MaskedTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.additive_damage = new System.Windows.Forms.CheckBox();
-            this.additive_projectile_range = new System.Windows.Forms.CheckBox();
-            this.additive_speed = new System.Windows.Forms.CheckBox();
-            this.input_range = new System.Windows.Forms.TextBox();
-            this.input_damage = new System.Windows.Forms.TextBox();
-            this.input_projectile_range = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.input_projectile_speed = new System.Windows.Forms.TextBox();
-            this.additive_range = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.input_pierce = new System.Windows.Forms.TextBox();
-            this.additive_pierce = new System.Windows.Forms.CheckBox();
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).BeginInit();
+            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -83,8 +68,6 @@ namespace BloonTowerMaker
             this.groupBox4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label_path
@@ -108,27 +91,6 @@ namespace BloonTowerMaker
             this.button_ok.Text = "Done";
             this.button_ok.UseVisualStyleBackColor = true;
             this.button_ok.Click += new System.EventHandler(this.button_ok_Click);
-            // 
-            // img_projectile
-            // 
-            this.img_projectile.Location = new System.Drawing.Point(201, 110);
-            this.img_projectile.Name = "img_projectile";
-            this.img_projectile.Size = new System.Drawing.Size(67, 60);
-            this.img_projectile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.img_projectile.TabIndex = 3;
-            this.img_projectile.TabStop = false;
-            this.img_projectile.MouseClick += new System.Windows.Forms.MouseEventHandler(this.img_projectile_MouseClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(198, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Projectile";
             // 
             // img_icon
             // 
@@ -265,10 +227,8 @@ namespace BloonTowerMaker
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.img_display);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.img_projectile);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.img_icon);
             this.panel2.Location = new System.Drawing.Point(374, 13);
@@ -307,12 +267,10 @@ namespace BloonTowerMaker
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.input_cost, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.input_name, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.input_basetower, 1, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 108);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -323,15 +281,6 @@ namespace BloonTowerMaker
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(252, 69);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 39);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Tower Base:";
             // 
             // label1
             // 
@@ -370,20 +319,12 @@ namespace BloonTowerMaker
             this.input_name.Size = new System.Drawing.Size(100, 20);
             this.input_name.TabIndex = 1;
             // 
-            // input_basetower
-            // 
-            this.input_basetower.FormattingEnabled = true;
-            this.input_basetower.Items.AddRange(new object[] {
-            "TowerType.DartMonkey"});
-            this.input_basetower.Location = new System.Drawing.Point(109, 42);
-            this.input_basetower.Name = "input_basetower";
-            this.input_basetower.Size = new System.Drawing.Size(141, 21);
-            this.input_basetower.TabIndex = 7;
-            this.input_basetower.SelectedIndexChanged += new System.EventHandler(this.input_basetower_SelectedIndexChanged);
-            // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox3.Controls.Add(this.btn_Edit);
+            this.groupBox3.Controls.Add(this.propertiesList);
+            this.groupBox3.Controls.Add(this.input_property);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -395,212 +336,68 @@ namespace BloonTowerMaker
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
             // 
+            // btn_Edit
+            // 
+            this.btn_Edit.Location = new System.Drawing.Point(497, 336);
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(75, 21);
+            this.btn_Edit.TabIndex = 11;
+            this.btn_Edit.Text = "Edit";
+            this.btn_Edit.UseVisualStyleBackColor = true;
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            // 
+            // propertiesList
+            // 
+            this.propertiesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.name,
+            this.value,
+            this.type});
+            this.propertiesList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.propertiesList.HideSelection = false;
+            this.propertiesList.Location = new System.Drawing.Point(161, 16);
+            this.propertiesList.Name = "propertiesList";
+            this.propertiesList.Size = new System.Drawing.Size(498, 315);
+            this.propertiesList.TabIndex = 9;
+            this.propertiesList.UseCompatibleStateImageBehavior = false;
+            this.propertiesList.View = System.Windows.Forms.View.Details;
+            // 
+            // name
+            // 
+            this.name.Text = "Name";
+            this.name.Width = 210;
+            // 
+            // value
+            // 
+            this.value.Text = "Value";
+            this.value.Width = 121;
+            // 
+            // input_property
+            // 
+            this.input_property.Location = new System.Drawing.Point(167, 337);
+            this.input_property.Name = "input_property";
+            this.input_property.Size = new System.Drawing.Size(295, 20);
+            this.input_property.TabIndex = 10;
+            // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.tableLayoutPanel1);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox5.ForeColor = System.Drawing.Color.Black;
             this.groupBox5.Location = new System.Drawing.Point(3, 16);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(344, 344);
+            this.groupBox5.Size = new System.Drawing.Size(158, 344);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Stats";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.additive_damage, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.additive_projectile_range, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.additive_speed, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.input_range, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.input_damage, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.input_projectile_range, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label9, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.input_projectile_speed, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.additive_range, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.input_pierce, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.additive_pierce, 2, 4);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(338, 325);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // additive_damage
-            // 
-            this.additive_damage.AutoSize = true;
-            this.additive_damage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.additive_damage.Location = new System.Drawing.Point(166, 81);
-            this.additive_damage.Name = "additive_damage";
-            this.additive_damage.Size = new System.Drawing.Size(64, 17);
-            this.additive_damage.TabIndex = 5;
-            this.additive_damage.Text = "Additive";
-            this.additive_damage.UseVisualStyleBackColor = true;
-            // 
-            // additive_projectile_range
-            // 
-            this.additive_projectile_range.AutoSize = true;
-            this.additive_projectile_range.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.additive_projectile_range.Location = new System.Drawing.Point(166, 55);
-            this.additive_projectile_range.Name = "additive_projectile_range";
-            this.additive_projectile_range.Size = new System.Drawing.Size(64, 17);
-            this.additive_projectile_range.TabIndex = 4;
-            this.additive_projectile_range.Text = "Additive";
-            this.additive_projectile_range.UseVisualStyleBackColor = true;
-            // 
-            // additive_speed
-            // 
-            this.additive_speed.AutoSize = true;
-            this.additive_speed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.additive_speed.Location = new System.Drawing.Point(166, 29);
-            this.additive_speed.Name = "additive_speed";
-            this.additive_speed.Size = new System.Drawing.Size(64, 17);
-            this.additive_speed.TabIndex = 3;
-            this.additive_speed.Text = "Additive";
-            this.additive_speed.UseVisualStyleBackColor = true;
-            // 
-            // input_range
-            // 
-            this.input_range.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_range.Location = new System.Drawing.Point(94, 3);
-            this.input_range.Name = "input_range";
-            this.input_range.Size = new System.Drawing.Size(66, 20);
-            this.input_range.TabIndex = 1;
-            this.input_range.Text = "0";
-            // 
-            // input_damage
-            // 
-            this.input_damage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_damage.Location = new System.Drawing.Point(94, 81);
-            this.input_damage.Name = "input_damage";
-            this.input_damage.Size = new System.Drawing.Size(66, 20);
-            this.input_damage.TabIndex = 1;
-            this.input_damage.Text = "0";
-            // 
-            // input_projectile_range
-            // 
-            this.input_projectile_range.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_projectile_range.Location = new System.Drawing.Point(94, 55);
-            this.input_projectile_range.Name = "input_projectile_range";
-            this.input_projectile_range.Size = new System.Drawing.Size(66, 20);
-            this.input_projectile_range.TabIndex = 1;
-            this.input_projectile_range.Text = "0";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(3, 78);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Damage";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 13);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Range";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(3, 26);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Projectile Speed";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(3, 52);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(85, 13);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Projectile Range";
-            // 
-            // input_projectile_speed
-            // 
-            this.input_projectile_speed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_projectile_speed.Location = new System.Drawing.Point(94, 29);
-            this.input_projectile_speed.Name = "input_projectile_speed";
-            this.input_projectile_speed.Size = new System.Drawing.Size(66, 20);
-            this.input_projectile_speed.TabIndex = 1;
-            this.input_projectile_speed.Text = "0";
-            // 
-            // additive_range
-            // 
-            this.additive_range.AutoSize = true;
-            this.additive_range.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.additive_range.Location = new System.Drawing.Point(166, 3);
-            this.additive_range.Name = "additive_range";
-            this.additive_range.Size = new System.Drawing.Size(64, 17);
-            this.additive_range.TabIndex = 2;
-            this.additive_range.Text = "Additive";
-            this.additive_range.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(3, 104);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Pierce";
-            // 
-            // input_pierce
-            // 
-            this.input_pierce.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_pierce.Location = new System.Drawing.Point(94, 107);
-            this.input_pierce.Name = "input_pierce";
-            this.input_pierce.Size = new System.Drawing.Size(66, 20);
-            this.input_pierce.TabIndex = 1;
-            this.input_pierce.Text = "0";
-            // 
-            // additive_pierce
-            // 
-            this.additive_pierce.AutoSize = true;
-            this.additive_pierce.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.additive_pierce.Location = new System.Drawing.Point(166, 107);
-            this.additive_pierce.Name = "additive_pierce";
-            this.additive_pierce.Size = new System.Drawing.Size(64, 17);
-            this.additive_pierce.TabIndex = 5;
-            this.additive_pierce.Text = "Additive";
-            this.additive_pierce.UseVisualStyleBackColor = true;
             // 
             // image_select_dialog
             // 
             this.image_select_dialog.FileName = "openFileDialog1";
             this.image_select_dialog.Filter = "Image Files|*.png|jpeg files|*.jpeg ";
             this.image_select_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.image_select_dialog_FileOk);
+            // 
+            // type
+            // 
+            this.type.Text = "Type";
             // 
             // PathEdit
             // 
@@ -620,7 +417,6 @@ namespace BloonTowerMaker
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PathEdit_FormClosing);
             this.Load += new System.EventHandler(this.PathEdit_Load);
             this.Enter += new System.EventHandler(this.PathEdit_Enter);
-            ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -634,9 +430,7 @@ namespace BloonTowerMaker
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -646,8 +440,6 @@ namespace BloonTowerMaker
 
         private System.Windows.Forms.Label label_path;
         private System.Windows.Forms.Button button_ok;
-        private System.Windows.Forms.PictureBox img_projectile;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox img_icon;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox img_display;
@@ -663,30 +455,18 @@ namespace BloonTowerMaker
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.OpenFileDialog image_select_dialog;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox additive_damage;
-        private System.Windows.Forms.CheckBox additive_projectile_range;
-        private System.Windows.Forms.CheckBox additive_speed;
-        private System.Windows.Forms.TextBox input_range;
-        private System.Windows.Forms.TextBox input_damage;
-        private System.Windows.Forms.TextBox input_projectile_range;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox input_projectile_speed;
-        private System.Windows.Forms.CheckBox additive_range;
         private System.Windows.Forms.TextBox input_name;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox input_cost;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox input_pierce;
-        private System.Windows.Forms.CheckBox additive_pierce;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox input_basetower;
         private System.Windows.Forms.TextBox input_description;
+        private System.Windows.Forms.ListView propertiesList;
+        private System.Windows.Forms.ColumnHeader name;
+        private System.Windows.Forms.ColumnHeader value;
+        private System.Windows.Forms.Button btn_Edit;
+        private System.Windows.Forms.MaskedTextBox input_property;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ColumnHeader type;
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Data\BaseModel.cs" />
     <Compile Include="Data\Models.cs" />
     <Compile Include="Data\Project.cs" />
+    <Compile Include="Data\Projectile.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +110,12 @@
       <DependentUpon>PathEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectileEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProjectileEditor.Designer.cs">
+      <DependentUpon>ProjectileEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Content Include="res\csTemplate\BaseTemplate.cs" />
@@ -124,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PathEdit.resx">
       <DependentUpon>PathEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProjectileEditor.resx">
+      <DependentUpon>ProjectileEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
