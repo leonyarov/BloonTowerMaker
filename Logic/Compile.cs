@@ -54,8 +54,7 @@ namespace BloonTowerMaker.Logic
             try
             {
                 foreach (var directory in Directory.GetDirectories(project.projectPath))
-                    foreach (var images in Directory.GetDirectories(directory))
-                        parameters.EmbeddedResources.AddRange(Directory.GetFiles(images,"*.png"));
+                        parameters.EmbeddedResources.AddRange(Directory.GetFiles(directory, "*.png"));
             }
             catch (Exception e)
             {
@@ -75,7 +74,7 @@ namespace BloonTowerMaker.Logic
             {
                 foreach (var file in files)
                 {
-                    NotepadHelper.ShowMessage(file,"Error");
+                    NotepadHelper.ShowMessage(file, "Error");
                 }
                 var error = "";
                 foreach (CompilerError CompErr in results.Errors)

@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using Assets.Scripts.Models.ServerEvents;
+using Assets.Scripts.Models.Towers;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
@@ -54,9 +55,12 @@ namespace BloonTowerMaker
             label_description.Text = model["description"];
             img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, name);
+            tower_name.Text = model["name"];
         }
         private void img_base_Click(object sender, EventArgs e)
         {
+            img_base.Image?.Dispose();
+            img_base.Image = null;
             Edit("000");
         }
 
@@ -76,12 +80,11 @@ namespace BloonTowerMaker
                 item.TextAlign = ContentAlignment.BottomCenter;
             }
 
-            //TODO: data["set"] may be string
-            //input_type.SelectedIndex = data["set"] != null
-            //    ? input_type.Items.IndexOf(data["set"]) +1
-            //    : 0;
+            input_type.SelectedIndex = data["towerSet"] != null
+                ? input_type.Items.IndexOf(data["towerSet"]) + 1
+                : 0;
 
-                input_top.Value = Project.instance.TopPathUpgrade;
+            input_top.Value = Project.instance.TopPathUpgrade;
                 input_middle.Value = Project.instance.MiddlePathUpgrades;
                 input_buttom.Value = Project.instance.BottomPathUpgrades;
             disablePathButton();
@@ -97,6 +100,15 @@ namespace BloonTowerMaker
                 };
                 recentToolStripMenuItem.DropDownItems.Add(dropdown);
             }
+
+            var monkeyTypes = typeof(TowerType).GetProperties();
+            foreach (var propertyInfo in monkeyTypes)
+            {
+                if (propertyInfo.PropertyType.Name != nameof(String)) continue;
+                combo_base.Items.Add(propertyInfo.Name);
+            }
+
+            combo_base.SelectedItem = data["baseTower"];
         }
 
         private void MouseLeaveIcon(object sender, EventArgs e)
@@ -105,6 +117,8 @@ namespace BloonTowerMaker
             label_description.Text = data["description"];
             img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, "000");
+            tower_name.Text = data["name"];
+
         }
         private void MainForm_Enter(object sender, EventArgs e)
         {
@@ -117,6 +131,7 @@ namespace BloonTowerMaker
                 item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
                 item.Text = models.GetTowerModel(path)["name"];
             }
+            data = models.GetTowerModel(Resources.Base);
         }
 
         private void combo_type_SelectedIndexChanged(object sender, EventArgs e)
@@ -221,6 +236,12 @@ namespace BloonTowerMaker
         {
             ProjectileEditor editor = new ProjectileEditor();
             editor.ShowDialog();
+        }
+
+        private void combo_base_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            data["baseTower"] = combo_base.SelectedItem.ToString();
+            models.UpdateBaseModel(data, Resources.Base);
         }
     }
 }

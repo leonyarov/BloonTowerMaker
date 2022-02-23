@@ -69,7 +69,8 @@ namespace BloonTowerMaker
             this.currdir = new System.Windows.Forms.Label();
             this.btn_projectile_editor = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.combo_base = new System.Windows.Forms.ComboBox();
+            this.tower_name = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.img_base)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.input_top)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -416,9 +417,9 @@ namespace BloonTowerMaker
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.groupBox1.Location = new System.Drawing.Point(39, 33);
+            this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(123, 117);
+            this.groupBox1.Size = new System.Drawing.Size(123, 97);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Paths";
@@ -441,7 +442,7 @@ namespace BloonTowerMaker
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(117, 98);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(117, 78);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // label2
@@ -488,7 +489,7 @@ namespace BloonTowerMaker
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(3, 52);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 46);
+            this.label4.Size = new System.Drawing.Size(41, 26);
             this.label4.TabIndex = 10;
             this.label4.Text = "Buttom";
             // 
@@ -583,19 +584,27 @@ namespace BloonTowerMaker
             this.label5.TabIndex = 6;
             this.label5.Text = "Base:";
             // 
-            // comboBox1
+            // combo_base
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Luckiest Guy", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Primary",
-            "Military",
-            "Magic",
-            "Support"});
-            this.comboBox1.Location = new System.Drawing.Point(202, 150);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 7;
+            this.combo_base.Font = new System.Drawing.Font("Luckiest Guy", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combo_base.FormattingEnabled = true;
+            this.combo_base.Location = new System.Drawing.Point(202, 150);
+            this.combo_base.Name = "combo_base";
+            this.combo_base.Size = new System.Drawing.Size(121, 24);
+            this.combo_base.TabIndex = 7;
+            this.combo_base.SelectedIndexChanged += new System.EventHandler(this.combo_base_SelectedIndexChanged);
+            // 
+            // tower_name
+            // 
+            this.tower_name.BackColor = System.Drawing.Color.Transparent;
+            this.tower_name.Font = new System.Drawing.Font("Luckiest Guy", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tower_name.ForeColor = System.Drawing.Color.White;
+            this.tower_name.Location = new System.Drawing.Point(164, 214);
+            this.tower_name.Name = "tower_name";
+            this.tower_name.Size = new System.Drawing.Size(173, 28);
+            this.tower_name.TabIndex = 13;
+            this.tower_name.Text = "Tower";
+            this.tower_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
@@ -603,12 +612,13 @@ namespace BloonTowerMaker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloonTowerMaker.Properties.Resources.primary;
             this.ClientSize = new System.Drawing.Size(1350, 729);
+            this.Controls.Add(this.tower_name);
             this.Controls.Add(this.currdir);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_projectile_editor);
             this.Controls.Add(this.btn_generate);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.combo_base);
             this.Controls.Add(this.input_type);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
@@ -695,7 +705,8 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label currdir;
         private System.Windows.Forms.Button btn_projectile_editor;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox combo_base;
+        private System.Windows.Forms.Label tower_name;
     }
 }
 

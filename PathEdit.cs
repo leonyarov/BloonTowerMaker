@@ -40,11 +40,12 @@ namespace BloonTowerMaker
             foreach (var key in dict.Keys.ToArray())
             {
                 var item = new ListViewItem(key);
+                item.Name = key;
                 item.SubItems.Add(model[key]);
                 item.SubItems.Add(dict[key]);
                 propertiesList.Items.Add(item);
             }
-            label_path.Text = path; //get tower path from calling button
+            this.Text = $"Path: {path}"; //get tower path from calling button
            
             UpdateImages(); //Update images on form
 
@@ -52,8 +53,8 @@ namespace BloonTowerMaker
 
         private void UpdateImages()
         {
-            img_display.Image?.Dispose();
             img_icon.Image?.Dispose();
+            img_display.Image?.Dispose();
             img_display.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
             img_icon.Image = SelectImage.GetImage(SelectImage.image_type.ICON, path);
         }
@@ -80,7 +81,7 @@ namespace BloonTowerMaker
         }
 
 
-        private void RemoveImage(object sender, string path)
+        private void RemoveImage(string path)
         {
             var imagename = propertiesList.Items["name"].SubItems[1].Text;
             if (string.IsNullOrWhiteSpace(imagename))
@@ -88,7 +89,6 @@ namespace BloonTowerMaker
                 MessageBox.Show("Path name cannot be empty to remove an image");
                 return;
             }
-            var img = sender as PictureBox;
             try
             {
                 File.Delete(Path.Combine(Project.instance.projectPath,Models.ParsePath(path),$"{imagename}{lastImage}.png"));
@@ -133,7 +133,9 @@ namespace BloonTowerMaker
             lastImage = "-Portrait";
             if (e.Button == MouseButtons.Right)
             {
-                RemoveImage(sender, path);
+                img_display.Image?.Dispose();
+                img_display.Image = null;
+                RemoveImage(path);
                 return;
             }
             image_select_dialog.ShowDialog();
@@ -143,7 +145,9 @@ namespace BloonTowerMaker
             lastImage = "-Icon";
             if (e.Button == MouseButtons.Right)
             {
-                RemoveImage(sender, path);
+                img_icon.Image?.Dispose();
+                img_display.Image = null;
+                RemoveImage(path);
                 return;
             }
             image_select_dialog.ShowDialog();

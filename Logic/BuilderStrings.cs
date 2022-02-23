@@ -9,7 +9,7 @@ namespace BloonTowerMaker.Logic
     internal class BuilderStrings
     {
         public const string VARIABLE = @"public override $type$ $name$ {get { return $value$;}}";
-        public const string FUNCTION_VARIABLE = @"$type$ $name$ {get { return $value$;}}";
+        public const string FUNCTION_VARIABLE = @"$name$.$properties$ = $value$;";
         public const string MAIN_CLASS = @"using BTD_Mod_Helper;
                                             using MelonLoader;
                                             using System.Reflection;

@@ -64,5 +64,14 @@ namespace BloonTowerMaker.Logic
             stringBuilder.Replace("$params$", @params);
             return stringBuilder.ToString();
         }
+
+        public static string BuildFunctionVariable(string name,string properties, string value)
+        {
+            StringBuilder stringBuilder = new StringBuilder(BuilderStrings.FUNCTION_VARIABLE);
+            stringBuilder.Replace("$name$", name);
+            stringBuilder.Replace("$properties$", properties);
+            stringBuilder.Replace("$value$", value);
+            return stringBuilder.ToString();
+        }
     }
 }

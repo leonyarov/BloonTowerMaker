@@ -29,56 +29,39 @@ namespace BloonTowerMaker
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_path = new System.Windows.Forms.Label();
             this.button_ok = new System.Windows.Forms.Button();
             this.img_icon = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.img_display = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.Description = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.combo_model = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.input_description = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.input_cost = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.input_name = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btn_Edit = new System.Windows.Forms.Button();
             this.propertiesList = new System.Windows.Forms.ListView();
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.input_property = new System.Windows.Forms.MaskedTextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
-            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label_path
-            // 
-            this.label_path.AutoSize = true;
-            this.label_path.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label_path.Location = new System.Drawing.Point(0, 0);
-            this.label_path.Name = "label_path";
-            this.label_path.Size = new System.Drawing.Size(28, 13);
-            this.label_path.TabIndex = 0;
-            this.label_path.Text = "path";
             // 
             // button_ok
             // 
@@ -94,9 +77,10 @@ namespace BloonTowerMaker
             // 
             // img_icon
             // 
-            this.img_icon.Location = new System.Drawing.Point(201, 27);
+            this.img_icon.BackColor = System.Drawing.Color.Silver;
+            this.img_icon.Location = new System.Drawing.Point(215, 40);
             this.img_icon.Name = "img_icon";
-            this.img_icon.Size = new System.Drawing.Size(67, 64);
+            this.img_icon.Size = new System.Drawing.Size(155, 155);
             this.img_icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img_icon.TabIndex = 3;
             this.img_icon.TabStop = false;
@@ -107,7 +91,7 @@ namespace BloonTowerMaker
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(198, 11);
+            this.label3.Location = new System.Drawing.Point(212, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(28, 13);
             this.label3.TabIndex = 4;
@@ -115,9 +99,10 @@ namespace BloonTowerMaker
             // 
             // img_display
             // 
-            this.img_display.Location = new System.Drawing.Point(8, 27);
+            this.img_display.BackColor = System.Drawing.Color.Silver;
+            this.img_display.Location = new System.Drawing.Point(12, 40);
             this.img_display.Name = "img_display";
-            this.img_display.Size = new System.Drawing.Size(155, 147);
+            this.img_display.Size = new System.Drawing.Size(155, 155);
             this.img_display.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img_display.TabIndex = 3;
             this.img_display.TabStop = false;
@@ -127,22 +112,11 @@ namespace BloonTowerMaker
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(9, 11);
+            this.label4.Location = new System.Drawing.Point(13, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(40, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Portrait";
-            // 
-            // Description
-            // 
-            this.Description.AutoSize = true;
-            this.Description.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.Description.Location = new System.Drawing.Point(5, 18);
-            this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(60, 13);
-            this.Description.TabIndex = 0;
-            this.Description.Text = "Description";
             // 
             // groupBox1
             // 
@@ -213,132 +187,38 @@ namespace BloonTowerMaker
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Controls.Add(this.groupBox4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.img_display);
+            this.groupBox2.Controls.Add(this.img_icon);
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
-            this.groupBox2.Location = new System.Drawing.Point(0, 13);
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(662, 201);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "General";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.img_display);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.img_icon);
-            this.panel2.Location = new System.Drawing.Point(374, 13);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.panel2.Size = new System.Drawing.Size(276, 182);
-            this.panel2.TabIndex = 5;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.input_description);
-            this.groupBox4.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox4.Controls.Add(this.Description);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox4.ForeColor = System.Drawing.Color.Black;
-            this.groupBox4.Location = new System.Drawing.Point(3, 16);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox4.Size = new System.Drawing.Size(262, 182);
-            this.groupBox4.TabIndex = 6;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Info";
-            // 
-            // input_description
-            // 
-            this.input_description.Dock = System.Windows.Forms.DockStyle.Top;
-            this.input_description.Location = new System.Drawing.Point(5, 31);
-            this.input_description.Multiline = true;
-            this.input_description.Name = "input_description";
-            this.input_description.Size = new System.Drawing.Size(252, 57);
-            this.input_description.TabIndex = 1;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.input_cost, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label5, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.input_name, 1, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 108);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(252, 69);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Cost";
-            // 
-            // input_cost
-            // 
-            this.input_cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_cost.Location = new System.Drawing.Point(3, 16);
-            this.input_cost.Name = "input_cost";
-            this.input_cost.Size = new System.Drawing.Size(100, 20);
-            this.input_cost.TabIndex = 1;
-            this.input_cost.Text = "0";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label5.Location = new System.Drawing.Point(109, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Upgrade Name";
-            // 
-            // input_name
-            // 
-            this.input_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.input_name.Location = new System.Drawing.Point(109, 16);
-            this.input_name.Name = "input_name";
-            this.input_name.Size = new System.Drawing.Size(100, 20);
-            this.input_name.TabIndex = 1;
-            // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.btn_Edit);
-            this.groupBox3.Controls.Add(this.propertiesList);
-            this.groupBox3.Controls.Add(this.input_property);
+            this.groupBox3.Controls.Add(this.groupBox6);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
-            this.groupBox3.Location = new System.Drawing.Point(0, 214);
+            this.groupBox3.Location = new System.Drawing.Point(0, 201);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(662, 363);
+            this.groupBox3.Size = new System.Drawing.Size(662, 376);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
             // 
             // btn_Edit
             // 
-            this.btn_Edit.Location = new System.Drawing.Point(497, 336);
+            this.btn_Edit.Location = new System.Drawing.Point(241, 330);
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(75, 21);
             this.btn_Edit.TabIndex = 11;
@@ -352,11 +232,10 @@ namespace BloonTowerMaker
             this.name,
             this.value,
             this.type});
-            this.propertiesList.Dock = System.Windows.Forms.DockStyle.Top;
             this.propertiesList.HideSelection = false;
-            this.propertiesList.Location = new System.Drawing.Point(161, 16);
+            this.propertiesList.Location = new System.Drawing.Point(9, 18);
             this.propertiesList.Name = "propertiesList";
-            this.propertiesList.Size = new System.Drawing.Size(498, 315);
+            this.propertiesList.Size = new System.Drawing.Size(307, 306);
             this.propertiesList.TabIndex = 9;
             this.propertiesList.UseCompatibleStateImageBehavior = false;
             this.propertiesList.View = System.Windows.Forms.View.Details;
@@ -364,30 +243,37 @@ namespace BloonTowerMaker
             // name
             // 
             this.name.Text = "Name";
-            this.name.Width = 210;
+            this.name.Width = 112;
             // 
             // value
             // 
             this.value.Text = "Value";
             this.value.Width = 121;
             // 
+            // type
+            // 
+            this.type.Text = "Type";
+            // 
             // input_property
             // 
-            this.input_property.Location = new System.Drawing.Point(167, 337);
+            this.input_property.Location = new System.Drawing.Point(9, 331);
             this.input_property.Name = "input_property";
-            this.input_property.Size = new System.Drawing.Size(295, 20);
+            this.input_property.Size = new System.Drawing.Size(221, 20);
             this.input_property.TabIndex = 10;
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.propertiesList);
+            this.groupBox5.Controls.Add(this.btn_Edit);
+            this.groupBox5.Controls.Add(this.input_property);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox5.ForeColor = System.Drawing.Color.Black;
             this.groupBox5.Location = new System.Drawing.Point(3, 16);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(158, 344);
+            this.groupBox5.Size = new System.Drawing.Size(324, 357);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Stats";
+            this.groupBox5.Text = "Tower";
             // 
             // image_select_dialog
             // 
@@ -395,9 +281,34 @@ namespace BloonTowerMaker
             this.image_select_dialog.Filter = "Image Files|*.png|jpeg files|*.jpeg ";
             this.image_select_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.image_select_dialog_FileOk);
             // 
-            // type
+            // groupBox6
             // 
-            this.type.Text = "Type";
+            this.groupBox6.Controls.Add(this.numericUpDown1);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox6.ForeColor = System.Drawing.Color.Black;
+            this.groupBox6.Location = new System.Drawing.Point(333, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(326, 357);
+            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Attack";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Projectile Amount:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(116, 31);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(61, 20);
+            this.numericUpDown1.TabIndex = 1;
             // 
             // PathEdit
             // 
@@ -410,7 +321,6 @@ namespace BloonTowerMaker
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_ok);
-            this.Controls.Add(this.label_path);
             this.DoubleBuffered = true;
             this.Name = "PathEdit";
             this.Text = "PathEdit";
@@ -423,44 +333,31 @@ namespace BloonTowerMaker
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_path;
         private System.Windows.Forms.Button button_ok;
         private System.Windows.Forms.PictureBox img_icon;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox img_display;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label Description;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.ComboBox combo_model;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.OpenFileDialog image_select_dialog;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox input_name;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox input_cost;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox input_description;
         private System.Windows.Forms.ListView propertiesList;
         private System.Windows.Forms.ColumnHeader name;
         private System.Windows.Forms.ColumnHeader value;
@@ -468,5 +365,8 @@ namespace BloonTowerMaker
         private System.Windows.Forms.MaskedTextBox input_property;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ColumnHeader type;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
