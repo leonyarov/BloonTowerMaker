@@ -77,9 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\BaseModel.cs" />
+    <Compile Include="Data\DictionaryExtensions.cs" />
+    <Compile Include="Data\IExtractModel.cs" />
     <Compile Include="Data\Models.cs" />
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Projectile.cs" />
+    <Compile Include="Data\MonkeyWeaponModel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

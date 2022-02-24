@@ -80,7 +80,7 @@ namespace BloonTowerMaker.Data
         public static Dictionary<string, string> getTowerModelAsDictionary()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            foreach (var key in ExtractPropertiesFromTowerModel().Keys)
+            foreach (var key in ExtractProperties<TowerModel>().Keys)
                 dict.Add(key,String.Empty);
             return dict;
         }
@@ -89,17 +89,17 @@ namespace BloonTowerMaker.Data
         ///Get properties from TowerModel as (key: name | value: type)
         /// </summary>
         /// <returns>Dictionary<string,string>as (key: name | value: type)</returns>
-        public static Dictionary<string, string> ExtractPropertiesFromTowerModel()
+        public static Dictionary<string, string> ExtractProperties<T>()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
-            var t = typeof(TowerModel).GetProperties();
+            var t = typeof(T).GetProperties();
             foreach (var propertyInfo in t)
             {
                 try
                 {
                     var key = propertyInfo.Name;
                     var value = propertyInfo.PropertyType.Name;
-                    var cmp = StringComparison.CurrentCultureIgnoreCase;
+                    const StringComparison cmp = StringComparison.CurrentCultureIgnoreCase;
                     if (!value.Equals(nameof(String), cmp) && !value.Equals(nameof(Single), cmp) &&
                         !value.Equals(nameof(Int32), cmp) && !value.Equals(nameof(Boolean), cmp)) continue;
 
@@ -117,10 +117,14 @@ namespace BloonTowerMaker.Data
                     continue; //If the type is not valid and throws an error
                 }
             }
-            dict.Add("description","string"); //add missing variable
-            dict.Add("path","int");
-            dict.Add("baseTower", "string");
-            dict.Add("Priority", "int");
+
+            if (typeof(T) == typeof(TowerModel))
+            {
+                dict.Add("description","string"); //add missing variable
+                dict.Add("path","int");
+                dict.Add("baseTower", "string");
+                dict.Add("Priority", "int");
+            }
             return dict;
         }
 

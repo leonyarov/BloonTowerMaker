@@ -35,7 +35,7 @@ namespace BloonTowerMaker
 
         private void PathEdit_Load(object sender, EventArgs e)
         {
-            var dict = Models.ExtractPropertiesFromTowerModel(); 
+            var dict = Models.ExtractProperties<TowerModel>(); 
             model = models.GetTowerModel(path); //get model path
             foreach (var key in dict.Keys.ToArray())
             {

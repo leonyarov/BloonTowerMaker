@@ -30,7 +30,6 @@ namespace BloonTowerMaker.Logic
 
         public static string ParseBase()
         {
-            var typeDictionary = Models.ExtractPropertiesFromTowerModel(); //types
             var dictionary = models.GetTowerModel(Resources.Base); // the base dictionary
             StringBuilder file = new StringBuilder(Builder.BuildBase(Project.instance.projectName));
             StringBuilder vars = new StringBuilder();
@@ -66,12 +65,12 @@ namespace BloonTowerMaker.Logic
             if (!Directory.Exists(Project.instance.projectPath)) throw new DirectoryNotFoundException("Cant find project folder");
             try
             {
-                foreach (var towerfile in Directory.GetFiles(Project.instance.projectPath, Resources.TowerPathJsonFile, SearchOption.AllDirectories))
+                foreach (var towerFile in Directory.GetFiles(Project.instance.projectPath, Resources.TowerPathJsonFile, SearchOption.AllDirectories))
                 {
-                    lastTower = towerfile;
-                    if (towerfile.Contains("000")) continue; //skip base file
+                    lastTower = towerFile;
+                    if (towerFile.Contains("000")) continue; //skip base file
                     //TODO: json legit check
-                    var text = File.ReadAllText(towerfile);
+                    var text = File.ReadAllText(towerFile);
                     var jsonDictionary = JsonConvert.DeserializeObject<Dictionary<string,string>>(text);
                     if (string.IsNullOrWhiteSpace(jsonDictionary["cost"]) || string.IsNullOrWhiteSpace(jsonDictionary["name"])) continue;;
                     var dict = RemoveGeneralVariables(ref jsonDictionary);
