@@ -42,14 +42,10 @@ namespace BloonTowerMaker
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.dataGridPathProperty = new System.Windows.Forms.DataGridView();
+            this.dataGridProjectiles = new System.Windows.Forms.DataGridView();
+            this.dataGridPathAttack = new System.Windows.Forms.DataGridView();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.propertiesList = new System.Windows.Forms.ListView();
-            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btn_Edit = new System.Windows.Forms.Button();
-            this.input_property = new System.Windows.Forms.MaskedTextBox();
+            this.dataGridPathProperty = new System.Windows.Forms.DataGridView();
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
@@ -58,8 +54,10 @@ namespace BloonTowerMaker
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridProjectiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathAttack)).BeginInit();
             this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).BeginInit();
             this.SuspendLayout();
             // 
             // button_ok
@@ -68,7 +66,7 @@ namespace BloonTowerMaker
             this.button_ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_ok.Location = new System.Drawing.Point(0, 782);
             this.button_ok.Name = "button_ok";
-            this.button_ok.Size = new System.Drawing.Size(662, 23);
+            this.button_ok.Size = new System.Drawing.Size(806, 23);
             this.button_ok.TabIndex = 2;
             this.button_ok.Text = "Done";
             this.button_ok.UseVisualStyleBackColor = true;
@@ -127,7 +125,7 @@ namespace BloonTowerMaker
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(0, 577);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(662, 205);
+            this.groupBox1.Size = new System.Drawing.Size(806, 205);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Model";
@@ -152,7 +150,7 @@ namespace BloonTowerMaker
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(656, 32);
+            this.panel1.Size = new System.Drawing.Size(800, 32);
             this.panel1.TabIndex = 1;
             // 
             // radioButton2
@@ -161,7 +159,7 @@ namespace BloonTowerMaker
             this.radioButton2.Dock = System.Windows.Forms.DockStyle.Right;
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.radioButton2.ForeColor = System.Drawing.Color.Black;
-            this.radioButton2.Location = new System.Drawing.Point(581, 5);
+            this.radioButton2.Location = new System.Drawing.Point(725, 5);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(70, 22);
             this.radioButton2.TabIndex = 0;
@@ -195,7 +193,7 @@ namespace BloonTowerMaker
             this.groupBox2.ForeColor = System.Drawing.Color.Black;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(662, 201);
+            this.groupBox2.Size = new System.Drawing.Size(806, 201);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "General";
@@ -210,90 +208,69 @@ namespace BloonTowerMaker
             this.groupBox3.ForeColor = System.Drawing.Color.Black;
             this.groupBox3.Location = new System.Drawing.Point(0, 201);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(662, 376);
+            this.groupBox3.Size = new System.Drawing.Size(806, 376);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.dataGridPathProperty);
+            this.groupBox6.Controls.Add(this.dataGridProjectiles);
+            this.groupBox6.Controls.Add(this.dataGridPathAttack);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Right;
             this.groupBox6.ForeColor = System.Drawing.Color.Black;
-            this.groupBox6.Location = new System.Drawing.Point(333, 16);
+            this.groupBox6.Location = new System.Drawing.Point(386, 16);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 357);
+            this.groupBox6.Size = new System.Drawing.Size(417, 357);
             this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Attack";
             // 
-            // dataGridPathProperty
+            // dataGridProjectiles
             // 
-            this.dataGridPathProperty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridPathProperty.Location = new System.Drawing.Point(46, 78);
-            this.dataGridPathProperty.Name = "dataGridPathProperty";
-            this.dataGridPathProperty.Size = new System.Drawing.Size(240, 150);
-            this.dataGridPathProperty.TabIndex = 0;
-            this.dataGridPathProperty.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPathProperty_CellValueChanged);
+            this.dataGridProjectiles.AllowUserToAddRows = false;
+            this.dataGridProjectiles.AllowUserToDeleteRows = false;
+            this.dataGridProjectiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridProjectiles.Location = new System.Drawing.Point(206, 19);
+            this.dataGridProjectiles.Name = "dataGridProjectiles";
+            this.dataGridProjectiles.Size = new System.Drawing.Size(208, 171);
+            this.dataGridProjectiles.TabIndex = 2;
+            // 
+            // dataGridPathAttack
+            // 
+            this.dataGridPathAttack.AllowUserToAddRows = false;
+            this.dataGridPathAttack.AllowUserToDeleteRows = false;
+            this.dataGridPathAttack.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPathAttack.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridPathAttack.Location = new System.Drawing.Point(3, 196);
+            this.dataGridPathAttack.Name = "dataGridPathAttack";
+            this.dataGridPathAttack.Size = new System.Drawing.Size(411, 158);
+            this.dataGridPathAttack.TabIndex = 1;
+            this.dataGridPathAttack.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPathAttack_CellValueChanged);
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.propertiesList);
-            this.groupBox5.Controls.Add(this.btn_Edit);
-            this.groupBox5.Controls.Add(this.input_property);
+            this.groupBox5.Controls.Add(this.dataGridPathProperty);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox5.ForeColor = System.Drawing.Color.Black;
             this.groupBox5.Location = new System.Drawing.Point(3, 16);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(324, 357);
+            this.groupBox5.Size = new System.Drawing.Size(380, 357);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Tower";
             // 
-            // propertiesList
+            // dataGridPathProperty
             // 
-            this.propertiesList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.name,
-            this.value,
-            this.type});
-            this.propertiesList.HideSelection = false;
-            this.propertiesList.Location = new System.Drawing.Point(9, 18);
-            this.propertiesList.Name = "propertiesList";
-            this.propertiesList.Size = new System.Drawing.Size(307, 306);
-            this.propertiesList.TabIndex = 9;
-            this.propertiesList.UseCompatibleStateImageBehavior = false;
-            this.propertiesList.View = System.Windows.Forms.View.Details;
-            // 
-            // name
-            // 
-            this.name.Text = "Name";
-            this.name.Width = 112;
-            // 
-            // value
-            // 
-            this.value.Text = "Value";
-            this.value.Width = 121;
-            // 
-            // type
-            // 
-            this.type.Text = "Type";
-            // 
-            // btn_Edit
-            // 
-            this.btn_Edit.Location = new System.Drawing.Point(241, 330);
-            this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(75, 21);
-            this.btn_Edit.TabIndex = 11;
-            this.btn_Edit.Text = "Edit";
-            this.btn_Edit.UseVisualStyleBackColor = true;
-            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
-            // 
-            // input_property
-            // 
-            this.input_property.Location = new System.Drawing.Point(9, 331);
-            this.input_property.Name = "input_property";
-            this.input_property.Size = new System.Drawing.Size(221, 20);
-            this.input_property.TabIndex = 10;
+            this.dataGridPathProperty.AllowUserToAddRows = false;
+            this.dataGridPathProperty.AllowUserToDeleteRows = false;
+            this.dataGridPathProperty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPathProperty.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridPathProperty.Location = new System.Drawing.Point(3, 16);
+            this.dataGridPathProperty.Name = "dataGridPathProperty";
+            this.dataGridPathProperty.Size = new System.Drawing.Size(374, 338);
+            this.dataGridPathProperty.TabIndex = 0;
+            this.dataGridPathProperty.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPathProperty_CellValueChanged);
             // 
             // image_select_dialog
             // 
@@ -307,7 +284,7 @@ namespace BloonTowerMaker
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(662, 805);
+            this.ClientSize = new System.Drawing.Size(806, 805);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -327,9 +304,10 @@ namespace BloonTowerMaker
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridProjectiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathAttack)).EndInit();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -348,14 +326,10 @@ namespace BloonTowerMaker
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.OpenFileDialog image_select_dialog;
-        private System.Windows.Forms.ListView propertiesList;
-        private System.Windows.Forms.ColumnHeader name;
-        private System.Windows.Forms.ColumnHeader value;
-        private System.Windows.Forms.Button btn_Edit;
-        private System.Windows.Forms.MaskedTextBox input_property;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ColumnHeader type;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.DataGridView dataGridPathProperty;
+        private System.Windows.Forms.DataGridView dataGridProjectiles;
+        private System.Windows.Forms.DataGridView dataGridPathAttack;
     }
 }

@@ -173,6 +173,15 @@ namespace BloonTowerMaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to attack.json.
+        /// </summary>
+        internal static string TowerAttackJsonFile {
+            get {
+                return ResourceManager.GetString("TowerAttackJsonFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to path.json.
         /// </summary>
         internal static string TowerPathJsonFile {

@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Assets.Scripts.Models;
 using Assets.Scripts.Models.Towers;
+using Assets.Scripts.Models.Towers.Behaviors.Attack;
+using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Weapons;
 using Assets.Scripts.Simulation.Towers;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
@@ -21,18 +24,16 @@ namespace BloonTowerMaker
     public partial class PathEdit : Form
     {
         string path;
-        Dictionary<string, string> model;
         bool isBase = false;
-        Models models;
         string lastImage = "";
 
         private ModelToList<TowerModel> pathModel;
+        private ModelToList<AttackModel> attackModel;
         public PathEdit(string path = "000")
         {
             InitializeComponent();
             this.path = path;
             isBase = path == Resources.Base;
-            models = new Models();
         }
 
         private void PathEdit_Load(object sender, EventArgs e)
@@ -40,18 +41,19 @@ namespace BloonTowerMaker
             pathModel = new ModelToList<TowerModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerPathJsonFile));
             dataGridPathProperty.DataSource = pathModel.data.ToDataTable();
 
-            //var dict = Models.ExtractProperties<TowerModel>(); 
-            //model = models.GetTowerModel(path); //get model path
-            //foreach (var key in dict.Keys.ToArray())
-            //{
-            //    var item = new ListViewItem(key);
-            //    item.Name = key;
-            //    propertiesList.Items.Add(item);
-            //    item.SubItems.Add(dict[key]);
-            //}
-            //    item.SubItems.Add(model[key]);
+            attackModel = new ModelToList<AttackModel>(Path.Combine(Project.instance.projectPath,Models.ParsePath(path),Resources.TowerAttackJsonFile));
+            dataGridPathAttack.DataSource = attackModel.data.ToDataTable();
+
+
+            List<string> projectileNames = new List<string>();
+            foreach (var file in Directory.GetFiles(Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder),"*.json"))
+            {
+                ModelToList<WeaponModel> weapon = new ModelToList<WeaponModel>(file);
+                projectileNames.Add(weapon.FindValue("name"));
+            }
+
+            dataGridProjectiles.DataSource = projectileNames.ToDataTableWithCheckbox();
             this.Text = $"Path: {path}"; //get tower path from calling button
-           
             UpdateImages(); //Update images on form
         }
 
@@ -69,18 +71,10 @@ namespace BloonTowerMaker
 
         private void PathEdit_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //foreach (ListViewItem key in propertiesList.Items)
-            //{
-            //    var value = key.SubItems[1].Text;
-            //    model[key.Text] = value;
-            //}
-
             pathModel.data.UpdateFromDataTable(dataGridPathProperty.DataSource as DataTable);
             pathModel.Edit("tier", Models.GetPathTier(path).ToString());
-            pathModel.Edit("tier", Models.GetPathRow(path));
+            pathModel.Edit("path", Models.GetPathRow(path));
             pathModel.Save();
-            //models.UpdateBaseModel(model, path);
-
             MainForm.ActiveForm.Update();
         }
 
@@ -99,7 +93,7 @@ namespace BloonTowerMaker
             }
             catch (Exception err)
             {
-                MessageBox.Show(err.ToString(), "Cant delete Image");
+                MessageBox.Show(err.ToString(), "Cant delete Image, Try to re-open the path");
             }
             UpdateImages();
         }
@@ -132,6 +126,7 @@ namespace BloonTowerMaker
             PathEdit_Load(sender, e);
         }
 
+        //Image Select
         private void img_display_MouseClick(object sender, MouseEventArgs e)
         {
             lastImage = "-Portrait";
@@ -157,28 +152,17 @@ namespace BloonTowerMaker
             image_select_dialog.ShowDialog();
         }
 
-        private IEnumerable<Control> GetAllTextBoxControls(Control container)
-        {
-            List<Control> controlList = new List<Control>();
-            foreach (Control c in container.Controls)
-            {
-                controlList.AddRange(GetAllTextBoxControls(c));
-                if (c is TextBox)
-                    controlList.Add(c);
-            }
-            return controlList;
-        }
-
-        private void btn_Edit_Click(object sender, EventArgs e)
-        {
-            if (propertiesList.SelectedItems.Count != 1) return;
-            propertiesList.SelectedItems[0].SubItems[1].Text = input_property.Text;
-        }
 
         private void dataGridPathProperty_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             pathModel.data.UpdateFromDataTable(dataGridPathProperty.DataSource as DataTable);
             pathModel.Save();
+        }
+
+        private void dataGridPathAttack_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            attackModel.data.UpdateFromDataTable(dataGridPathAttack.DataSource as DataTable);
+            attackModel.Save();
         }
     }
 }

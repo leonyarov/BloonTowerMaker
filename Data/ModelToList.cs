@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloonTowerMaker.Properties;
+using Il2CppSystem;
 using Newtonsoft.Json;
+using Exception = System.Exception;
+using String = System.String;
 
 namespace BloonTowerMaker.Data
 {
@@ -74,6 +76,68 @@ namespace BloonTowerMaker.Data
             catch (Exception err)
             {
                 throw new Exception($"Error reading {Path.GetFileNameWithoutExtension(path)} projectile file: " + err.Message);
+            }
+        }
+
+        public void Delete()
+        {
+            try
+            {
+                File.Delete(path);
+            }
+            catch (Exception err)
+            {
+                throw new Exception($"Cannot Delete file at path {path}: " + err.Message);
+            }
+
+            var fileDir = Path.GetDirectoryName(path);
+            var fileInDir = Directory.GetFiles(fileDir);
+            var fileName = Path.GetFileNameWithoutExtension(path);
+            foreach (var file in fileInDir)
+            {
+                if (!file.Contains(fileName)) continue;
+                try
+                {
+                    File.Delete(file);
+                }
+                catch (Exception errException)
+                {
+                    throw new Exception($"Cannot Delete additional files to file {fileName}: {file} - " +
+                                        errException.Message);
+                }
+            }
+        }
+
+        public void Rename(string newName)
+        {
+            if (newName == path) return;
+            if (!newName.Contains(".json")) newName += ".json";
+            var fileName = Path.GetFileNameWithoutExtension(path);
+            var fileDir = Path.GetDirectoryName(path);
+            var newFileName = Path.Combine(fileDir, newName);
+            try
+            {
+                File.Move(path, newFileName); //Rename the file
+                path = newFileName; //set new path as the current path
+                var fileInDir = Directory.GetFiles(fileDir);
+                foreach (var file in fileInDir)
+                {
+                    if (!file.Contains(fileName) || file == newFileName) continue;
+                    try
+                    {
+                        var extension = Path.GetExtension(file);
+                        File.Move(file, Path.Combine(fileDir,newName.Replace(".json","")) + extension);
+                    }
+                    catch (Exception errException)
+                    {
+                        throw new Exception($"Cannot Rename additional files to file {fileName}: {file} - " +
+                                            errException.Message);
+                    }
+                }
+            }
+            catch (Exception errException)
+            {
+                throw new Exception($"Cannot rename {fileName} to {newFileName}" + errException.Message);
             }
         }
 

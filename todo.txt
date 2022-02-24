@@ -7,4 +7,5 @@ TODO: 6. author information on parser
 TODO: 7. FIX IMAGE USED BY PROCESS
 TODO: 8. Copy tower properties.
 TODO: 9. BUG: Path count load fix (wont disable the button on load)
-TODO: Test images, and build variables from dictionary in parser
+TODO: Finish up with projectile select
+TODO: Do global modifiers on objects
