@@ -27,6 +27,16 @@ namespace BloonTowerMaker.Data
 
             return dt;
         }
+        public static DataTable ToDataTable(this List<List<string>> model)
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("Type", typeof(string));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Value", typeof(string));
+            foreach (var variable in model)
+                dt.Rows.Add(variable[0],variable[1],variable[2]);
+            return dt;
+        }
         public static void UpdateFromDataTable(this Dictionary<string, string> dictionary,
             DataTable table)
         {
@@ -35,6 +45,19 @@ namespace BloonTowerMaker.Data
                 var key = tableRow[1].ToString();
                 var value = tableRow[2].ToString();
                 dictionary[key] = value;
+            }
+        }
+        public static void UpdateFromDataTable(this List<List<string>> model,
+            DataTable table)
+        {
+            foreach (DataRow tableRow in table.Rows)
+            {
+                var type = tableRow[0].ToString();
+                var name = tableRow[1].ToString();
+                var value = tableRow[2].ToString();
+                var list = new List<string> { type, name, value};
+                var index = model.FindIndex(x => x.Contains(name));
+                model[index] = list;
             }
         }
 

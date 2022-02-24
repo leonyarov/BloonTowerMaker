@@ -9,6 +9,7 @@ namespace BloonTowerMaker.Data
 {
     class Models
     {
+        [ObsoleteAttribute("This property is obsolete.", false)]
         public Dictionary<string, string> GetTowerModel(string path)
         {
             var jsonPath = Path.Combine(Project.instance.projectPath, ParsePath(path), Resources.TowerPathJsonFile);
@@ -22,6 +23,12 @@ namespace BloonTowerMaker.Data
         public static string ParsePath(string path)
         {
             return $"path_{path}";
+        }
+
+        public static string GetJsonPath(string path)
+        {
+            return System.IO.Path.Combine(Project.instance.projectPath, Models.ParsePath(path),
+                Resources.TowerPathJsonFile);
         }
 
         public void UpdateBaseModel(Dictionary<string,string> dictionary, string path)

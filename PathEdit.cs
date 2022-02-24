@@ -25,6 +25,8 @@ namespace BloonTowerMaker
         bool isBase = false;
         Models models;
         string lastImage = "";
+
+        private ModelToList<TowerModel> pathModel;
         public PathEdit(string path = "000")
         {
             InitializeComponent();
@@ -35,20 +37,22 @@ namespace BloonTowerMaker
 
         private void PathEdit_Load(object sender, EventArgs e)
         {
-            var dict = Models.ExtractProperties<TowerModel>(); 
-            model = models.GetTowerModel(path); //get model path
-            foreach (var key in dict.Keys.ToArray())
-            {
-                var item = new ListViewItem(key);
-                item.Name = key;
-                item.SubItems.Add(model[key]);
-                item.SubItems.Add(dict[key]);
-                propertiesList.Items.Add(item);
-            }
+            pathModel = new ModelToList<TowerModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerPathJsonFile));
+            dataGridPathProperty.DataSource = pathModel.data.ToDataTable();
+
+            //var dict = Models.ExtractProperties<TowerModel>(); 
+            //model = models.GetTowerModel(path); //get model path
+            //foreach (var key in dict.Keys.ToArray())
+            //{
+            //    var item = new ListViewItem(key);
+            //    item.Name = key;
+            //    propertiesList.Items.Add(item);
+            //    item.SubItems.Add(dict[key]);
+            //}
+            //    item.SubItems.Add(model[key]);
             this.Text = $"Path: {path}"; //get tower path from calling button
            
             UpdateImages(); //Update images on form
-
         }
 
         private void UpdateImages()
@@ -65,17 +69,17 @@ namespace BloonTowerMaker
 
         private void PathEdit_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //foreach (ListViewItem key in propertiesList.Items)
+            //{
+            //    var value = key.SubItems[1].Text;
+            //    model[key.Text] = value;
+            //}
 
-            foreach (ListViewItem key in propertiesList.Items)
-            {
-                var value = key.SubItems[1].Text;
-                model[key.Text] = value;
-            }
-
-            model["tier"]= Models.GetPathTier(path).ToString();
-            model["path"] = Models.GetPathRow(path);
-
-            models.UpdateBaseModel(model, path);
+            pathModel.data.UpdateFromDataTable(dataGridPathProperty.DataSource as DataTable);
+            pathModel.Edit("tier", Models.GetPathTier(path).ToString());
+            pathModel.Edit("tier", Models.GetPathRow(path));
+            pathModel.Save();
+            //models.UpdateBaseModel(model, path);
 
             MainForm.ActiveForm.Update();
         }
@@ -83,15 +87,15 @@ namespace BloonTowerMaker
 
         private void RemoveImage(string path)
         {
-            var imagename = propertiesList.Items["name"].SubItems[1].Text;
-            if (string.IsNullOrWhiteSpace(imagename))
+            var imageName = pathModel.Find("name")[2];
+            if (string.IsNullOrWhiteSpace(imageName))
             {
                 MessageBox.Show("Path name cannot be empty to remove an image");
                 return;
             }
             try
             {
-                File.Delete(Path.Combine(Project.instance.projectPath,Models.ParsePath(path),$"{imagename}{lastImage}.png"));
+                File.Delete(Path.Combine(Project.instance.projectPath,Models.ParsePath(path),$"{imageName}{lastImage}.png"));
             }
             catch (Exception err)
             {
@@ -102,8 +106,8 @@ namespace BloonTowerMaker
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
-            var imagename = propertiesList.Items["name"].SubItems[1].Text;
-            if (string.IsNullOrWhiteSpace(imagename))
+            var imageName = pathModel.Find("name")[2];
+            if (string.IsNullOrWhiteSpace(imageName))
             {
                 MessageBox.Show("Path name cannot be empty to set an image");
                 return;
@@ -112,7 +116,7 @@ namespace BloonTowerMaker
             try
             {
                 var new_filename = Path.Combine(Project.instance.projectPath, Models.ParsePath(path),
-                    $"{imagename}{lastImage}.png");
+                    $"{imageName}{lastImage}.png");
                 File.Copy(file,new_filename , true);
             }
             catch (Exception err)
@@ -169,6 +173,12 @@ namespace BloonTowerMaker
         {
             if (propertiesList.SelectedItems.Count != 1) return;
             propertiesList.SelectedItems[0].SubItems[1].Text = input_property.Text;
+        }
+
+        private void dataGridPathProperty_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            pathModel.data.UpdateFromDataTable(dataGridPathProperty.DataSource as DataTable);
+            pathModel.Save();
         }
     }
 }

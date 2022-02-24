@@ -41,26 +41,25 @@ namespace BloonTowerMaker
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btn_Edit = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.dataGridPathProperty = new System.Windows.Forms.DataGridView();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.propertiesList = new System.Windows.Forms.ListView();
             this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btn_Edit = new System.Windows.Forms.Button();
             this.input_property = new System.Windows.Forms.MaskedTextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_ok
@@ -216,15 +215,40 @@ namespace BloonTowerMaker
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
             // 
-            // btn_Edit
+            // groupBox6
             // 
-            this.btn_Edit.Location = new System.Drawing.Point(241, 330);
-            this.btn_Edit.Name = "btn_Edit";
-            this.btn_Edit.Size = new System.Drawing.Size(75, 21);
-            this.btn_Edit.TabIndex = 11;
-            this.btn_Edit.Text = "Edit";
-            this.btn_Edit.UseVisualStyleBackColor = true;
-            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            this.groupBox6.Controls.Add(this.dataGridPathProperty);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupBox6.ForeColor = System.Drawing.Color.Black;
+            this.groupBox6.Location = new System.Drawing.Point(333, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(326, 357);
+            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Attack";
+            // 
+            // dataGridPathProperty
+            // 
+            this.dataGridPathProperty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridPathProperty.Location = new System.Drawing.Point(46, 78);
+            this.dataGridPathProperty.Name = "dataGridPathProperty";
+            this.dataGridPathProperty.Size = new System.Drawing.Size(240, 150);
+            this.dataGridPathProperty.TabIndex = 0;
+            this.dataGridPathProperty.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPathProperty_CellValueChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.propertiesList);
+            this.groupBox5.Controls.Add(this.btn_Edit);
+            this.groupBox5.Controls.Add(this.input_property);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox5.ForeColor = System.Drawing.Color.Black;
+            this.groupBox5.Location = new System.Drawing.Point(3, 16);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(324, 357);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Tower";
             // 
             // propertiesList
             // 
@@ -254,6 +278,16 @@ namespace BloonTowerMaker
             // 
             this.type.Text = "Type";
             // 
+            // btn_Edit
+            // 
+            this.btn_Edit.Location = new System.Drawing.Point(241, 330);
+            this.btn_Edit.Name = "btn_Edit";
+            this.btn_Edit.Size = new System.Drawing.Size(75, 21);
+            this.btn_Edit.TabIndex = 11;
+            this.btn_Edit.Text = "Edit";
+            this.btn_Edit.UseVisualStyleBackColor = true;
+            this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
+            // 
             // input_property
             // 
             this.input_property.Location = new System.Drawing.Point(9, 331);
@@ -261,54 +295,11 @@ namespace BloonTowerMaker
             this.input_property.Size = new System.Drawing.Size(221, 20);
             this.input_property.TabIndex = 10;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.propertiesList);
-            this.groupBox5.Controls.Add(this.btn_Edit);
-            this.groupBox5.Controls.Add(this.input_property);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox5.ForeColor = System.Drawing.Color.Black;
-            this.groupBox5.Location = new System.Drawing.Point(3, 16);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(324, 357);
-            this.groupBox5.TabIndex = 7;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Tower";
-            // 
             // image_select_dialog
             // 
             this.image_select_dialog.FileName = "openFileDialog1";
             this.image_select_dialog.Filter = "Image Files|*.png|jpeg files|*.jpeg ";
             this.image_select_dialog.FileOk += new System.ComponentModel.CancelEventHandler(this.image_select_dialog_FileOk);
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.numericUpDown1);
-            this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox6.ForeColor = System.Drawing.Color.Black;
-            this.groupBox6.Location = new System.Drawing.Point(333, 16);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 357);
-            this.groupBox6.TabIndex = 8;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Attack";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Projectile Amount:";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(116, 31);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(61, 20);
-            this.numericUpDown1.TabIndex = 1;
             // 
             // PathEdit
             // 
@@ -335,11 +326,10 @@ namespace BloonTowerMaker
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -366,7 +356,6 @@ namespace BloonTowerMaker
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ColumnHeader type;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.DataGridView dataGridPathProperty;
     }
 }
