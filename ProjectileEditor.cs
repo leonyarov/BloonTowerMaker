@@ -17,6 +17,8 @@ namespace BloonTowerMaker
     {
         //private Projectile selectedProjectile;
         private ModelToList<WeaponModel> selectedProjectile;
+        private Dictionary<string, List<string>> projectileDictionary = new Dictionary<string, List<string>>();
+
         private string lastImagePath;
         /// <summary>
         /// key - projectile name, value - projectile image path
@@ -45,12 +47,13 @@ namespace BloonTowerMaker
         private void ProjectileEditor_Load(object sender, EventArgs e)
         {
             RefreshList();
+            projectileDictionary = projectileDictionary.loadSelected();
         }
 
         private void ProjectileEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason != CloseReason.UserClosing) return;
-            //TODO: at projectile window close
+            
         }
 
         private void btn_new_Click(object sender, EventArgs e)
@@ -76,6 +79,10 @@ namespace BloonTowerMaker
             listProjectiles.SelectedItem = listProjectiles.Items[listProjectiles.Items.Count - 1];
             selectedProjectile.Edit("name", newFileName);
 
+            //Save projectile reference
+            projectileDictionary.Add(newFileName,new List<string>());
+            projectileDictionary.saveSelected();
+
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -87,6 +94,10 @@ namespace BloonTowerMaker
             img_projectile.Image?.Dispose();
             //Projectile.Delete(name);
             selectedProjectile.Delete();
+
+            //Remove projectile reference
+            projectileDictionary.Remove(name);
+            projectileDictionary.saveSelected();
         }
 
         private void img_projectile_Click(object sender, EventArgs e)
@@ -108,21 +119,24 @@ namespace BloonTowerMaker
         {
             var name = dataGridProjectile.Rows[e.RowIndex].Cells[1].Value.ToString();
             var value = dataGridProjectile.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //var name = selectedProjectile.FindValue("name");
-            if (listProjectiles.Items.Contains(name))
+            if (listProjectiles.Items.Contains(value))
             {
                 MessageBox.Show("Cannot set projectile name that already exist");
                 return;
             }
-            //var valueDict = selectedProjectile.GetValues();
-            selectedProjectile.data.UpdateFromDataTable(this.dataGridProjectile.DataSource as DataTable);
-            selectedProjectile.Save();
             if (name == "name")
             {
+                var prevName = selectedProjectile.FindValue("name");
+                projectileDictionary.RenameKey(prevName,value);
+                projectileDictionary.saveSelected();
+
                 img_projectile.Image?.Dispose();
                 selectedProjectile.Rename(value);
                 RefreshList();
             }
+            //var valueDict = selectedProjectile.GetValues();
+            selectedProjectile.data.UpdateFromDataTable(this.dataGridProjectile.DataSource as DataTable);
+            selectedProjectile.Save();
             //valueDict.UpdateFromDataTable(this.dataGridProjectile.DataSource as DataTable);
             //selectedProjectile.SetValues(valueDict);
             //if (name == "name")

@@ -85,6 +85,7 @@
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Projectile.cs" />
     <Compile Include="Data\MonkeyWeaponModel.cs" />
+    <Compile Include="Data\SelectedProjectiles.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

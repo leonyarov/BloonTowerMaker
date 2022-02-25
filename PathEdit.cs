@@ -29,6 +29,7 @@ namespace BloonTowerMaker
 
         private ModelToList<TowerModel> pathModel;
         private ModelToList<AttackModel> attackModel;
+        private Dictionary<string, List<string>> selectedProjectiles = new Dictionary<string, List<string>>();
         public PathEdit(string path = "000")
         {
             InitializeComponent();
@@ -55,6 +56,10 @@ namespace BloonTowerMaker
             dataGridProjectiles.DataSource = projectileNames.ToDataTableWithCheckbox();
             this.Text = $"Path: {path}"; //get tower path from calling button
             UpdateImages(); //Update images on form
+
+
+            //Load selected projectiles
+            selectedProjectiles= selectedProjectiles.loadSelected();
         }
 
         private void UpdateImages()
@@ -163,6 +168,19 @@ namespace BloonTowerMaker
         {
             attackModel.data.UpdateFromDataTable(dataGridPathAttack.DataSource as DataTable);
             attackModel.Save();
+        }
+
+        private void dataGridProjectiles_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var value = dataGridProjectiles[e.ColumnIndex,e.RowIndex].Value as bool?; //get checkbox value
+            if (value == null || value.GetType() != typeof(bool)) return;
+            var name = dataGridProjectiles[e.ColumnIndex-1, e.RowIndex].Value.ToString(); //get checkbox name
+            if ((bool)value)
+                selectedProjectiles[name].Add(path);
+            else
+                selectedProjectiles[name].Remove(pathModel.FindValue(path));
+            selectedProjectiles.saveSelected();
+
         }
     }
 }

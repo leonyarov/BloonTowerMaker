@@ -235,6 +235,7 @@ namespace BloonTowerMaker
             this.dataGridProjectiles.Name = "dataGridProjectiles";
             this.dataGridProjectiles.Size = new System.Drawing.Size(208, 171);
             this.dataGridProjectiles.TabIndex = 2;
+            this.dataGridProjectiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProjectiles_CellValueChanged);
             // 
             // dataGridPathAttack
             // 

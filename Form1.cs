@@ -159,23 +159,23 @@ namespace BloonTowerMaker
             {
                 case 0: this.BackgroundImage = Properties.Resources.primary;
                     //data["towerSet"] = "PRIMARY";
-                    data.Edit("name", "PRIMARY");
+                    data.Edit("towerSet", "PRIMARY");
                     break;
                 case 1: this.BackgroundImage = Properties.Resources.army;
-                    data.Edit("name", "MILITARY");
+                    data.Edit("towerSet", "MILITARY");
                     //data["towerSet"] = "MILITARY";
                     break;
                 case 2: this.BackgroundImage = Properties.Resources.magic;
-                    data.Edit("name", "MAGIC");
+                    data.Edit("towerSet", "MAGIC");
                     //data["towerSet"] = "MAGIC";
                     break;
                 case 3: this.BackgroundImage = Properties.Resources.support;
-                    data.Edit("name", "SUPPORT");
+                    data.Edit("towerSet", "SUPPORT");
                     //data["towerSet"] = "SUPPORT";
                     break;
                 default:
                     this.BackgroundImage = Properties.Resources.primary;
-                    data.Edit("name", "PRIMARY");
+                    data.Edit("towerSet", "PRIMARY");
                     //data["towerSet"] = "PRIMARY";
                     break;
             }
