@@ -9,8 +9,12 @@ namespace BloonTowerMaker.Logic
     internal class BuilderStrings
     {
         public const string VARIABLE = @"public override $type$ $name$ {get { return $value$;}}";
+
+        public const string TOWERMODEL_CONVENTION = "TowerModel towerModel";
+
         public const string FUNCTION_VARIABLE = @"$name$.$properties$ = $value$;";
-        public const string MAIN_CLASS = @"using BTD_Mod_Helper;
+
+        public const string MAIN_CLASS = @" using BTD_Mod_Helper;
                                             using MelonLoader;
                                             using System.Reflection;
                                             using System.Runtime.InteropServices;
@@ -78,17 +82,54 @@ namespace BloonTowerMaker.Logic
         public const string FUNCTION = @"public override void $name$($params$) {
                                             /*CODE*/
                                          }
-                                        /*FUNCTIONS*/";
+                                        ";
 
-        public const string DISPLAY_CLASS = @" public class $class$ : ModDisplay
-                                        {
-                                            public override string BaseDisplay => Generic2dDisplay;
+        public const string PROJECTILE_DISPLAY_CLASS = 
+                                                    @" public class $class$ : ModDisplay
+                                                    {
+                                                        public override string BaseDisplay {get {return Generic2dDisplay;} }
 
-                                            public override void ModifyDisplayNode(UnityDisplayNode node)
+                                                        public override void ModifyDisplayNode(UnityDisplayNode node)
+                                                        {
+                                                            Set2DTexture(node, $TextureName$ );
+                                                        }
+                                                    } 
+                                                    ";
+
+        public const string FOREACH_LOOP = @"
+                                            foreach (var $item$ in $collection$)
                                             {
-                                                Set2DTexture(node, nameof($class$));
+                                                /*LOOP_CODE*/
                                             }
-                                        } 
-                                        /*DISPLAYS*/";
+                                            
+                                            ";
+
+        public const string DISPLAY_CLASS = @"
+                                            using System.Linq;
+                                            using Assets.Scripts.Models.Towers;
+                                            using Assets.Scripts.Unity.Display;
+                                            using BTD_Mod_Helper.Api.Display;
+                                            using BTD_Mod_Helper.Extensions;
+                                            using MelonLoader;
+
+                                            namespace $tower$.Display
+                                            {
+                                                public class $upgrade$Display : ModTowerDisplay<$tower$>
+                                                {
+                                                    public override string BaseDisplay {get {return /*DISPLAY*/}};
+                                                    //GetDisplay(TowerType.BoomerangMonkey, 5, 0, 0);
+                                                    public override bool UseForTower(int[] tiers)
+                                                    {
+                                                        return tiers[$row$] == $path$;
+                                                    }
+
+                                                    public override void ModifyDisplayNode(UnityDisplayNode node)
+                                                    {
+                                                        node.SaveMeshTexture();
+                                                        SetMeshTexture(node, /*TEXTURE*/);
+                                                    }
+                                                }
+                                            }
+                                            ";
     }
 }

@@ -80,6 +80,7 @@
     <Compile Include="Data\BaseModel.cs" />
     <Compile Include="Data\CombinedModel.cs" />
     <Compile Include="Data\DictionaryExtensions.cs" />
+    <Compile Include="Data\ListExtensions.cs" />
     <Compile Include="Data\ModelToList.cs" />
     <Compile Include="Data\IExtractModel.cs" />
     <Compile Include="Data\Models.cs" />
@@ -125,6 +126,7 @@
       <DependentUpon>ProjectileEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Settings.cs" />
     <Content Include="res\csTemplate\BaseTemplate.cs" />
     <Content Include="res\csTemplate\MainTemplate.cs" />
@@ -133,6 +135,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Form11.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NewProject.resx">
       <DependentUpon>NewProject.cs</DependentUpon>
@@ -142,17 +145,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectileEditor.resx">
       <DependentUpon>ProjectileEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
