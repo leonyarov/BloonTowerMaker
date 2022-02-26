@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Unity.Achievements.List;
@@ -52,6 +53,22 @@ namespace BloonTowerMaker.Data
         {
             data[data.IndexOf(Find(entry))][2] = value;
             Save();
+        }
+
+        public bool CanCompile()
+        {
+            try
+            {
+                var r2 = string.IsNullOrWhiteSpace(FindValue("Cost"));
+                var r3 = string.IsNullOrWhiteSpace(FindValue("Description"));
+                if (!r2 && !r3) return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+            return false;
         }
 
         public void Save()

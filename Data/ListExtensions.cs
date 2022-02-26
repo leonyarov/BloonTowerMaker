@@ -37,7 +37,7 @@ namespace BloonTowerMaker.Data
         /// <returns>The value of the model</returns>
         public static string GetModelValue(this List<string> data)
         {
-            return data[3];
+            return data[2];
         }
 
         /// <summary>
@@ -47,8 +47,10 @@ namespace BloonTowerMaker.Data
         /// <returns>string parsed to its type to put inside a stringbuilder</returns>
         public static string ParseValue(this List<string> data)
         {
-            if (data.GetModelName().Equals("TowerSet") || data.GetModelName().Equals("BaseTower"))
+            if (data.GetModelName().Equals("TowerSet"))
                 return data.GetModelValue();
+            if (data.GetModelName().Equals("BaseTower"))
+                return $"TowerType.{data.GetModelValue()}";
             switch (data.GetModelType())
             {
                 case "string":
@@ -67,7 +69,7 @@ namespace BloonTowerMaker.Data
         /// <returns>True: if data is not empty value</returns>
         public static bool IsValidValue(this List<string> data)
         {
-            return string.IsNullOrWhiteSpace(data.GetModelValue());
+            return !string.IsNullOrWhiteSpace(data.GetModelValue());
         }
     }
 

@@ -22,7 +22,7 @@ namespace BloonTowerMaker.Logic
             List<string> files = new List<string>();
             try
             {
-                files.AddRange(Parser.ParsePath());
+                files.AddRange(Parser.ParsePaths());
                 files.Add(Parser.ParseBase());
                 files.Add(Parser.ParseMain());
             } catch (Exception e) {throw e;}
