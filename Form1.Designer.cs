@@ -45,7 +45,7 @@ namespace BloonTowerMaker
             this.btn_t003 = new System.Windows.Forms.Button();
             this.btn_t004 = new System.Windows.Forms.Button();
             this.btn_t005 = new System.Windows.Forms.Button();
-            this.btn_t555 = new System.Windows.Forms.Button();
+            this.btn_at555 = new System.Windows.Forms.Button();
             this.label_cost = new System.Windows.Forms.Label();
             this.img_base = new System.Windows.Forms.PictureBox();
             this.label_description = new System.Windows.Forms.Label();
@@ -305,20 +305,21 @@ namespace BloonTowerMaker
             this.btn_t005.Text = "100";
             this.btn_t005.UseVisualStyleBackColor = false;
             // 
-            // btn_t555
+            // btn_at555
             // 
-            this.btn_t555.BackColor = System.Drawing.Color.Transparent;
-            this.btn_t555.FlatAppearance.BorderSize = 0;
-            this.btn_t555.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btn_t555.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btn_t555.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_t555.ForeColor = System.Drawing.Color.Transparent;
-            this.btn_t555.Location = new System.Drawing.Point(1098, 162);
-            this.btn_t555.Name = "btn_t555";
-            this.btn_t555.Size = new System.Drawing.Size(137, 457);
-            this.btn_t555.TabIndex = 1;
-            this.btn_t555.Text = "555";
-            this.btn_t555.UseVisualStyleBackColor = false;
+            this.btn_at555.BackColor = System.Drawing.Color.Transparent;
+            this.btn_at555.Enabled = false;
+            this.btn_at555.FlatAppearance.BorderSize = 0;
+            this.btn_at555.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btn_at555.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btn_at555.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_at555.ForeColor = System.Drawing.Color.Transparent;
+            this.btn_at555.Location = new System.Drawing.Point(1098, 162);
+            this.btn_at555.Name = "btn_at555";
+            this.btn_at555.Size = new System.Drawing.Size(137, 457);
+            this.btn_at555.TabIndex = 1;
+            this.btn_at555.Text = "555";
+            this.btn_at555.UseVisualStyleBackColor = false;
             // 
             // label_cost
             // 
@@ -625,7 +626,7 @@ namespace BloonTowerMaker
             this.Controls.Add(this.label_description);
             this.Controls.Add(this.img_base);
             this.Controls.Add(this.label_cost);
-            this.Controls.Add(this.btn_t555);
+            this.Controls.Add(this.btn_at555);
             this.Controls.Add(this.btn_t005);
             this.Controls.Add(this.btn_t050);
             this.Controls.Add(this.btn_t500);
@@ -681,7 +682,7 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Button btn_t003;
         private System.Windows.Forms.Button btn_t004;
         private System.Windows.Forms.Button btn_t005;
-        private System.Windows.Forms.Button btn_t555;
+        private System.Windows.Forms.Button btn_at555;
         private System.Windows.Forms.Label label_cost;
         private System.Windows.Forms.PictureBox img_base;
         private System.Windows.Forms.Label label_description;

@@ -116,7 +116,7 @@
             this.author.Location = new System.Drawing.Point(118, 3);
             this.author.Name = "author";
             this.author.Size = new System.Drawing.Size(110, 20);
-            this.author.TabIndex = 1;
+            this.author.TabIndex = 0;
             // 
             // label2
             // 
@@ -132,7 +132,7 @@
             this.version.Location = new System.Drawing.Point(118, 91);
             this.version.Name = "version";
             this.version.Size = new System.Drawing.Size(110, 20);
-            this.version.TabIndex = 1;
+            this.version.TabIndex = 2;
             // 
             // label4
             // 
@@ -181,7 +181,7 @@
             this.path.Location = new System.Drawing.Point(0, 0);
             this.path.Name = "path";
             this.path.Size = new System.Drawing.Size(110, 20);
-            this.path.TabIndex = 0;
+            this.path.TabIndex = 3;
             // 
             // NewProject
             // 

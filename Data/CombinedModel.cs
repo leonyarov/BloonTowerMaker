@@ -1,61 +1,61 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BloonTowerMaker.Properties;
+using System.IO;
+using Assets.Scripts.Models.Towers;
+using Assets.Scripts.Models.Towers.Behaviors.Attack;
+using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Weapons;
 using Newtonsoft.Json;
-using Exception = System.Exception;
-using String = System.String;
+
 
 namespace BloonTowerMaker.Data
 {
-    public class ModelToList<T>
+    public class CombinedModel
     {
-        public List<List<string>> data;
-        private string path;
+        public Dictionary<string, List<List<string>>> models;
+        public string path;
 
-        public ModelToList(string path)
+        /// <summary>
+        /// 
+        ///var towerModel = Models.ExtractProperties<TowerModel>();
+        ///var weaponModel = Models.ExtractProperties<WeaponModel>();
+        ///var projectileModel = Models.ExtractProperties<ProjectileModel>();
+        ///var attackModel = Models.ExtractProperties<AttackModel>();
+        /// </summary>
+        public CombinedModel(Dictionary<string,Dictionary<string, string>> models, string path)
         {
-            data = new List<List<string>>();
             this.path = path;
+            this.models = new Dictionary<string, List<List<string>>>();
             if (!File.Exists(path))
             {
-                var extracted = Models.ExtractProperties<T>();
-                foreach (var keyValuePair in extracted)
+                foreach (var dict in models)
                 {
-                    var variable = new List<string>();
-                    variable.Add(keyValuePair.Value);
-                    variable.Add(keyValuePair.Key);
-                    variable.Add(String.Empty);
-                    data.Add(variable);
+                    var model =new List<List<string>>();
+                    foreach (var item in dict.Value)
+                    {
+                        var variable = new List<string>();
+                        variable.Add(item.Value);
+                        variable.Add(item.Key);
+                        variable.Add(String.Empty);
+                        model.Add(variable);
+                    }
+                    this.models[dict.Key] = model;
                 }
+
                 Save();
             }
+
             Load();
-        }
-
-        public List<string> Find(string entry)
-        {
-            return data.Find(x => x[1] == entry);
-        }
-
-        public string FindValue(string entry)
-        {
-            return Find(entry)[2];
-        }
-
-        public void Edit(string entry, string value)
-        {
-            data[data.IndexOf(Find(entry))][2] = value;
-            Save();
         }
 
         public void Save()
         {
             try
             {
-                var serializeObject = JsonConvert.SerializeObject(data);
+                var serializeObject = JsonConvert.SerializeObject(models);
                 File.WriteAllText(path, serializeObject);
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace BloonTowerMaker.Data
             try
             {
                 var json = File.ReadAllText(path);
-                data = JsonConvert.DeserializeObject<List<List<string>>>(json);
+                models = JsonConvert.DeserializeObject<Dictionary<string, List<List<string>>>>(json);
             }
             catch (Exception err)
             {
@@ -124,7 +124,7 @@ namespace BloonTowerMaker.Data
                     try
                     {
                         var extension = Path.GetExtension(file);
-                        File.Move(file, Path.Combine(fileDir,newName.Replace(".json","")) + extension);
+                        File.Move(file, Path.Combine(fileDir, newName.Replace(".json", "")) + extension);
                     }
                     catch (Exception errException)
                     {
@@ -138,9 +138,7 @@ namespace BloonTowerMaker.Data
                 throw new Exception($"Cannot rename {fileName} to {newFileName}" + errException.Message);
             }
         }
-
     }
-
 
 
 }

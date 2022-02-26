@@ -8,6 +8,8 @@ using System.Linq;
 using System.Windows.Forms;
 using BloonTowerMaker.Properties;
 using System.IO;
+using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
 using Mono.Cecil;
 
@@ -16,7 +18,8 @@ namespace BloonTowerMaker
     public partial class ProjectileEditor : Form
     {
         //private Projectile selectedProjectile;
-        private ModelToList<WeaponModel> selectedProjectile;
+        private ModelToList<DamageModel> selectedDamage;
+        private ModelToList<ProjectileModel> selectedProjectile;
         private Dictionary<string, List<string>> projectileDictionary = new Dictionary<string, List<string>>();
 
         private string lastImagePath;
@@ -74,7 +77,7 @@ namespace BloonTowerMaker
                 MessageBox.Show("Error creating projectile", err.Message);
             }
 
-            //selectedProjectile = new ModelToList<WeaponModel>(Path.Combine(Project.instance.projectPath,Resources.ProjectileFolder,newFileName + ".json"));
+            //selectedProjectile = new ModelToList<DamageModel>(Path.Combine(Project.instance.projectPath,Resources.ProjectileFolder,newFileName + ".json"));
             listProjectiles.Items.Add("NewProjectile");
             listProjectiles.SelectedItem = listProjectiles.Items[listProjectiles.Items.Count - 1];
             selectedProjectile.Edit("name", newFileName);
@@ -108,7 +111,8 @@ namespace BloonTowerMaker
 
         private void selectImageDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var projectileName = listProjectiles.SelectedItems[0].ToString().Replace(" ","") + ".png";
+            //var projectileName = listProjectiles.SelectedItems[0].ToString().Replace(" ","") + ".png";
+            var projectileName = listProjectiles.SelectedItems[0].ToString() + ".png";
             lastImagePath = selectImageDialog.FileName;
             img_projectile.Image?.Dispose();
             img_projectile.Image = Image.FromFile(lastImagePath);
@@ -117,8 +121,11 @@ namespace BloonTowerMaker
 
         private void dataGridProjectile_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            //Get row name - value
             var name = dataGridProjectile.Rows[e.RowIndex].Cells[1].Value.ToString();
             var value = dataGridProjectile.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+            //If renaming exist in the list dont rename
             if (listProjectiles.Items.Contains(value))
             {
                 MessageBox.Show("Cannot set projectile name that already exist");
@@ -127,38 +134,49 @@ namespace BloonTowerMaker
             if (name == "name")
             {
                 var prevName = selectedProjectile.FindValue("name");
-                projectileDictionary.RenameKey(prevName,value);
-                projectileDictionary.saveSelected();
 
+                //Rename the projectile inside projectile.json
+                projectileDictionary.RenameKey(prevName,value);
+
+                //Save projectile to projectile.json
+                projectileDictionary.saveSelected();
+                
+                //Dispose the image to rename it
                 img_projectile.Image?.Dispose();
+                
+                //Rename projectile
                 selectedProjectile.Rename(value);
+                
+                //Rename weapon
+                selectedDamage.Rename(value);
+                
+                //Refresh list of projectiles
                 RefreshList();
             }
-            //var valueDict = selectedProjectile.GetValues();
+            //Save projectile data to its json
             selectedProjectile.data.UpdateFromDataTable(this.dataGridProjectile.DataSource as DataTable);
             selectedProjectile.Save();
-            //valueDict.UpdateFromDataTable(this.dataGridProjectile.DataSource as DataTable);
-            //selectedProjectile.SetValues(valueDict);
-            //if (name == "name")
-                //btn_delete_Click(sender,e);
-                //Projectile.Delete(selectedProjectile.GetValues()["name"]);
-            //selectedProjectile.Save();
-            //if (name == "name")
-                //RefreshList();
-            //    listProjectiles.Items[listProjectiles.Items.IndexOf(listProjectiles.SelectedItems[0])] = dataGridProjectile.Rows[e.RowIndex].Cells[2].Value.ToString();
 
         }
 
         private void listProjectiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listProjectiles.SelectedItems.Count == decimal.Zero) return;
-            //selectedProjectile = new Projectile(listProjectiles.SelectedItems[0].ToString(), true);
-            var newPath = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,
-                listProjectiles.SelectedItems[0].ToString() + ".json");
-            selectedProjectile = new ModelToList<WeaponModel>(newPath);
-            //dataGridProjectile.DataSource = selectedProjectile.ToDataTable<string>();
+            var name = listProjectiles.SelectedItems[0].ToString();
+
+            //Get paths of both jsons
+            var projectilePath = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder, name + ".json");
+            var damagePath = Path.Combine(Project.instance.projectPath,Resources.ProjectileFolder, Resources.ProjectileWeaponFolder,name + ".json");
+
+            //load up projectile model to table 
+            selectedProjectile = new ModelToList<ProjectileModel>(projectilePath);
             dataGridProjectile.DataSource = selectedProjectile.data.ToDataTable();
-            //var imagePath = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,selectedProjectile.GetValues()["name"] + ".png");
+
+            //load up weapon model to table 
+            selectedDamage = new ModelToList<DamageModel>(damagePath);
+            dataGridDamage.DataSource = selectedDamage.data.ToDataTable();
+
+            //Get image from selected projectile
             var imagePath = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,selectedProjectile.FindValue("name")+ ".png");
             img_projectile.Image?.Dispose();
             if (File.Exists(imagePath))
@@ -169,7 +187,17 @@ namespace BloonTowerMaker
 
         private void btn_help_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Renaming a projectile will require you to assign a new image to it or it wont compile properly","Be aware!");
+            MessageBox.Show("Projectile and Weapon models are related");
+        }
+
+        private void dataGridDamage_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            //var name = dataGridDamage.Rows[e.RowIndex].Cells[1].Value.ToString();
+            //var value = dataGridDamage.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+            //Save table to json
+            selectedDamage.data.UpdateFromDataTable(this.dataGridDamage.DataSource as DataTable);
+            selectedDamage.Save();
         }
     }
 }

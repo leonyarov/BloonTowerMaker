@@ -3,7 +3,11 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Assets.Scripts.Models.Towers;
+using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
+using Assets.Scripts.Models.Towers.Weapons;
 
 namespace BloonTowerMaker.Data
 {
@@ -25,6 +29,11 @@ namespace BloonTowerMaker.Data
             return $"path_{path}";
         }
 
+        /// <summary>
+        /// Get file path from string 
+        /// </summary>
+        /// <param name="path">"000" or "050" etc...</param>
+        /// <returns>Returns the path.json file from a string</returns>
         public static string GetJsonPath(string path)
         {
             return System.IO.Path.Combine(Project.instance.projectPath, Models.ParsePath(path),
@@ -107,15 +116,17 @@ namespace BloonTowerMaker.Data
                     var key = propertyInfo.Name;
                     var value = propertyInfo.PropertyType.Name;
                     const StringComparison cmp = StringComparison.CurrentCultureIgnoreCase;
-                    if (!value.Equals(nameof(String), cmp) && !value.Equals(nameof(Single), cmp) &&
-                        !value.Equals(nameof(Int32), cmp) && !value.Equals(nameof(Boolean), cmp)) continue;
+                    //if (!value.Equals(nameof(String), cmp) && !value.Equals(nameof(Single), cmp) &&
+                    //    !value.Equals(nameof(Int32), cmp) && !value.Equals(nameof(Boolean), cmp)) continue;
 
                     switch (value)
                     {
                         case nameof(String): value = "string"; break;
                         case nameof(Single): value = "float"; break;
                         case nameof(Int32): value = "int"; break;
-                        case nameof(Boolean) : value = "bool";break;
+                        case nameof(Boolean) : value = "bool"; break;
+                        case nameof(Enum) : value = "enum"; break;
+                        default: continue;
                     }
                     dict.Add(key, value);
                 }
@@ -125,13 +136,28 @@ namespace BloonTowerMaker.Data
                 }
             }
 
-            if (typeof(T) == typeof(TowerModel))
-            {
-                dict.Add("description","string"); //add missing variable
-                dict.Add("path","int");
-                dict.Add("baseTower", "string");
-                dict.Add("Priority", "int");
-            }
+            //if (typeof(T) == typeof(TowerModel))
+            //{
+            //    dict.Add("description","string"); //add missing variable
+            //    dict.Add("path","int");
+            //    dict.Add("baseTower", "string");
+            //    dict.Add("Priority", "int");
+            //    dict.Add("CamoDetection","bool");
+            //}
+
+            //if (typeof(T) == typeof(WeaponModel))
+            //{
+            //    var projectileModel = ExtractProperties<ProjectileModel>();
+            //    dict.Union(projectileModel);
+
+            //}
+
+            //if (typeof(T) == typeof(ProjectileModel))
+            //{
+            //    var damageModel = ExtractProperties<DamageModel>();
+            //    foreach (var item in damageModel)
+            //        dict[item.Key] = item.Value;
+            //}
             return dict;
         }
 

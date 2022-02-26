@@ -27,7 +27,7 @@ namespace BloonTowerMaker.Data
         public Project(string projectPath, string projectName, string version, string author)
         {
             this.projectPath = projectPath ?? "";
-            this.projectName = projectName ?? "New Tower";
+            this.projectName = projectName ?? "NewTower";
             this.version = version ?? "1.0.0";
             this.author = author ?? "Unknown Author";
             TopPathUpgrade = MiddlePathUpgrades = BottomPathUpgrades = 0;
@@ -56,10 +56,12 @@ namespace BloonTowerMaker.Data
                 Directory.CreateDirectory(towerFolder);
             }
             //Create paragon and base folder
-            Directory.CreateDirectory(Path.Combine(initialDirectory, "path_555"));
+            //Directory.CreateDirectory(Path.Combine(initialDirectory, "path_555")); //TODO: Enable this when paragons supported
             Directory.CreateDirectory(Path.Combine(initialDirectory, "path_000"));
             //Create projectile folder
             Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectileFolder));
+            //Create weapon folder inside projectile folder
+            Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectileFolder, Resources.ProjectileWeaponFolder));
             //Create project.json
             File.Create(Path.Combine(initialDirectory, Resources.ProjectileJson));
             //Create projectile.json
@@ -80,7 +82,8 @@ namespace BloonTowerMaker.Data
                     Save();
                     return form.proj;
                 }
-                Application.Exit();
+                else
+                    Environment.Exit(0); //Exit completely if window closed
             }
 
             return null;

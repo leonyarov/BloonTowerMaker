@@ -30,18 +30,24 @@
         {
             this.listProjectiles = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dataGridProjectile = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataGridDamage = new System.Windows.Forms.DataGridView();
             this.btn_help = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.img_projectile = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridProjectile = new System.Windows.Forms.DataGridView();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_new = new System.Windows.Forms.Button();
             this.selectImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProjectile)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDamage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).BeginInit();
             this.SuspendLayout();
             // 
             // listProjectiles
@@ -55,20 +61,88 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Controls.Add(this.btn_help);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.img_projectile);
-            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.btn_delete);
             this.groupBox1.Controls.Add(this.btn_new);
             this.groupBox1.Controls.Add(this.listProjectiles);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(516, 389);
+            this.groupBox1.Size = new System.Drawing.Size(966, 387);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Projectiles";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanel1.Controls.Add(this.groupBox3);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox2);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(168, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(792, 381);
+            this.flowLayoutPanel1.TabIndex = 9;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dataGridProjectile);
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(389, 373);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Projectile Model";
+            // 
+            // dataGridProjectile
+            // 
+            this.dataGridProjectile.AllowUserToAddRows = false;
+            this.dataGridProjectile.AllowUserToDeleteRows = false;
+            this.dataGridProjectile.AllowUserToResizeRows = false;
+            this.dataGridProjectile.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridProjectile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridProjectile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridProjectile.Location = new System.Drawing.Point(3, 16);
+            this.dataGridProjectile.Name = "dataGridProjectile";
+            this.dataGridProjectile.RowHeadersVisible = false;
+            this.dataGridProjectile.ShowEditingIcon = false;
+            this.dataGridProjectile.Size = new System.Drawing.Size(383, 354);
+            this.dataGridProjectile.TabIndex = 0;
+            this.dataGridProjectile.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProjectile_CellValueChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.dataGridDamage);
+            this.groupBox2.Location = new System.Drawing.Point(398, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(389, 373);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Damage Model";
+            // 
+            // dataGridDamage
+            // 
+            this.dataGridDamage.AllowUserToAddRows = false;
+            this.dataGridDamage.AllowUserToDeleteRows = false;
+            this.dataGridDamage.AllowUserToResizeRows = false;
+            this.dataGridDamage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridDamage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridDamage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridDamage.Location = new System.Drawing.Point(3, 16);
+            this.dataGridDamage.Name = "dataGridDamage";
+            this.dataGridDamage.RowHeadersVisible = false;
+            this.dataGridDamage.ShowEditingIcon = false;
+            this.dataGridDamage.Size = new System.Drawing.Size(383, 354);
+            this.dataGridDamage.TabIndex = 0;
+            this.dataGridDamage.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDamage_CellValueChanged);
             // 
             // btn_help
             // 
@@ -103,31 +177,6 @@
             this.img_projectile.TabStop = false;
             this.img_projectile.Click += new System.EventHandler(this.img_projectile_Click);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.dataGridProjectile);
-            this.groupBox2.Location = new System.Drawing.Point(168, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(336, 383);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Properties";
-            // 
-            // dataGridProjectile
-            // 
-            this.dataGridProjectile.AllowUserToAddRows = false;
-            this.dataGridProjectile.AllowUserToDeleteRows = false;
-            this.dataGridProjectile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridProjectile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridProjectile.Location = new System.Drawing.Point(3, 16);
-            this.dataGridProjectile.Name = "dataGridProjectile";
-            this.dataGridProjectile.Size = new System.Drawing.Size(330, 364);
-            this.dataGridProjectile.TabIndex = 0;
-            this.dataGridProjectile.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProjectile_CellValueChanged);
-            // 
             // btn_delete
             // 
             this.btn_delete.Location = new System.Drawing.Point(6, 229);
@@ -157,7 +206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 389);
+            this.ClientSize = new System.Drawing.Size(966, 387);
             this.Controls.Add(this.groupBox1);
             this.Name = "ProjectileEditor";
             this.Text = "ProjectileEditor";
@@ -165,9 +214,12 @@
             this.Load += new System.EventHandler(this.ProjectileEditor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProjectile)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDamage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.img_projectile)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -182,7 +234,10 @@
         private System.Windows.Forms.PictureBox img_projectile;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog selectImageDialog;
-        private System.Windows.Forms.DataGridView dataGridProjectile;
+        private System.Windows.Forms.DataGridView dataGridDamage;
         private System.Windows.Forms.Button btn_help;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dataGridProjectile;
     }
 }

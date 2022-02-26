@@ -16,7 +16,8 @@ namespace BloonTowerMaker.Logic
         {
             ICON,
             PORTRAIT,
-            PROJECTILE
+            PROJECTILE,
+            DISPLAY
         }
         public static image_type imageType;
 
@@ -33,7 +34,9 @@ namespace BloonTowerMaker.Logic
                     case image_type.PORTRAIT:
                         return new Bitmap(Image.FromFile(files.Find(x => x.Contains("Portrait"))));
                     case image_type.PROJECTILE:
-                        return new Bitmap(Image.FromFile(files.Find(x => x.Contains("Projectile"))));
+                        return new Bitmap(Image.FromFile(files.Find(x => x.Contains("Projectile")))); 
+                    case image_type.DISPLAY:
+                        return new Bitmap(Image.FromFile(files.Find(x => x.Contains("Display"))));
                     default:
                         return null; //replace with blank image
                 }

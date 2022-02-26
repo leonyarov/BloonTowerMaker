@@ -35,15 +35,17 @@ namespace BloonTowerMaker.Data
             dt.Columns.Add("Value", typeof(string));
             foreach (var variable in model)
                 dt.Rows.Add(variable[0],variable[1],variable[2]);
+            dt.Columns[0].ReadOnly = dt.Columns[1].ReadOnly = true;
             return dt;
         }
         public static DataTable ToDataTableWithCheckbox(this List<string> model)
         {
             var dt = new DataTable();
-            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Projectile Name", typeof(string));
             dt.Columns.Add("Enabled", typeof(bool));
             foreach (var variable in model)
                     dt.Rows.Add(variable, false);
+            dt.Columns[0].ReadOnly = true;
             return dt;
         }
         public static void UpdateFromDataTable(this Dictionary<string, string> dictionary,

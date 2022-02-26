@@ -154,6 +154,15 @@ namespace BloonTowerMaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to weapons.
+        /// </summary>
+        internal static string ProjectileWeaponFolder {
+            get {
+                return ResourceManager.GetString("ProjectileWeaponFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to project.json.
         /// </summary>
         internal static string ProjectMainFile {
@@ -182,11 +191,38 @@ namespace BloonTowerMaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to global.json.
+        /// </summary>
+        internal static string TowerGlobalAttackJsonFile {
+            get {
+                return ResourceManager.GetString("TowerGlobalAttackJsonFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tower.json.
+        /// </summary>
+        internal static string TowerModelJsonFile {
+            get {
+                return ResourceManager.GetString("TowerModelJsonFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to path.json.
         /// </summary>
         internal static string TowerPathJsonFile {
             get {
                 return ResourceManager.GetString("TowerPathJsonFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to textures.json.
+        /// </summary>
+        internal static string TowerTexturesJsonFile {
+            get {
+                return ResourceManager.GetString("TowerTexturesJsonFile", resourceCulture);
             }
         }
     }

@@ -35,6 +35,8 @@ namespace BloonTowerMaker.Logic
             StringBuilder vars = new StringBuilder();
             var model = RemoveGeneralVariables(ref dictionary);
             file.Replace("$towerclass$",model["name"].Replace(" ",""));
+
+            //Build Variables for base tower properties
             vars.Append(Builder.BuildVariable("string?", "TowerSet", model["towerSet"]));
             vars.Append(Builder.BuildVariable("string?", "BaseTower", $"TowerType.{model["baseTower"]}"));
             vars.Append(Builder.BuildVariable("string", "Description", model["description"]));
@@ -42,9 +44,9 @@ namespace BloonTowerMaker.Logic
             vars.Append(Builder.BuildVariable("int", "TopPathUpgrades", $"{Project.instance.TopPathUpgrade}"));
             vars.Append(Builder.BuildVariable("int", "MiddlePathUpgrades", $"{Project.instance.MiddlePathUpgrades}"));
             vars.Append(Builder.BuildVariable("int", "BottomPathUpgrades", $"{Project.instance.BottomPathUpgrades}"));
+            vars.Append(Builder.BuildVariable("ParagonMode", "ParagonMode", "ParagonMode.None"));
 
             file.Replace("/*VARIABLES*/", vars.ToString()); //Place path variables 
-            //vars.Append(Builder.BuildVariable("ParagonMode", "ParagonMode", "ParagonMode.None"));
             StringBuilder func = new StringBuilder(Builder.BuildFunction("ModifyBaseTowerModel", "TowerModel towerModel"));
             vars.Clear(); //free string builder
             foreach (var entry in dictionary)

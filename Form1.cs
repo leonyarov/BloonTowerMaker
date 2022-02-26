@@ -16,6 +16,7 @@ using Assets.Scripts.Simulation.Track;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
+using BTD_Mod_Helper.Api.Towers;
 using Mono.Cecil;
 
 namespace BloonTowerMaker
@@ -26,6 +27,8 @@ namespace BloonTowerMaker
         Models models;
         private Project towerProject;
         ModelToList<TowerModel> data;
+        private ModelToList<ModTower> baseTower;
+        private ModelToList<ModUpgrade> upgradeTower;
         public object ImageSelect { get; private set; }
 
         public MainForm()
@@ -52,16 +55,15 @@ namespace BloonTowerMaker
             var b = sender as Button;
             var path = b.Name.Replace(Resources.PathButtonIndentifier, "");
             var pathToFile = Models.GetJsonPath(path);
-            var model = new ModelToList<TowerModel>(pathToFile);
-                //models.GetTowerModel(name);
-            //label_cost.Text = model["cost"];
-            label_cost.Text = model.FindValue("cost");
-            label_description.Text = model.FindValue("description");
-            //label_description.Text = model["description"];
+
+            //Get temp model
+            var model = new ModelToList<ModUpgrade>(pathToFile);
+
+            label_cost.Text = model.FindValue("Cost");
+            label_description.Text = model.FindValue("Description");
             img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
-            //tower_name.Text = model["name"];
-            tower_name.Text = model.FindValue("name");
+            tower_name.Text = model.FindValue("DisplayName");
         }
         private void img_base_Click(object sender, EventArgs e)
         {
@@ -74,8 +76,11 @@ namespace BloonTowerMaker
         {
             towerProject = Project.Load();
             currdir.Text = towerProject.projectPath;
-            //data = models.GetTowerModel(Resources.Base);
-            data = new ModelToList<TowerModel>(Models.GetJsonPath(Resources.Base));
+
+            //Load base file from folder
+            baseTower = new ModelToList<ModTower>(Models.GetJsonPath(Resources.Base));
+
+            //Load Up each button
             foreach (var item in this.Controls.OfType<Button>())
             {
                 if (!item.Name.Contains(Resources.PathButtonIndentifier)) continue;
@@ -87,16 +92,14 @@ namespace BloonTowerMaker
                 item.TextAlign = ContentAlignment.BottomCenter;
             }
 
-            //input_type.SelectedIndex = data["towerSet"] != null
-            //    ? input_type.Items.IndexOf(data["towerSet"]) + 1
-            //    : 0;
-            input_type.SelectedIndex = data.FindValue("towerSet") != null
-                ? input_type.Items.IndexOf(data.FindValue("towerSet")) + 1
+            input_type.SelectedIndex = baseTower.FindValue("TowerSet") != null
+                ? input_type.Items.IndexOf(baseTower.FindValue("TowerSet")) + 1
                 : 0;
 
             input_top.Value = Project.instance.TopPathUpgrade;
             input_middle.Value = Project.instance.MiddlePathUpgrades;
             input_buttom.Value = Project.instance.BottomPathUpgrades;
+
             disablePathButton();
             recentToolStripMenuItem.DropDown = new ToolStripDropDown();
             foreach (var defaultRecentPath in Settings.Default.RecentPaths ?? new StringCollection())
@@ -118,21 +121,20 @@ namespace BloonTowerMaker
                 combo_base.Items.Add(propertyInfo.Name);
             }
 
-            combo_base.SelectedItem = data.FindValue("baseTower");
-            //combo_base.SelectedItem = data["baseTower"];
+            //combo_base.SelectedItem = data.FindValue("BaseTower");
+
+            //Find the baseTower reference in the 000 path
+            combo_base.SelectedItem = baseTower.FindValue("BaseTower");
         }
 
         private void MouseLeaveIcon(object sender, EventArgs e)
         {
-            label_cost.Text = data.FindValue("cost");
-            //label_cost.Text = data["cost"];
-            label_description.Text = data.FindValue("description");
-            //label_description.Text = data["description"];
+            //--- Get Base tower data to show when cursor is not over anythingf
+            label_cost.Text = baseTower.FindValue("Cost");
+            label_description.Text = baseTower.FindValue("Description");
             img_base.Image?.Dispose();
             img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, Resources.Base);
-            tower_name.Text = data.FindValue("name");
-            //tower_name.Text = data["name"];
-
+            tower_name.Text = baseTower.FindValue("DisplayName");
         }
         private void MainForm_Enter(object sender, EventArgs e)
         {
@@ -141,42 +143,42 @@ namespace BloonTowerMaker
             {
                 if (!item.Name.Contains("btn_t")) continue;
                 var path = item.Name.Replace("btn_t", "");
-                var tempModel = new ModelToList<TowerModel>(Models.GetJsonPath(path));
+                var tempModel = new ModelToList<ModUpgrade>(Models.GetJsonPath(path));
                 item.BackgroundImage?.Dispose();
                 item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
-                //item.Text = models.GetTowerModel(path)["name"];
-                item.Text = tempModel.FindValue("name");
+                item.Text = tempModel.FindValue("DisplayName");
             }
-            //data = models.GetTowerModel(Resources.Base);
-            data = new ModelToList<TowerModel>(Models.GetJsonPath(Resources.Base));
+
+            //Refresh base data from json file (after path window was closed)
+            baseTower = new ModelToList<ModTower>(Models.GetJsonPath(Resources.Base));
+
         }
 
         private void combo_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            data = new ModelToList<TowerModel>(Models.GetJsonPath(Resources.Base));
             var box = sender as ComboBox;
             switch (box.SelectedIndex)
             {
                 case 0: this.BackgroundImage = Properties.Resources.primary;
-                    //data["towerSet"] = "PRIMARY";
-                    data.Edit("towerSet", "PRIMARY");
+                    //data.Edit("TowerSet", "PRIMARY");
+                    baseTower.Edit("TowerSet", "PRIMARY");
                     break;
                 case 1: this.BackgroundImage = Properties.Resources.army;
-                    data.Edit("towerSet", "MILITARY");
-                    //data["towerSet"] = "MILITARY";
+                    //data.Edit("TowerSet", "MILITARY");
+                    baseTower.Edit("TowerSet", "MILITARY");
                     break;
                 case 2: this.BackgroundImage = Properties.Resources.magic;
-                    data.Edit("towerSet", "MAGIC");
-                    //data["towerSet"] = "MAGIC";
+                    //data.Edit("TowerSet", "MAGIC");
+                    baseTower.Edit("TowerSet", "MAGIC");
                     break;
                 case 3: this.BackgroundImage = Properties.Resources.support;
-                    data.Edit("towerSet", "SUPPORT");
-                    //data["towerSet"] = "SUPPORT";
+                    //data.Edit("TowerSet", "SUPPORT");
+                    baseTower.Edit("TowerSet", "SUPPORT");
                     break;
                 default:
                     this.BackgroundImage = Properties.Resources.primary;
-                    data.Edit("towerSet", "PRIMARY");
-                    //data["towerSet"] = "PRIMARY";
+                    baseTower.Edit("TowerSet", "PRIMARY");
+                    //data.Edit("TowerSet", "PRIMARY");
                     break;
             }
             //models.UpdateBaseModel(data,"000");
@@ -198,21 +200,27 @@ namespace BloonTowerMaker
 
         private void input_top_ValueChanged(object sender, EventArgs e)
         {
-            Project.instance.TopPathUpgrade = (int)input_top.Value;
+            var value = (int) input_top.Value;
+            Project.instance.TopPathUpgrade = value;
+            baseTower.Edit("TopPathUpgrades", value.ToString());
             disablePathButton();
             Project.Save();
         }
 
         private void input_middle_ValueChanged(object sender, EventArgs e)
         {
-            Project.instance.MiddlePathUpgrades = (int)input_top.Value;
+            var value = (int)input_middle.Value;
+            Project.instance.MiddlePathUpgrades = value;
+            baseTower.Edit("MiddlePathUpgrades", value.ToString());
             disablePathButton();
             Project.Save();
         }
 
         private void input_buttom_ValueChanged(object sender, EventArgs e)
         {
-            Project.instance.BottomPathUpgrades = (int)input_top.Value;
+            var value = (int)input_buttom.Value;
+            Project.instance.BottomPathUpgrades = value;
+            baseTower.Edit("BottomPathUpgrades", value.ToString());
             disablePathButton();
             Project.Save();
         }
@@ -262,9 +270,10 @@ namespace BloonTowerMaker
 
         private void combo_base_SelectedIndexChanged(object sender, EventArgs e)
         {
-            data = new ModelToList<TowerModel>(Models.GetJsonPath(Resources.Base));
+            //data = new ModelToList<TowerModel>(Models.GetJsonPath(Resources.Base));
             //data["baseTower"] = combo_base.SelectedItem.ToString();
-            data.Edit("baseTower",combo_base.SelectedItem.ToString());
+            //data.Edit("baseTower",combo_base.SelectedItem.ToString());
+            baseTower.Edit("BaseTower",combo_base.SelectedItem.ToString());
             //models.UpdateBaseModel(data, Resources.Base);
         }
     }

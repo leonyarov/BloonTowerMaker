@@ -148,6 +148,9 @@
   <data name="ProjectileJson" xml:space="preserve">
     <value>projectiles.json</value>
   </data>
+  <data name="ProjectileWeaponFolder" xml:space="preserve">
+    <value>weapons</value>
+  </data>
   <data name="ProjectMainFile" xml:space="preserve">
     <value>project.json</value>
   </data>
@@ -157,7 +160,16 @@
   <data name="TowerAttackJsonFile" xml:space="preserve">
     <value>attack.json</value>
   </data>
+  <data name="TowerGlobalAttackJsonFile" xml:space="preserve">
+    <value>global.json</value>
+  </data>
+  <data name="TowerModelJsonFile" xml:space="preserve">
+    <value>tower.json</value>
+  </data>
   <data name="TowerPathJsonFile" xml:space="preserve">
     <value>path.json</value>
+  </data>
+  <data name="TowerTexturesJsonFile" xml:space="preserve">
+    <value>textures.json</value>
   </data>
 </root>
