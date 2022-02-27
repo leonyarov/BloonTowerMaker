@@ -9,9 +9,12 @@ using System.Windows.Forms;
 using Assets.Scripts.Models;
 using Assets.Scripts.Models.Towers;
 using Assets.Scripts.Models.Towers.Behaviors.Attack;
+using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
 using BloonTowerMaker.Properties;
 using BTD_Mod_Helper.Api.Towers;
+using MonoMod.Utils;
 using Newtonsoft.Json;
 
 namespace BloonTowerMaker.Logic
@@ -69,6 +72,7 @@ namespace BloonTowerMaker.Logic
             var towerModel = new ModelToList<TowerModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(Resources.Base), Resources.TowerModelJsonFile));
             var attackModel = new ModelToList<AttackModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(Resources.Base), Resources.TowerAttackJsonFile));
             var weaponModel = new ModelToList<WeaponModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(Resources.Base), Resources.TowerGlobalAttackJsonFile));
+            var damageModel = new ModelToList<DamageModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(Resources.Base), Resources.TowerGlobalDamageJsonFile));
 
             StringBuilder file = new StringBuilder(Builder.BuildBase(Project.instance.projectName, baseModel.FindValue("DisplayName").RemoveWhiteSpace()));
 
@@ -78,15 +82,31 @@ namespace BloonTowerMaker.Logic
 
             //Build the base function
             var func = new StringBuilder(Builder.BuildFunction("ModifyBaseTowerModel", BuilderStrings.TOWERMODEL_CONVENTION));
+
+            //Assign projectiles
+            var projectiles = ParseProjectileForPath(Resources.Base);
+            func.Replace("/*PROJECTILES*/", projectiles);
+
+            //Build function variables
             var funcCode = Builder.VariableBuilderFromData(towerModel.data, (data) => Builder.BuildFunctionVariable("towerModel",data), true);
             func.Replace("/*CODE*/", funcCode.ToString());
+            
             //Build attack model variables
             funcCode = Builder.VariableBuilderFromData(attackModel.data,(data) => Builder.BuildFunctionVariable("towerModel.GetAttackModel()", data), true);
             func.Replace("/*CODE*/", funcCode.ToString());
+
             //Build foreach loop
             var loop = new StringBuilder(Builder.BuildLoop("weaponModel", "towerModel.GetWeapons()"));
-            funcCode = Builder.VariableBuilderFromData(weaponModel.data,(data) => Builder.BuildFunctionVariable("weaponModel", data));
-            loop.Replace("/*LOOP_CODE*/",funcCode.ToString());
+
+            //Build weapon model inside loop
+            funcCode = Builder.VariableBuilderFromData(weaponModel.data,(data) => Builder.BuildFunctionVariable("weaponModel", data),true);
+            loop.Replace("/*CODE*/",funcCode.ToString());
+
+            //Build damage model inside loop
+            funcCode = Builder.VariableBuilderFromData(damageModel.data,(data) => Builder.BuildFunctionVariable("weaponModel.projectile.GetDamageModel()", data));
+            loop.Replace("/*CODE*/",funcCode.ToString());
+            
+            //Place loop inside the function
             func.Replace("/*CODE*/", loop.ToString());
 
             //Finish Building Function
@@ -108,6 +128,7 @@ namespace BloonTowerMaker.Logic
                 var towerModel = new ModelToList<TowerModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerModelJsonFile));
                 var attackModel = new ModelToList<AttackModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerAttackJsonFile));
                 var weaponModel = new ModelToList<WeaponModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerGlobalAttackJsonFile));
+                var damageModel = new ModelToList<DamageModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerGlobalDamageJsonFile));
 
                 if (!baseModel.CanCompile())  continue; //Quit compiling file if is not compilable
                 StringBuilder file = new StringBuilder(Builder.BuildPath(Project.instance.projectName, baseModel.FindValue("DisplayName").RemoveWhiteSpace(), baseName));
@@ -118,15 +139,31 @@ namespace BloonTowerMaker.Logic
 
                 //Build the base function
                 var func = new StringBuilder(Builder.BuildFunction("ApplyUpgrade", BuilderStrings.TOWERMODEL_CONVENTION));
+
+                //Assign projectiles
+                var projectiles = ParseProjectileForPath(path);
+                func.Replace("/*PROJECTILES*/", projectiles);
+
+                //Build function variables
                 var funcCode = Builder.VariableBuilderFromData(towerModel.data, (data) => Builder.BuildFunctionVariable("towerModel", data), true);
                 func.Replace("/*CODE*/", funcCode.ToString());
+
                 //Build attack model variables
                 funcCode = Builder.VariableBuilderFromData(attackModel.data, (data) => Builder.BuildFunctionVariable("towerModel.GetAttackModel()", data), true);
                 func.Replace("/*CODE*/", funcCode.ToString());
+
                 //Build foreach loop for global modifiers
-                var loop = new StringBuilder(Builder.BuildLoop("weaponModel", "tower.GetWeapons()"));
-                funcCode = Builder.VariableBuilderFromData(weaponModel.data, (data) => Builder.BuildFunctionVariable("weaponModel", data));
-                loop.Replace("/*LOOP_CODE*/", funcCode.ToString());
+                var loop = new StringBuilder(Builder.BuildLoop("weaponModel", "towerModel.GetWeapons()"));
+
+                //Build weapon model inside loop
+                funcCode = Builder.VariableBuilderFromData(weaponModel.data, (data) => Builder.BuildFunctionVariable("weaponModel", data),true);
+                loop.Replace("/*CODE*/", funcCode.ToString());
+
+                //Build damage model inside loop
+                funcCode = Builder.VariableBuilderFromData(damageModel.data, (data) => Builder.BuildFunctionVariable("weaponModel.projectile.GetDamageModel()", data));
+                loop.Replace("/*CODE*/", funcCode.ToString());
+
+                //Place loop inside the function
                 func.Replace("/*CODE*/", loop.ToString());
 
                 //Finish Building Function (finalize)
@@ -136,51 +173,70 @@ namespace BloonTowerMaker.Logic
 
             return sources;
         }
-        //public static string[] ParsePath()
-        //{
-        //    List<string> sources = new List<string>();
-        //    var lastTower = "";
-        //    if (!Directory.Exists(Project.instance.projectPath)) throw new DirectoryNotFoundException("Cant find project folder");
-        //    try
-        //    {
-        //        foreach (var towerFile in Directory.GetFiles(Project.instance.projectPath, Resources.TowerPathJsonFile, SearchOption.AllDirectories))
-        //        {
-        //            lastTower = towerFile;
-        //            if (towerFile.Contains("000")) continue; //skip base file
-        //            var text = File.ReadAllText(towerFile);
-        //            var jsonDictionary = JsonConvert.DeserializeObject<Dictionary<string,string>>(text);
-        //            if (string.IsNullOrWhiteSpace(jsonDictionary["cost"]) || string.IsNullOrWhiteSpace(jsonDictionary["name"])) continue;;
-        //            var dict = RemoveGeneralVariables(ref jsonDictionary);
-        //            StringBuilder file = new StringBuilder(Builder.BuildPath(Project.instance.projectName,dict["name"].Replace(" ","")));
-        //            StringBuilder vars = new StringBuilder();
-        //            file.Replace("$basetower$", models.GetTowerModel("000")["name"].Replace(" ", ""));
-        //            vars.Append(Builder.BuildVariable("int", "Cost", $"{dict["cost"]}"));
-        //            vars.Append(Builder.BuildVariable("string", "Description", $"{dict["description"]}"));
-        //            vars.Append(Builder.BuildVariable("int", "Path", $"{dict["path"]}"));
-        //            vars.Append(Builder.BuildVariable("int", "Tier", $"{dict["tier"]}"));
-        //            file.Replace("/*VARIABLES*/", vars.ToString());
 
-        //            StringBuilder func = new StringBuilder();
-        //            func.Append(Builder.BuildFunction("ApplyUpgrade", "TowerModel towerModel"));
-        //            vars.Clear(); //free string builder
-        //            foreach (var entry in jsonDictionary)
-        //            {
-        //                if (string.IsNullOrWhiteSpace(entry.Value)) continue; //skip empty strings
-        //                vars.Append(Builder.BuildFunctionVariable("towerModel", entry.Key, entry.Value));
-        //            }
+        public static string ParseProjectileClasses()
+        {
+            var projectileFolder = Directory.GetFiles(Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder), "*.json");
+            var template = new StringBuilder(Builder.BuildProjectileDisplayTemplate(Project.instance.projectName));
+            foreach (var projectile in projectileFolder)
+            {
+                var weaponFile = Path.Combine(Project.instance.projectPath, Resources.ProjectileWeaponFolder, Path.GetFileName(projectile));
+                var projectileModel = new ModelToList<WeaponModel>(projectile);
+                //var damageModel = new ModelToList<DamageModel>(weaponFile);
+                var @class = Builder.BuildProjectileDisplayClass(Path.GetFileNameWithoutExtension(weaponFile),
+                    projectileModel.FindValue("name"));
+                template.Replace("/*CLASSES*/", @class);
+            }
 
-        //            func.Replace("/*CODE*/", vars.ToString());
-        //            file.Replace("/*FUNCTIONS*/", func.ToString());
-        //            sources.Add(file.ToString());
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception("Cannot open .json file: " + lastTower);
-        //    }
+            return template.ToString();
+        }
 
-        //    return sources.ToArray();
-        //}
-       
+        private static string ParseProjectileForPath(string path)
+        {
+            var projectileFile = (new Dictionary<string, List<string>>()).loadSelected();
+            if (!projectileFile.Any(x => x.Value.Contains(path))) return string.Empty;
+            StringBuilder projectile = new StringBuilder();
+            projectile.Append("var wpn = towerModel.GetWeapon().Duplicate();");
+            projectile.Append("towerModel.GetWeapons().Clear();");
+            //Every projectile assigned to path
+            int index = 0;
+            foreach (var entry in projectileFile)
+            {
+                if (!projectileFile[entry.Key].Contains(path)) continue;
+                
+                //Paths
+                var projectilePath =Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder, entry.Key + ".json");
+                var weaponPath  = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder, Resources.ProjectileWeaponFolder,entry.Key + ".json");
+
+                //Models
+                var projectileModel = new ModelToList<ProjectileModel>(projectilePath);
+                var damageModel = new ModelToList<WeaponModel>(weaponPath);
+
+                //Set new weapon name
+                var variableString = $"wpn{index++}";
+
+                //Set the new weapon as duplicate
+                var dupe = $"var {variableString} = wpn.Duplicate();";
+
+                //Apped the duplicated weapon
+                projectile.Append(dupe); 
+                
+                //Build variables of both models
+                var proj = Builder.VariableBuilderFromData(projectileModel.data, (data) => Builder.BuildFunctionVariable(variableString + ".projectile",data),true);
+                var dmg = Builder.VariableBuilderFromData(damageModel.data, (data) => Builder.BuildFunctionVariable(variableString + ".projectile.GetDamageModel()",data));
+
+                //Append the variables
+                projectile.Append(proj);
+                projectile.Replace("/*CODE*/", dmg.ToString());
+
+                //Set the projectile display
+                projectile.Append($"{variableString}.projectile.ApplyDisplay<{entry.Key}>();");
+
+                //Add the weapon to all weapons
+                projectile.Append($"towerModel.GetAttackModel().AddWeapon({variableString});");
+            }
+
+            return projectile.ToString();
+        }
     }
 }

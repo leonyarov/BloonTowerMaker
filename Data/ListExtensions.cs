@@ -57,6 +57,8 @@ namespace BloonTowerMaker.Data
                     return $"\"{data.GetModelValue()}\"";
                 case "bool":
                     return data.GetModelValue().ToLower();
+                case "float":
+                    return data.GetModelValue() + 'f';
                 default: 
                     return data.GetModelValue();
             }

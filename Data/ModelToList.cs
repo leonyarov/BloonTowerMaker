@@ -158,6 +158,29 @@ namespace BloonTowerMaker.Data
                 throw new Exception($"Cannot rename {fileName} to {newFileName}" + errException.Message);
             }
         }
+
+        public void RenameImages(string newFileName)
+        {
+            var displayName = FindValue("DisplayName");
+            //var fileName = Path.GetFileNameWithoutExtension(path);
+            var fileDir = Path.GetDirectoryName(path);
+            var fileInDir = Directory.GetFiles(fileDir, "*.png");
+            foreach (var file in fileInDir)
+            {
+                if (!file.Contains(displayName) || file == newFileName) continue;
+                try
+                {
+                    var extension = Path.GetExtension(file);
+                    var fileName = Path.GetFileNameWithoutExtension(file);
+                    File.Move(file, Path.Combine(fileDir, fileName.Replace(displayName,newFileName) + extension));
+                }
+                catch (Exception errException)
+                {
+                    throw new Exception($"Cannot Rename additional files to  {newFileName}: {file} - " +
+                                        errException.Message);
+                }
+            }
+        }
     }
 
 

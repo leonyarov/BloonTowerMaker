@@ -41,6 +41,7 @@ namespace BloonTowerMaker
         private void Edit(string path)
         {
             var edit = new PathEdit(path);
+            img_base.Image?.Dispose();
             edit.ShowDialog();
             edit.Focus();
         }

@@ -13,6 +13,7 @@ using Assets.Scripts.Models;
 using Assets.Scripts.Models.Towers;
 using Assets.Scripts.Models.Towers.Behaviors.Attack;
 using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
 using Assets.Scripts.Simulation.Towers;
 using BloonTowerMaker.Data;
@@ -33,6 +34,7 @@ namespace BloonTowerMaker
         private ModelToList<WeaponModel> weaponModel;
         private ModelToList<ModTower> baseModel;
         private ModelToList<ModUpgrade> upgradeModel;
+        private ModelToList<DamageModel> damageModel;
         private Dictionary<string, List<string>> selectedProjectiles = new Dictionary<string, List<string>>();
         private Textures textures;
         public PathEdit(string path = "000")
@@ -68,6 +70,10 @@ namespace BloonTowerMaker
             //Load weapon model from weapons or GetWeapon()
             weaponModel = new ModelToList<WeaponModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerGlobalAttackJsonFile));
             dataGridGlobalAttack.DataSource = weaponModel.data.ToDataTable();
+            
+            //Load damage model from weapons or weapon.GetDamageModel()
+            damageModel = new ModelToList<DamageModel>(Path.Combine(Project.instance.projectPath, Models.ParsePath(path), Resources.TowerGlobalDamageJsonFile));
+            dataGridDamage.DataSource = damageModel.data.ToDataTable();
 
             //Load all projectiles to list
             List<string> projectileNames = new List<string>();
@@ -166,10 +172,14 @@ namespace BloonTowerMaker
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
-            var imageName = pathModel.Find("name")[2];
+            var imageName = "";
+            if (isBase) imageName = baseModel.FindValue("DisplayName");
+            else imageName = upgradeModel.FindValue("DisplayName");
+
+
             if (string.IsNullOrWhiteSpace(imageName))
             {
-                MessageBox.Show("Path name cannot be empty to set an image");
+                MessageBox.Show("Path DisplayName cannot be empty to set an image");
                 return;
             }
             var file = image_select_dialog.FileName;
@@ -275,6 +285,32 @@ namespace BloonTowerMaker
 
         private void dataGridPathMain_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            var name = dataGridPathMain.Rows[e.RowIndex].Cells[1].Value.ToString();
+            var value = dataGridPathMain.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+            switch (name)
+            {
+                case "DisplayName" when !value.IsValidKeyword():
+                {
+                    MessageBox.Show("Cannot set tower name as C# reserved keyword: " + value);
+                    if (isBase) dataGridPathMain.Rows[e.RowIndex].Cells[2].Value = baseModel.FindValue("DisplayName");
+                    else dataGridPathMain.Rows[e.RowIndex].Cells[2].Value = upgradeModel.FindValue("DisplayName");
+                    return;
+                }
+                case "DisplayName":
+                {
+                    foreach (var pictureBox in imageTable.Controls.OfType<PictureBox>()) pictureBox.Image?.Dispose();
+                    try
+                    {
+                        if (isBase) baseModel.RenameImages(value);
+                        else upgradeModel.RenameImages(value);
+                    }
+                    catch (Exception err){ MessageBox.Show("Failed not rename image and path, try to reopen the path window"); }
+                    UpdateImages();
+                    break;
+                }
+            }
+
             if (isBase)
             {
                 baseModel.data.UpdateFromDataTable(dataGridPathMain.DataSource as DataTable);
@@ -284,7 +320,13 @@ namespace BloonTowerMaker
             {
                 upgradeModel.data.UpdateFromDataTable(dataGridPathMain.DataSource as DataTable);
                 upgradeModel.Save();
+
             }
+        }
+        private void dataGridDamage_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            damageModel.data.UpdateFromDataTable(dataGridDamage.DataSource as DataTable);
+            damageModel.Save();
         }
 
         private void number_base1_ValueChanged(object sender, EventArgs e)
@@ -304,5 +346,6 @@ namespace BloonTowerMaker
             textures.dataDictionary.First().Value[2] = (int)number_base3.Value;
             textures.Save();
         }
+
     }
 }

@@ -35,7 +35,7 @@ namespace BloonTowerMaker
             this.img_display = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.imageTable = new System.Windows.Forms.TableLayoutPanel();
             this.img_texture = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,6 +54,8 @@ namespace BloonTowerMaker
             this.image_select_dialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.dataGridDamage = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridPathMain = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -63,7 +65,7 @@ namespace BloonTowerMaker
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.imageTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.img_texture)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.number_base1)).BeginInit();
@@ -78,6 +80,8 @@ namespace BloonTowerMaker
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDamage)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPathMain)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
@@ -144,7 +148,7 @@ namespace BloonTowerMaker
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox1.Controls.Add(this.imageTable);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -157,25 +161,25 @@ namespace BloonTowerMaker
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Model";
             // 
-            // tableLayoutPanel1
+            // imageTable
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.img_texture, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.img_icon, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.img_display, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(486, 180);
-            this.tableLayoutPanel1.TabIndex = 8;
+            this.imageTable.ColumnCount = 3;
+            this.imageTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.imageTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.imageTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.imageTable.Controls.Add(this.label4, 0, 0);
+            this.imageTable.Controls.Add(this.img_texture, 2, 1);
+            this.imageTable.Controls.Add(this.img_icon, 1, 1);
+            this.imageTable.Controls.Add(this.img_display, 0, 1);
+            this.imageTable.Controls.Add(this.label3, 1, 0);
+            this.imageTable.Controls.Add(this.label2, 2, 0);
+            this.imageTable.Location = new System.Drawing.Point(6, 19);
+            this.imageTable.Name = "imageTable";
+            this.imageTable.RowCount = 2;
+            this.imageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.imageTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.imageTable.Size = new System.Drawing.Size(486, 180);
+            this.imageTable.TabIndex = 8;
             // 
             // img_texture
             // 
@@ -271,7 +275,7 @@ namespace BloonTowerMaker
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.dataGridPathAttack);
-            this.groupBox7.Location = new System.Drawing.Point(3, 441);
+            this.groupBox7.Location = new System.Drawing.Point(3, 440);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(390, 188);
             this.groupBox7.TabIndex = 4;
@@ -298,9 +302,9 @@ namespace BloonTowerMaker
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.dataGridProjectiles);
-            this.groupBox4.Location = new System.Drawing.Point(3, 246);
+            this.groupBox4.Location = new System.Drawing.Point(3, 440);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(387, 189);
+            this.groupBox4.Size = new System.Drawing.Size(368, 183);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Projectile Select";
@@ -318,7 +322,7 @@ namespace BloonTowerMaker
             this.dataGridProjectiles.MultiSelect = false;
             this.dataGridProjectiles.Name = "dataGridProjectiles";
             this.dataGridProjectiles.RowHeadersVisible = false;
-            this.dataGridProjectiles.Size = new System.Drawing.Size(381, 170);
+            this.dataGridProjectiles.Size = new System.Drawing.Size(362, 164);
             this.dataGridProjectiles.TabIndex = 2;
             this.dataGridProjectiles.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridProjectiles_CellValueChanged);
             // 
@@ -341,9 +345,9 @@ namespace BloonTowerMaker
             // 
             this.groupBox5.Controls.Add(this.dataGridPathProperty);
             this.groupBox5.ForeColor = System.Drawing.Color.Black;
-            this.groupBox5.Location = new System.Drawing.Point(3, 210);
+            this.groupBox5.Location = new System.Drawing.Point(3, 246);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(371, 422);
+            this.groupBox5.Size = new System.Drawing.Size(371, 188);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Tower Model";
@@ -361,7 +365,7 @@ namespace BloonTowerMaker
             this.dataGridPathProperty.MultiSelect = false;
             this.dataGridPathProperty.Name = "dataGridPathProperty";
             this.dataGridPathProperty.RowHeadersVisible = false;
-            this.dataGridPathProperty.Size = new System.Drawing.Size(365, 403);
+            this.dataGridPathProperty.Size = new System.Drawing.Size(365, 169);
             this.dataGridPathProperty.TabIndex = 0;
             this.dataGridPathProperty.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPathProperty_CellValueChanged);
             // 
@@ -374,7 +378,7 @@ namespace BloonTowerMaker
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dataGridGlobalAttack);
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Location = new System.Drawing.Point(3, 197);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(386, 237);
             this.groupBox3.TabIndex = 5;
@@ -383,8 +387,8 @@ namespace BloonTowerMaker
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.Controls.Add(this.groupBox9);
             this.flowLayoutPanel2.Controls.Add(this.groupBox3);
-            this.flowLayoutPanel2.Controls.Add(this.groupBox4);
             this.flowLayoutPanel2.Controls.Add(this.groupBox7);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 16);
@@ -392,12 +396,39 @@ namespace BloonTowerMaker
             this.flowLayoutPanel2.Size = new System.Drawing.Size(393, 635);
             this.flowLayoutPanel2.TabIndex = 8;
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.dataGridDamage);
+            this.groupBox9.Location = new System.Drawing.Point(3, 3);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(390, 188);
+            this.groupBox9.TabIndex = 5;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Global Damage Model";
+            // 
+            // dataGridDamage
+            // 
+            this.dataGridDamage.AllowUserToAddRows = false;
+            this.dataGridDamage.AllowUserToDeleteRows = false;
+            this.dataGridDamage.AllowUserToResizeRows = false;
+            this.dataGridDamage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridDamage.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridDamage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridDamage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridDamage.Location = new System.Drawing.Point(3, 16);
+            this.dataGridDamage.MultiSelect = false;
+            this.dataGridDamage.Name = "dataGridDamage";
+            this.dataGridDamage.RowHeadersVisible = false;
+            this.dataGridDamage.Size = new System.Drawing.Size(384, 169);
+            this.dataGridDamage.TabIndex = 1;
+            this.dataGridDamage.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridDamage_CellValueChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridPathMain);
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(374, 201);
+            this.groupBox2.Size = new System.Drawing.Size(374, 237);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Path Properties";
@@ -415,7 +446,7 @@ namespace BloonTowerMaker
             this.dataGridPathMain.MultiSelect = false;
             this.dataGridPathMain.Name = "dataGridPathMain";
             this.dataGridPathMain.RowHeadersVisible = false;
-            this.dataGridPathMain.Size = new System.Drawing.Size(368, 182);
+            this.dataGridPathMain.Size = new System.Drawing.Size(368, 218);
             this.dataGridPathMain.TabIndex = 1;
             this.dataGridPathMain.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridPathMain_CellValueChanged);
             // 
@@ -423,6 +454,7 @@ namespace BloonTowerMaker
             // 
             this.flowLayoutPanel3.Controls.Add(this.groupBox2);
             this.flowLayoutPanel3.Controls.Add(this.groupBox5);
+            this.flowLayoutPanel3.Controls.Add(this.groupBox4);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
@@ -482,8 +514,8 @@ namespace BloonTowerMaker
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.imageTable.ResumeLayout(false);
+            this.imageTable.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.img_texture)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.number_base1)).EndInit();
@@ -498,6 +530,8 @@ namespace BloonTowerMaker
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPathProperty)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridDamage)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPathMain)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
@@ -533,12 +567,14 @@ namespace BloonTowerMaker
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox img_texture;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel imageTable;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridPathMain;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.DataGridView dataGridDamage;
     }
 }

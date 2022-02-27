@@ -11,7 +11,6 @@ using System.IO;
 using Assets.Scripts.Models.Towers.Projectiles;
 using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
-using Mono.Cecil;
 
 namespace BloonTowerMaker
 {
@@ -124,6 +123,13 @@ namespace BloonTowerMaker
             //Get row name - value
             var name = dataGridProjectile.Rows[e.RowIndex].Cells[1].Value.ToString();
             var value = dataGridProjectile.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+            if (name == "name" && !value.IsValidKeyword())
+            {
+                MessageBox.Show("Cannot set projectile name as C# reserved keyword: " + value);
+                dataGridProjectile.Rows[e.RowIndex].Cells[2].Value = selectedProjectile.FindValue("name");
+                return;
+            }
 
             //If renaming exist in the list dont rename
             if (listProjectiles.Items.Contains(value))

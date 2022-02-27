@@ -22,6 +22,7 @@ namespace BloonTowerMaker.Logic
             List<string> files = new List<string>();
             try
             {
+                files.Add(Parser.ParseProjectileClasses());
                 files.AddRange(Parser.ParsePaths());
                 files.Add(Parser.ParseBase());
                 files.Add(Parser.ParseMain());
@@ -53,8 +54,12 @@ namespace BloonTowerMaker.Logic
             //Image include in project
             try
             {
+                //Embedd path images
                 foreach (var directory in Directory.GetDirectories(project.projectPath))
                         parameters.EmbeddedResources.AddRange(Directory.GetFiles(directory, "*.png"));
+
+                //Embedd projectile images
+                //parameters.EmbeddedResources.AddRange(Directory.GetFiles(Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder), "*.png"));
             }
             catch (Exception e)
             {
@@ -67,7 +72,11 @@ namespace BloonTowerMaker.Logic
             parameters.GenerateInMemory = false;
             parameters.TreatWarningsAsErrors = false;
             parameters.OutputAssembly = $"{project.projectName.Replace(" ", "")}.dll";
-             
+
+            //foreach (var file in files)
+            //{
+            //    NotepadHelper.ShowMessage(file, "Error");
+            //}
             //Compile
             CompilerResults results = provider.CompileAssemblyFromSource(parameters,files.ToArray());
             if (results.Errors.Count > 0)

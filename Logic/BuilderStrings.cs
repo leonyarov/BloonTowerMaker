@@ -14,6 +14,16 @@ namespace BloonTowerMaker.Logic
 
         public const string FUNCTION_VARIABLE = @"$name$.$properties$ = $value$;";
 
+        public const string DISPLAY_CLASS_TEMPLATE = @"
+                                                        using Assets.Scripts.Simulation.SMath;
+                                                        using Assets.Scripts.Unity.Display;
+                                                        using BTD_Mod_Helper.Api.Display;
+                                                        namespace $tower$
+                                                        {
+                                                                /*CLASSES*/
+                                                        }
+";
+
         public const string MAIN_CLASS = @" using BTD_Mod_Helper;
                                             using MelonLoader;
                                             using System.Reflection;
@@ -80,6 +90,7 @@ namespace BloonTowerMaker.Logic
                                             }";
 
         public const string FUNCTION = @"public override void $name$($params$) {
+                                            /*PROJECTILES*/
                                             /*CODE*/
                                          }
                                         ";
@@ -94,12 +105,14 @@ namespace BloonTowerMaker.Logic
                                                             Set2DTexture(node, $TextureName$ );
                                                         }
                                                     } 
+
+                                                    /*CLASSES*/
                                                     ";
 
         public const string FOREACH_LOOP = @"
                                             foreach (var $item$ in $collection$)
                                             {
-                                                /*LOOP_CODE*/
+                                                /*CODE*/
                                             }
                                             
                                             ";

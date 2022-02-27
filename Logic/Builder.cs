@@ -25,6 +25,12 @@ namespace BloonTowerMaker.Logic
             return stringBuilder.ToString();
         }
 
+        public static string BuildProjectileDisplayTemplate(string name)
+        {
+            StringBuilder stringBuilder = new StringBuilder(BuilderStrings.DISPLAY_CLASS_TEMPLATE);
+            stringBuilder.Replace("$tower$", name);
+            return stringBuilder.ToString();
+        }
         public static string BuildDisplayClass(string tower, string upgrade, string row, string path)
         {
             StringBuilder stringBuilder = new StringBuilder(BuilderStrings.DISPLAY_CLASS);
@@ -105,7 +111,12 @@ namespace BloonTowerMaker.Logic
             stringBuilder.Replace("$value$", value);
             return stringBuilder.ToString();
         }
-
+        /// <summary>
+        /// $function$.$properties$ = $value$;"
+        /// </summary>
+        /// <param name="function">Function name to append</param>
+        /// <param name="variable">Propery and value</param>
+        /// <returns>finished string</returns>
         public static string BuildFunctionVariable(string function, List<string> variable)
         {
             StringBuilder stringBuilder = new StringBuilder(BuilderStrings.FUNCTION_VARIABLE);
@@ -114,7 +125,13 @@ namespace BloonTowerMaker.Logic
             stringBuilder.Replace("$value$", variable.ParseValue());
             return stringBuilder.ToString();
         }
-
+        /// <summary>
+        /// Multiple variables based on function given
+        /// </summary>
+        /// <param name="data">variables to work with</param>
+        /// <param name="func">func to pass</param>
+        /// <param name="appendMore">appends /*CODE*/ in the end</param>
+        /// <returns>StringBuilder with variables</returns>
         public static StringBuilder VariableBuilderFromData(List<List<string>> data, Func<List<string>,string> func, bool appendMore = false)
         {
             StringBuilder code = new StringBuilder();

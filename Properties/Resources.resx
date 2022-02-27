@@ -163,6 +163,9 @@
   <data name="TowerGlobalAttackJsonFile" xml:space="preserve">
     <value>global.json</value>
   </data>
+  <data name="TowerGlobalDamageJsonFile" xml:space="preserve">
+    <value>damage.json</value>
+  </data>
   <data name="TowerModelJsonFile" xml:space="preserve">
     <value>tower.json</value>
   </data>

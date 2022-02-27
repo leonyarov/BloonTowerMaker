@@ -87,6 +87,7 @@ namespace BloonTowerMaker
             this.btn_t100.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t100.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t100.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t100.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t100.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t100.Location = new System.Drawing.Point(390, 183);
             this.btn_t100.Name = "btn_t100";
@@ -102,6 +103,7 @@ namespace BloonTowerMaker
             this.btn_t200.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t200.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t200.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t200.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t200.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t200.Location = new System.Drawing.Point(536, 183);
             this.btn_t200.Name = "btn_t200";
@@ -117,6 +119,7 @@ namespace BloonTowerMaker
             this.btn_t300.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t300.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t300.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t300.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t300.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t300.Location = new System.Drawing.Point(682, 183);
             this.btn_t300.Name = "btn_t300";
@@ -132,6 +135,7 @@ namespace BloonTowerMaker
             this.btn_t400.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t400.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t400.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t400.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t400.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t400.Location = new System.Drawing.Point(822, 183);
             this.btn_t400.Name = "btn_t400";
@@ -147,6 +151,7 @@ namespace BloonTowerMaker
             this.btn_t500.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t500.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t500.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t500.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t500.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t500.Location = new System.Drawing.Point(972, 183);
             this.btn_t500.Name = "btn_t500";
@@ -162,6 +167,7 @@ namespace BloonTowerMaker
             this.btn_t010.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t010.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t010.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t010.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t010.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t010.Location = new System.Drawing.Point(390, 338);
             this.btn_t010.Name = "btn_t010";
@@ -177,6 +183,7 @@ namespace BloonTowerMaker
             this.btn_t020.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t020.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t020.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t020.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t020.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t020.Location = new System.Drawing.Point(536, 338);
             this.btn_t020.Name = "btn_t020";
@@ -192,6 +199,7 @@ namespace BloonTowerMaker
             this.btn_t030.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t030.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t030.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t030.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t030.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t030.Location = new System.Drawing.Point(682, 338);
             this.btn_t030.Name = "btn_t030";
@@ -207,6 +215,7 @@ namespace BloonTowerMaker
             this.btn_t040.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t040.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t040.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t040.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t040.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t040.Location = new System.Drawing.Point(822, 338);
             this.btn_t040.Name = "btn_t040";
@@ -222,6 +231,7 @@ namespace BloonTowerMaker
             this.btn_t050.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t050.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t050.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t050.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t050.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t050.Location = new System.Drawing.Point(972, 338);
             this.btn_t050.Name = "btn_t050";
@@ -237,6 +247,7 @@ namespace BloonTowerMaker
             this.btn_t001.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t001.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t001.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t001.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t001.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t001.Location = new System.Drawing.Point(390, 491);
             this.btn_t001.Name = "btn_t001";
@@ -252,6 +263,7 @@ namespace BloonTowerMaker
             this.btn_t002.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t002.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t002.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t002.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t002.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t002.Location = new System.Drawing.Point(536, 491);
             this.btn_t002.Name = "btn_t002";
@@ -267,6 +279,7 @@ namespace BloonTowerMaker
             this.btn_t003.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t003.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t003.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t003.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t003.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t003.Location = new System.Drawing.Point(682, 491);
             this.btn_t003.Name = "btn_t003";
@@ -282,6 +295,7 @@ namespace BloonTowerMaker
             this.btn_t004.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t004.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t004.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t004.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t004.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t004.Location = new System.Drawing.Point(822, 491);
             this.btn_t004.Name = "btn_t004";
@@ -297,6 +311,7 @@ namespace BloonTowerMaker
             this.btn_t005.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btn_t005.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btn_t005.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_t005.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t005.ForeColor = System.Drawing.Color.Transparent;
             this.btn_t005.Location = new System.Drawing.Point(972, 491);
             this.btn_t005.Name = "btn_t005";
@@ -318,7 +333,6 @@ namespace BloonTowerMaker
             this.btn_at555.Name = "btn_at555";
             this.btn_at555.Size = new System.Drawing.Size(137, 457);
             this.btn_at555.TabIndex = 1;
-            this.btn_at555.Text = "555";
             this.btn_at555.UseVisualStyleBackColor = false;
             // 
             // label_cost
@@ -349,7 +363,7 @@ namespace BloonTowerMaker
             this.label_description.BackColor = System.Drawing.Color.Transparent;
             this.label_description.Font = new System.Drawing.Font("Luckiest Guy", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_description.ForeColor = System.Drawing.Color.White;
-            this.label_description.Location = new System.Drawing.Point(354, 9);
+            this.label_description.Location = new System.Drawing.Point(348, 21);
             this.label_description.Name = "label_description";
             this.label_description.Size = new System.Drawing.Size(675, 77);
             this.label_description.TabIndex = 4;
@@ -526,34 +540,34 @@ namespace BloonTowerMaker
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(110, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.saveToolStripMenuItem1_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // recentToolStripMenuItem
             // 
             this.recentToolStripMenuItem.Name = "recentToolStripMenuItem";
-            this.recentToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.recentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.recentToolStripMenuItem.Text = "Recent";
             // 
             // currdir
             // 
             this.currdir.AutoSize = true;
-            this.currdir.Location = new System.Drawing.Point(1121, 33);
+            this.currdir.Location = new System.Drawing.Point(54, 6);
             this.currdir.Name = "currdir";
             this.currdir.Size = new System.Drawing.Size(35, 13);
             this.currdir.TabIndex = 12;
@@ -644,10 +658,10 @@ namespace BloonTowerMaker
             this.Controls.Add(this.btn_t100);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Form1";
+            this.Text = "Bloon Tower Maker [Alpha v0.1]";
             this.Activated += new System.EventHandler(this.MainForm_Enter);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Enter += new System.EventHandler(this.MainForm_Enter);
