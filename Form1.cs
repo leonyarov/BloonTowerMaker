@@ -26,7 +26,6 @@ namespace BloonTowerMaker
         //Dictionary<string,string> data;
         Models models;
         private Project towerProject;
-        ModelToList<TowerModel> data;
         private ModelToList<ModTower> baseTower;
         private ModelToList<ModUpgrade> upgradeTower;
         public object ImageSelect { get; private set; }
@@ -53,6 +52,7 @@ namespace BloonTowerMaker
         }
         private void PathHover(object sender, EventArgs e)
         {
+            //Get model path from button
             var b = sender as Button;
             var path = b.Name.Replace(Resources.PathButtonIndentifier, "");
             var pathToFile = Models.GetJsonPath(path);
@@ -60,16 +60,18 @@ namespace BloonTowerMaker
             //Get temp model
             var model = new ModelToList<ModUpgrade>(pathToFile);
 
+            //Set label values 
             label_cost.Text = model.FindValue("Cost");
             label_description.Text = model.FindValue("Description");
-            img_base.Image?.Dispose();
-            img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
             tower_name.Text = model.FindValue("DisplayName");
+
+            //Load Images
+            img_base.Image?.Dispose();
+            img_base.Image = SelectImage.LoadImage(model.FindValue("Portrait"));
         }
         private void img_base_Click(object sender, EventArgs e)
         {
             img_base.Image?.Dispose();
-            img_base.Image = null;
             Edit("000");
         }
 
@@ -85,10 +87,12 @@ namespace BloonTowerMaker
             foreach (var item in this.Controls.OfType<Button>())
             {
                 if (!item.Name.Contains(Resources.PathButtonIndentifier)) continue;
+                var path = item.Name.Replace(Resources.PathButtonIndentifier, "");
+                var model = new ModelToList<ModUpgrade>(Models.GetJsonPath(path));
                 item.Click += PathSelect;
                 item.MouseEnter += PathHover;
                 item.MouseLeave += MouseLeaveIcon;
-                item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON, item.Name.Replace(Resources.PathButtonIndentifier, ""));
+                item.BackgroundImage = SelectImage.LoadImage(model.FindValue("Icon"));
                 item.BackgroundImageLayout = ImageLayout.Stretch;
                 item.TextAlign = ContentAlignment.BottomCenter;
             }
@@ -122,8 +126,6 @@ namespace BloonTowerMaker
                 combo_base.Items.Add(propertyInfo.Name);
             }
 
-            //combo_base.SelectedItem = data.FindValue("BaseTower");
-
             //Find the baseTower reference in the 000 path
             combo_base.SelectedItem = baseTower.FindValue("BaseTower");
         }
@@ -134,7 +136,8 @@ namespace BloonTowerMaker
             label_cost.Text = baseTower.FindValue("Cost");
             label_description.Text = baseTower.FindValue("Description");
             img_base.Image?.Dispose();
-            img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, Resources.Base);
+            img_base.Image = SelectImage.LoadImage(baseTower.FindValue("Portrait"));
+            //img_base.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, Resources.Base);
             tower_name.Text = baseTower.FindValue("DisplayName");
         }
         private void MainForm_Enter(object sender, EventArgs e)
@@ -146,7 +149,7 @@ namespace BloonTowerMaker
                 var path = item.Name.Replace("btn_t", "");
                 var tempModel = new ModelToList<ModUpgrade>(Models.GetJsonPath(path));
                 item.BackgroundImage?.Dispose();
-                item.BackgroundImage = SelectImage.GetImage(SelectImage.image_type.ICON,path);
+                item.BackgroundImage = SelectImage.LoadImage(tempModel.FindValue("Display"));
                 item.Text = tempModel.FindValue("DisplayName");
             }
 

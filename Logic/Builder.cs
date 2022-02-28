@@ -31,13 +31,21 @@ namespace BloonTowerMaker.Logic
             stringBuilder.Replace("$tower$", name);
             return stringBuilder.ToString();
         }
-        public static string BuildDisplayClass(string tower, string upgrade, string row, string path)
+
+        public static string BuildDisplayClass(
+            string tower, string basetower, string towertype, string typepath, string row, string tier,  string texturename)
         {
-            StringBuilder stringBuilder = new StringBuilder(BuilderStrings.DISPLAY_CLASS);
+            StringBuilder stringBuilder = new StringBuilder(BuilderStrings.DISPLAY_TEXTURE_CLASS);
             stringBuilder.Replace("$tower$", tower.RemoveWhiteSpace());
-            stringBuilder.Replace("$upgrade$", upgrade.RemoveWhiteSpace());
-            stringBuilder.Replace("$row$", tower.RemoveWhiteSpace());
-            stringBuilder.Replace("$path$", tower.RemoveWhiteSpace());
+            stringBuilder.Replace("$basetower$", basetower.RemoveWhiteSpace());
+            stringBuilder.Replace("$towertype$", towertype.RemoveWhiteSpace());
+            stringBuilder.Replace("$top$", typepath[0].ToString());
+            stringBuilder.Replace("$mid$", typepath[1].ToString());
+            stringBuilder.Replace("$bot$", typepath[2].ToString());
+            stringBuilder.Replace("$row$", row.RemoveWhiteSpace());
+            stringBuilder.Replace("$tier$", tier.RemoveWhiteSpace());
+            stringBuilder.Replace("$texturename$", texturename.RemoveWhiteSpace());
+
             return stringBuilder.ToString();
         }
         public static string BuildVariable(string type, string name, string value)
@@ -137,7 +145,7 @@ namespace BloonTowerMaker.Logic
             StringBuilder code = new StringBuilder();
             foreach (var variable in data)
             {
-                if (!variable.IsValidValue()) continue;
+                if (!variable.IsValidValue() || !variable.CanInclude()) continue;
                 code.Append(func(variable));
             }
             if (appendMore) code.Append("/*CODE*/");

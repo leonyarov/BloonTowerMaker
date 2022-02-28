@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Models.Towers.Projectiles;
+using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Unity.Achievements.List;
 using BloonTowerMaker.Properties;
 using Newtonsoft.Json;
@@ -61,7 +63,8 @@ namespace BloonTowerMaker.Data
             {
                 var r2 = string.IsNullOrWhiteSpace(FindValue("Cost"));
                 var r3 = string.IsNullOrWhiteSpace(FindValue("Description"));
-                if (!r2 && !r3) return true;
+                var r1 = string.IsNullOrWhiteSpace(FindValue("DisplayName"));
+                if (!r1 && !r2 && !r3) return true;
             }
             catch
             {
@@ -80,7 +83,7 @@ namespace BloonTowerMaker.Data
             }
             catch (Exception ex)
             {
-                throw new Exception($"Cannot write projectile file: " + ex.Message);
+                throw new Exception($"Cannot write file: " + ex.Message);
             }
         }
 
@@ -93,7 +96,7 @@ namespace BloonTowerMaker.Data
             }
             catch (Exception err)
             {
-                throw new Exception($"Error reading {Path.GetFileNameWithoutExtension(path)} projectile file: " + err.Message);
+                throw new Exception($"Error reading {Path.GetFileNameWithoutExtension(path)}  file: " + err.Message);
             }
         }
 
@@ -108,22 +111,29 @@ namespace BloonTowerMaker.Data
                 throw new Exception($"Cannot Delete file at path {path}: " + err.Message);
             }
 
-            var fileDir = Path.GetDirectoryName(path);
-            var fileInDir = Directory.GetFiles(fileDir);
-            var fileName = Path.GetFileNameWithoutExtension(path);
-            foreach (var file in fileInDir)
+            if (typeof(T) == typeof(ProjectileModel))
             {
-                if (!file.Contains(fileName)) continue;
-                try
-                {
-                    File.Delete(file);
-                }
-                catch (Exception errException)
-                {
-                    throw new Exception($"Cannot Delete additional files to file {fileName}: {file} - " +
-                                        errException.Message);
-                }
+
+                var weapon = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,
+                    Resources.ProjectileWeaponFolder, Path.GetFileName(path));
+                File.Delete(weapon);
             }
+            //var fileDir = Path.GetDirectoryName(path);
+            //var fileInDir = Directory.GetFiles(fileDir);
+            //var fileName = Path.GetFileNameWithoutExtension(path);
+            //foreach (var file in fileInDir)
+            //{
+            //    if (!file.Contains(fileName)) continue;
+            //    try
+            //    {
+            //        File.Delete(file);
+            //    }
+            //    catch (Exception errException)
+            //    {
+            //        throw new Exception($"Cannot Delete additional files to file {fileName}: {file} - " +
+            //                            errException.Message);
+            //    }
+            //}
         }
 
         public void Rename(string newName)
@@ -136,22 +146,30 @@ namespace BloonTowerMaker.Data
             try
             {
                 File.Move(path, newFileName); //Rename the file
-                path = newFileName; //set new path as the current path
-                var fileInDir = Directory.GetFiles(fileDir);
-                foreach (var file in fileInDir)
+                if (typeof(T) == typeof(ProjectileModel))
                 {
-                    if (!file.Contains(fileName) || file == newFileName) continue;
-                    try
-                    {
-                        var extension = Path.GetExtension(file);
-                        File.Move(file, Path.Combine(fileDir,newName.Replace(".json","")) + extension);
-                    }
-                    catch (Exception errException)
-                    {
-                        throw new Exception($"Cannot Rename additional files to file {fileName}: {file} - " +
-                                            errException.Message);
-                    }
+
+                    var weapon = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,
+                        Resources.ProjectileWeaponFolder, Path.GetFileName(path));
+                    var weaponNew = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,
+                        Resources.ProjectileWeaponFolder, newName);
+                    File.Move(weapon, weaponNew);
                 }
+                path = newFileName; //set new path as the current path
+                //foreach (var file in fileInDir)
+                //{
+                //    if (!file.Contains(fileName) || file == newFileName) continue;
+                //    try
+                //    {
+                //        var extension = Path.GetExtension(file);
+                //        File.Move(file, Path.Combine(fileDir,newName.Replace(".json","")) + extension);
+                //    }
+                //    catch (Exception errException)
+                //    {
+                //        throw new Exception($"Cannot Rename additional files to file {fileName}: {file} - " +
+                //                            errException.Message);
+                //    }
+                //}
             }
             catch (Exception errException)
             {

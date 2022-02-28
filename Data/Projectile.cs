@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace BloonTowerMaker.Data
 {
-    public class Projectile : IExtractModel
+    public class Projectile
     {
         private List<Dictionary<string, string>> projectile;
     

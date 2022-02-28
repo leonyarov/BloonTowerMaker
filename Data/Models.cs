@@ -8,6 +8,7 @@ using Assets.Scripts.Models.Towers;
 using Assets.Scripts.Models.Towers.Projectiles;
 using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
+using BTD_Mod_Helper.Api.Towers;
 
 namespace BloonTowerMaker.Data
 {
@@ -49,12 +50,6 @@ namespace BloonTowerMaker.Data
             File.WriteAllText(jsonPath, json);
         }
 
-        public bool ModelIsLegit(Dictionary<string,string> dictionary)
-        {
-            //TODO: check if the model is legit by cost, description etc (described in github)
-            throw new NotImplementedException();
-        }
-
         public static string GetPathRow(string path)
         {
             if (path[0] != '0')
@@ -92,6 +87,12 @@ namespace BloonTowerMaker.Data
             return 0;
         }
 
+        public static int[] GetTiersFromPath(string path)
+        {
+            return path.Select(x => int.Parse(x.ToString())).ToArray();
+        }
+
+
         //Get TowerModel class as dictionary of (key: name | value: value)
         public static Dictionary<string, string> getTowerModelAsDictionary()
         {
@@ -116,8 +117,6 @@ namespace BloonTowerMaker.Data
                     var key = propertyInfo.Name;
                     var value = propertyInfo.PropertyType.Name;
                     const StringComparison cmp = StringComparison.CurrentCultureIgnoreCase;
-                    //if (!value.Equals(nameof(String), cmp) && !value.Equals(nameof(Single), cmp) &&
-                    //    !value.Equals(nameof(Int32), cmp) && !value.Equals(nameof(Boolean), cmp)) continue;
 
                     switch (value)
                     {
@@ -134,30 +133,14 @@ namespace BloonTowerMaker.Data
                 {
                     continue; //If the type is not valid and throws an error
                 }
+
             }
 
-            //if (typeof(T) == typeof(TowerModel))
-            //{
-            //    dict.Add("description","string"); //add missing variable
-            //    dict.Add("path","int");
-            //    dict.Add("baseTower", "string");
-            //    dict.Add("Priority", "int");
-            //    dict.Add("CamoDetection","bool");
-            //}
-
-            //if (typeof(T) == typeof(WeaponModel))
-            //{
-            //    var projectileModel = ExtractProperties<ProjectileModel>();
-            //    dict.Union(projectileModel);
-
-            //}
-
-            //if (typeof(T) == typeof(ProjectileModel))
-            //{
-            //    var damageModel = ExtractProperties<DamageModel>();
-            //    foreach (var item in damageModel)
-            //        dict[item.Key] = item.Value;
-            //}
+            if (typeof(T) == typeof(ModTower) || typeof(T) == typeof(ModUpgrade))
+            {
+                dict.Add("Display", "image");
+                dict.Add("Texture", "image");
+            }
             return dict;
         }
 

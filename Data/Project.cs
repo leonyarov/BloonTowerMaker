@@ -62,6 +62,8 @@ namespace BloonTowerMaker.Data
             Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectileFolder));
             //Create weapon folder inside projectile folder
             Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectileFolder, Resources.ProjectileWeaponFolder));
+            //Create resources folder
+            Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectResourcesFolder));
             //Create project.json
             File.Create(Path.Combine(initialDirectory, Resources.ProjectileJson));
             //Create projectile.json

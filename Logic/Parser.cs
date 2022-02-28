@@ -184,7 +184,7 @@ namespace BloonTowerMaker.Logic
                 var projectileModel = new ModelToList<WeaponModel>(projectile);
                 //var damageModel = new ModelToList<DamageModel>(weaponFile);
                 var @class = Builder.BuildProjectileDisplayClass(Path.GetFileNameWithoutExtension(weaponFile),
-                    projectileModel.FindValue("name"));
+                    projectileModel.FindValue("display"));
                 template.Replace("/*CLASSES*/", @class);
             }
 
@@ -237,6 +237,11 @@ namespace BloonTowerMaker.Logic
             }
 
             return projectile.ToString();
+        }
+
+        private static string ParseTowerDisplayClass()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -201,7 +201,7 @@ namespace BloonTowerMaker
             this.btn_t030.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_t030.Font = new System.Drawing.Font("Luckiest Guy", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_t030.ForeColor = System.Drawing.Color.Transparent;
-            this.btn_t030.Location = new System.Drawing.Point(682, 338);
+            this.btn_t030.Location = new System.Drawing.Point(677, 338);
             this.btn_t030.Name = "btn_t030";
             this.btn_t030.Size = new System.Drawing.Size(111, 105);
             this.btn_t030.TabIndex = 0;

@@ -29,6 +29,7 @@ namespace BloonTowerMaker
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PathEdit));
             this.button_ok = new System.Windows.Forms.Button();
             this.img_icon = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,6 +63,7 @@ namespace BloonTowerMaker
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btn_help = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -148,6 +150,7 @@ namespace BloonTowerMaker
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.btn_help);
             this.groupBox1.Controls.Add(this.imageTable);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
@@ -493,6 +496,18 @@ namespace BloonTowerMaker
             this.flowLayoutPanel4.Size = new System.Drawing.Size(795, 663);
             this.flowLayoutPanel4.TabIndex = 12;
             // 
+            // btn_help
+            // 
+            this.btn_help.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btn_help.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_help.Location = new System.Drawing.Point(513, 170);
+            this.btn_help.Name = "btn_help";
+            this.btn_help.Size = new System.Drawing.Size(20, 20);
+            this.btn_help.TabIndex = 9;
+            this.btn_help.Text = "?";
+            this.btn_help.UseVisualStyleBackColor = false;
+            this.btn_help.Click += new System.EventHandler(this.btn_help_Click);
+            // 
             // PathEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,6 +519,8 @@ namespace BloonTowerMaker
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_ok);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PathEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PathEdit";
@@ -576,5 +593,6 @@ namespace BloonTowerMaker
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.DataGridView dataGridDamage;
+        private System.Windows.Forms.Button btn_help;
     }
 }

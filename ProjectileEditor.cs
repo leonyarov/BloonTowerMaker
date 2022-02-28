@@ -11,6 +11,7 @@ using System.IO;
 using Assets.Scripts.Models.Towers.Projectiles;
 using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
+using BloonTowerMaker.Logic;
 
 namespace BloonTowerMaker
 {
@@ -66,16 +67,6 @@ namespace BloonTowerMaker
                 MessageBox.Show("Rename the previews 'NewProjectile'");
                 return;
             }
-            try
-            {
-                //selectedProjectile = new Projectile();
-                
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show("Error creating projectile", err.Message);
-            }
-
             //selectedProjectile = new ModelToList<DamageModel>(Path.Combine(Project.instance.projectPath,Resources.ProjectileFolder,newFileName + ".json"));
             listProjectiles.Items.Add("NewProjectile");
             listProjectiles.SelectedItem = listProjectiles.Items[listProjectiles.Items.Count - 1];
@@ -94,7 +85,7 @@ namespace BloonTowerMaker
             var index = listProjectiles.SelectedIndex;
             listProjectiles.Items.RemoveAt(index);
             img_projectile.Image?.Dispose();
-            //Projectile.Delete(name);
+            img_projectile.Image = null;
             selectedProjectile.Delete();
 
             //Remove projectile reference
@@ -111,11 +102,17 @@ namespace BloonTowerMaker
         private void selectImageDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //var projectileName = listProjectiles.SelectedItems[0].ToString().Replace(" ","") + ".png";
-            var projectileName = listProjectiles.SelectedItems[0].ToString() + ".png";
             lastImagePath = selectImageDialog.FileName;
+
+            //Save the image to the files
+            SelectImage.SaveImage(lastImagePath);
+
+            //Load new image
             img_projectile.Image?.Dispose();
-            img_projectile.Image = Image.FromFile(lastImagePath);
-            File.Copy(lastImagePath,Path.Combine(Project.instance.projectPath,Resources.ProjectileFolder, projectileName),true);
+            img_projectile.Image = SelectImage.LoadImage(selectImageDialog.SafeFileName);
+
+            //Save image name in projectile
+            selectedProjectile.Edit("display", Path.GetFileNameWithoutExtension(lastImagePath));
         }
 
         private void dataGridProjectile_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -148,13 +145,13 @@ namespace BloonTowerMaker
                 projectileDictionary.saveSelected();
                 
                 //Dispose the image to rename it
-                img_projectile.Image?.Dispose();
+                //img_projectile.Image?.Dispose();
                 
                 //Rename projectile
                 selectedProjectile.Rename(value);
                 
                 //Rename weapon
-                selectedDamage.Rename(value);
+                //selectedDamage.Rename(value);
                 
                 //Refresh list of projectiles
                 RefreshList();
@@ -183,12 +180,13 @@ namespace BloonTowerMaker
             dataGridDamage.DataSource = selectedDamage.data.ToDataTable();
 
             //Get image from selected projectile
-            var imagePath = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,selectedProjectile.FindValue("name")+ ".png");
+            //var imagePath = Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder,selectedProjectile.FindValue("name")+ ".png");
             img_projectile.Image?.Dispose();
-            if (File.Exists(imagePath))
-                img_projectile.Image = Image.FromFile(imagePath);
-            else
-                img_projectile.Image = null;
+            //if (File.Exists(imagePath))
+            //    img_projectile.Image = Image.FromFile(imagePath);
+            //else
+            //    img_projectile.Image = null;
+            img_projectile.Image = SelectImage.LoadImage(selectedProjectile.FindValue("display"));
         }
 
         private void btn_help_Click(object sender, EventArgs e)
@@ -198,9 +196,6 @@ namespace BloonTowerMaker
 
         private void dataGridDamage_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //var name = dataGridDamage.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //var value = dataGridDamage.Rows[e.RowIndex].Cells[2].Value.ToString();
-
             //Save table to json
             selectedDamage.data.UpdateFromDataTable(this.dataGridDamage.DataSource as DataTable);
             selectedDamage.Save();

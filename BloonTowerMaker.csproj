@@ -76,17 +76,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Attack.cs" />
     <Compile Include="Data\BaseModel.cs" />
-    <Compile Include="Data\CombinedModel.cs" />
     <Compile Include="Data\DictionaryExtensions.cs" />
     <Compile Include="Data\ListExtensions.cs" />
     <Compile Include="Data\ModelToList.cs" />
-    <Compile Include="Data\IExtractModel.cs" />
     <Compile Include="Data\Models.cs" />
     <Compile Include="Data\Project.cs" />
     <Compile Include="Data\Projectile.cs" />
-    <Compile Include="Data\MonkeyWeaponModel.cs" />
     <Compile Include="Data\ReservedKeywords.cs" />
     <Compile Include="Data\SelectedProjectiles.cs" />
     <Compile Include="Data\Textures.cs" />

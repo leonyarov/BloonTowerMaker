@@ -64,6 +64,16 @@ namespace BloonTowerMaker.Data
             }
         }
 
+
+        /// <summary>
+        /// Do not include special types
+        /// </summary>
+        public static bool CanInclude(this List<string> data)
+        {
+            var r1 = data.GetModelType().Equals("image");
+            return !r1;
+        }
+
         /// <summary>
         /// Check if data is viable to use in the compiler
         /// </summary>

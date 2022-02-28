@@ -117,32 +117,40 @@ namespace BloonTowerMaker.Logic
                                             
                                             ";
 
-        public const string DISPLAY_CLASS = @"
-                                            using System.Linq;
-                                            using Assets.Scripts.Models.Towers;
-                                            using Assets.Scripts.Unity.Display;
-                                            using BTD_Mod_Helper.Api.Display;
-                                            using BTD_Mod_Helper.Extensions;
-                                            using MelonLoader;
+        public const string DISPLAY_TEXTURE_TEMPLATE = @"
+                                                        using System.Linq;
+                                                        using Assets.Scripts.Models.Towers;
+                                                        using Assets.Scripts.Unity.Display;
+                                                        using BTD_Mod_Helper.Api.Display;
+                                                        using BTD_Mod_Helper.Extensions;
+                                                        using MelonLoader;
+                                                        namespace CardMonkey
+                                                        {
+                                                           /*CLASSES*/
+                                                        }
+                                                     ";
 
-                                            namespace $tower$.Display
-                                            {
-                                                public class $upgrade$Display : ModTowerDisplay<$tower$>
-                                                {
-                                                    public override string BaseDisplay {get {return /*DISPLAY*/}};
-                                                    //GetDisplay(TowerType.BoomerangMonkey, 5, 0, 0);
-                                                    public override bool UseForTower(int[] tiers)
+        public const string DISPLAY_TEXTURE_CLASS = @"
+                                                    public class $tower$Display : ModTowerDisplay<$basetower$>
                                                     {
-                                                        return tiers[$row$] == $path$;
-                                                    }
+                                                        public override string BaseDisplay {get {return GetDisplay(TowerType.$towertype$, $top$, $mid$, $bot$);}} 
 
-                                                    public override void ModifyDisplayNode(UnityDisplayNode node)
-                                                    {
-                                                        node.SaveMeshTexture();
-                                                        SetMeshTexture(node, /*TEXTURE*/);
+                                                        public override bool UseForTower(int[] tiers)
+                                                        {
+                                                            return tiers[$row$] == $tier$;
+                                                        }
+
+                                                        public override void ModifyDisplayNode(UnityDisplayNode node)
+                                                        {
+                                                            node.SaveMeshTexture();
+                                                            
+                                                            // Set our custom texture
+                                                            SetMeshTexture(node, $texturename$);
+
+                                                            //Bone removal
+                                                            //node.RemoveBone(""SuperMonkeyRig:Dart"");
+                                                        }
                                                     }
-                                                }
-                                            }
-                                            ";
+                                                        ";
     }
 }

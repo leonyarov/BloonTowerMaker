@@ -126,11 +126,24 @@ namespace BloonTowerMaker
 
         private void UpdateImages()
         {
+            //Dispose images 
+            img_texture.Image?.Dispose();
             img_icon.Image?.Dispose();
             img_display.Image?.Dispose();
-            img_display.Image = SelectImage.GetImage(SelectImage.image_type.PORTRAIT, path);
-            img_icon.Image = SelectImage.GetImage(SelectImage.image_type.ICON, path);
-            img_texture.Image = SelectImage.GetImage(SelectImage.image_type.DISPLAY, path);
+
+            //Load Images
+            if (isBase)
+            {
+                img_display.Image = SelectImage.LoadImage(baseModel.FindValue("Portrait"));
+                img_icon.Image = SelectImage.LoadImage(baseModel.FindValue("Icon"));
+                img_texture.Image = SelectImage.LoadImage(baseModel.FindValue("Texture"));
+            }
+            else
+            {
+                img_display.Image = SelectImage.LoadImage(weaponModel.FindValue("Portrait"));
+                img_icon.Image = SelectImage.LoadImage(weaponModel.FindValue("Icon"));
+                img_texture.Image = SelectImage.LoadImage(weaponModel.FindValue("Texture"));
+            }
         }
         private void button_ok_Click(object sender, EventArgs e)
         {
@@ -151,48 +164,39 @@ namespace BloonTowerMaker
         }
 
 
-        private void RemoveImage(string path)
+        private void RemoveImage()
         {
-            var imageName = pathModel.Find("name")[2];
-            if (string.IsNullOrWhiteSpace(imageName))
-            {
-                MessageBox.Show("Path name cannot be empty to remove an image");
-                return;
-            }
-            try
-            {
-                File.Delete(Path.Combine(Project.instance.projectPath,Models.ParsePath(path),$"{imageName}{lastImage}.png"));
-            }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.ToString(), "Cant delete Image, Try to re-open path");
-            }
+            if (isBase) baseModel.Edit(lastImage, "");
+            else upgradeModel.Edit(lastImage, "");
             UpdateImages();
         }
 
         private void image_select_dialog_FileOk(object sender, CancelEventArgs e)
         {
-            var imageName = "";
-            if (isBase) imageName = baseModel.FindValue("DisplayName");
-            else imageName = upgradeModel.FindValue("DisplayName");
+            var imagePath = image_select_dialog.FileName;
 
-
-            if (string.IsNullOrWhiteSpace(imageName))
+            if (string.IsNullOrWhiteSpace(imagePath))
             {
-                MessageBox.Show("Path DisplayName cannot be empty to set an image");
+                MessageBox.Show("Bad image selected");
                 return;
             }
-            var file = image_select_dialog.FileName;
+
+            var imageName = Path.GetFileNameWithoutExtension(imagePath);
+
             try
             {
-                var new_filename = Path.Combine(Project.instance.projectPath, Models.ParsePath(path),
-                    $"{imageName}{lastImage}.png");
-                File.Copy(file,new_filename , true);
+                SelectImage.SaveImage(imagePath);
             }
-            catch (Exception err)
+            catch
             {
-                MessageBox.Show(err.ToString(), "Error getting image", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                //MessageBox.Show("Cant set image " + imagePath);
+                //return;
             }
+
+            if (isBase) baseModel.Edit(lastImage, imageName);
+            else upgradeModel.Edit(lastImage, imageName);
+
             UpdateImages(); //Update images on form
 
         }
@@ -205,24 +209,23 @@ namespace BloonTowerMaker
         //Image Select
         private void img_display_MouseClick(object sender, MouseEventArgs e)
         {
-            lastImage = "-Portrait";
+            lastImage = "Portrait";
             if (e.Button == MouseButtons.Right)
             {
                 img_display.Image?.Dispose();
-                img_display.Image = null;
-                RemoveImage(path);
+                RemoveImage();
                 return;
             }
             image_select_dialog.ShowDialog();
+
         }
         private void img_icon_MouseClick(object sender, MouseEventArgs e)
         {
-            lastImage = "-Icon";
+            lastImage = "Icon";
             if (e.Button == MouseButtons.Right)
             {
                 img_icon.Image?.Dispose();
-                img_display.Image = null;
-                RemoveImage(path);
+                RemoveImage();
                 return;
             }
             image_select_dialog.ShowDialog();
@@ -230,12 +233,11 @@ namespace BloonTowerMaker
 
         private void img_texture_MouseClick(object sender, MouseEventArgs e)
         {
-            lastImage = "-Display";
+            lastImage = "Texture";
             if (e.Button == MouseButtons.Right)
             {
                 img_texture.Image?.Dispose();
-                img_display.Image = null;
-                RemoveImage(path);
+                RemoveImage();
                 return;
             }
             image_select_dialog.ShowDialog();
@@ -288,28 +290,24 @@ namespace BloonTowerMaker
             var name = dataGridPathMain.Rows[e.RowIndex].Cells[1].Value.ToString();
             var value = dataGridPathMain.Rows[e.RowIndex].Cells[2].Value.ToString();
 
-            switch (name)
+            if (name == "DisplayName" && !value.IsValidKeyword())
             {
-                case "DisplayName" when !value.IsValidKeyword():
-                {
                     MessageBox.Show("Cannot set tower name as C# reserved keyword: " + value);
-                    if (isBase) dataGridPathMain.Rows[e.RowIndex].Cells[2].Value = baseModel.FindValue("DisplayName");
-                    else dataGridPathMain.Rows[e.RowIndex].Cells[2].Value = upgradeModel.FindValue("DisplayName");
+                    dataGridPathMain.Rows[e.RowIndex].Cells[2].Value = isBase ? baseModel.FindValue("DisplayName") : upgradeModel.FindValue("DisplayName");
                     return;
-                }
-                case "DisplayName":
-                {
-                    foreach (var pictureBox in imageTable.Controls.OfType<PictureBox>()) pictureBox.Image?.Dispose();
-                    try
-                    {
-                        if (isBase) baseModel.RenameImages(value);
-                        else upgradeModel.RenameImages(value);
-                    }
-                    catch (Exception err){ MessageBox.Show("Failed not rename image and path, try to reopen the path window"); }
-                    UpdateImages();
-                    break;
-                }
             }
+                //case "DisplayName":
+                //{
+                //    foreach (var pictureBox in imageTable.Controls.OfType<PictureBox>()) pictureBox.Image?.Dispose();
+                //    try
+                //    {
+                //        if (isBase) baseModel.RenameImages(value);
+                //        else upgradeModel.RenameImages(value);
+                //    }
+                //    catch (Exception err){ MessageBox.Show("Failed not rename image and path, try to reopen the path window"); }
+                //    UpdateImages();
+                //    break;
+                //}
 
             if (isBase)
             {
@@ -347,5 +345,9 @@ namespace BloonTowerMaker
             textures.Save();
         }
 
+        private void btn_help_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Right click to remove image. " + Environment.NewLine + "Removed Images wont be deleted from the resource folder!","Info");
+        }
     }
 }
