@@ -140,9 +140,9 @@ namespace BloonTowerMaker
             }
             else
             {
-                img_display.Image = SelectImage.LoadImage(weaponModel.FindValue("Portrait"));
-                img_icon.Image = SelectImage.LoadImage(weaponModel.FindValue("Icon"));
-                img_texture.Image = SelectImage.LoadImage(weaponModel.FindValue("Texture"));
+                img_display.Image = SelectImage.LoadImage(upgradeModel.FindValue("Portrait"));
+                img_icon.Image = SelectImage.LoadImage(upgradeModel.FindValue("Icon"));
+                img_texture.Image = SelectImage.LoadImage(upgradeModel.FindValue("Texture"));
             }
         }
         private void button_ok_Click(object sender, EventArgs e)
@@ -308,7 +308,6 @@ namespace BloonTowerMaker
                 //    UpdateImages();
                 //    break;
                 //}
-
             if (isBase)
             {
                 baseModel.data.UpdateFromDataTable(dataGridPathMain.DataSource as DataTable);
@@ -348,6 +347,13 @@ namespace BloonTowerMaker
         private void btn_help_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Right click to remove image. " + Environment.NewLine + "Removed Images wont be deleted from the resource folder!","Info");
+        }
+
+        private void help2_btn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show( 
+                "[string] - free text (avoid using special symbols)\n[float] - any number with a decimal point (1.9, 0.01, 2) etc... \n[int] - number without a decimal point. (decimal point will throw an error)\n[image] - free text (image name inside \"/resources\" folder)\n* Cost, Description, DisplayName are required for the path to be included in the build"
+                ,"Variable input");
         }
     }
 }

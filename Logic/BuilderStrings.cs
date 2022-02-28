@@ -20,7 +20,7 @@ namespace BloonTowerMaker.Logic
                                                         using BTD_Mod_Helper.Api.Display;
                                                         namespace $tower$
                                                         {
-                                                                /*CLASSES*/
+                                                                /*CLASS*/
                                                         }
 ";
 
@@ -117,16 +117,15 @@ namespace BloonTowerMaker.Logic
                                             
                                             ";
 
-        public const string DISPLAY_TEXTURE_TEMPLATE = @"
-                                                        using System.Linq;
-                                                        using Assets.Scripts.Models.Towers;
+        public const string DISPLAY_TEXTURE_TEMPLATE = @"using Assets.Scripts.Models.Towers;
                                                         using Assets.Scripts.Unity.Display;
+                                                        using BTD_Mod_Helper.Api;
                                                         using BTD_Mod_Helper.Api.Display;
                                                         using BTD_Mod_Helper.Extensions;
                                                         using MelonLoader;
-                                                        namespace CardMonkey
+                                                        namespace $tower$
                                                         {
-                                                           /*CLASSES*/
+                                                           /*CLASS*/
                                                         }
                                                      ";
 
@@ -135,6 +134,10 @@ namespace BloonTowerMaker.Logic
                                                     {
                                                         public override string BaseDisplay {get {return GetDisplay(TowerType.$towertype$, $top$, $mid$, $bot$);}} 
 
+                                                        public $tower$Display()
+                                                        {
+                                                            
+                                                        }
                                                         public override bool UseForTower(int[] tiers)
                                                         {
                                                             return tiers[$row$] == $tier$;
@@ -142,8 +145,7 @@ namespace BloonTowerMaker.Logic
 
                                                         public override void ModifyDisplayNode(UnityDisplayNode node)
                                                         {
-                                                            node.SaveMeshTexture();
-                                                            
+                                                            /*GET_TEXTURE*/
                                                             // Set our custom texture
                                                             SetMeshTexture(node, $texturename$);
 
@@ -151,6 +153,7 @@ namespace BloonTowerMaker.Logic
                                                             //node.RemoveBone(""SuperMonkeyRig:Dart"");
                                                         }
                                                     }
+                                                        /*CLASS*/
                                                         ";
     }
 }

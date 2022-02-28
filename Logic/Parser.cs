@@ -185,7 +185,7 @@ namespace BloonTowerMaker.Logic
                 //var damageModel = new ModelToList<DamageModel>(weaponFile);
                 var @class = Builder.BuildProjectileDisplayClass(Path.GetFileNameWithoutExtension(weaponFile),
                     projectileModel.FindValue("display"));
-                template.Replace("/*CLASSES*/", @class);
+                template.Replace("/*CLASS*/", @class);
             }
 
             return template.ToString();
@@ -197,7 +197,7 @@ namespace BloonTowerMaker.Logic
             if (!projectileFile.Any(x => x.Value.Contains(path))) return string.Empty;
             StringBuilder projectile = new StringBuilder();
             projectile.Append("var wpn = towerModel.GetWeapon().Duplicate();");
-            projectile.Append("towerModel.GetWeapons().Clear();");
+            projectile.Append("foreach (var w in towerModel.GetWeapons()) towerModel.GetAttackModel().RemoveWeapon(w);");
             //Every projectile assigned to path
             int index = 0;
             foreach (var entry in projectileFile)
@@ -239,9 +239,61 @@ namespace BloonTowerMaker.Logic
             return projectile.ToString();
         }
 
-        private static string ParseTowerDisplayClass()
+        public static string ParseDisplayClass()
         {
-            throw new NotImplementedException();
+
+            //Build template class for displays
+            var template = new StringBuilder(Builder.BuildDisplayTemplate(Project.instance.projectName));
+            //Get the base model
+            var baseModel = new ModelToList<ModTower>(Models.GetJsonPath(Resources.Base));
+
+            //Get the name of the base model
+            var baseName = baseModel.FindValue("DisplayName");
+
+            //Get every path folder
+            foreach (var towerFolder in Directory.GetDirectories(Project.instance.projectPath, "path*"))
+            {
+                //Path to the texture file
+                var texturePath = Path.Combine(towerFolder, Resources.TowerTexturesJsonFile);
+
+                //Check if texture.json exist
+                if (!File.Exists(texturePath)) continue;
+
+                //Get texture file
+                var textureFile = new Textures(texturePath);
+
+                //Get texture data
+                var textureData = textureFile.dataDictionary.First();
+
+                //Extract path from folder name
+                var path = Path.GetFileName(towerFolder).Replace("path_", "");
+
+                var isBase = path == Resources.Base;
+                StringBuilder textureClass;
+
+                //Get texture for the base
+                if (isBase)
+                {
+                    textureClass = new StringBuilder(Builder.BuildDisplayClass(
+                        baseName, baseName, textureData.Key,
+                        string.Join("", textureData.Value.ConvertAll(i => i.ToString()).ToArray()),
+                        "0", "0", baseModel.FindValue("Texture")));
+                }
+                //Get texture for other paths
+                else
+                {
+                var upgradeModel = new ModelToList<ModUpgrade>(Models.GetJsonPath(path));
+                textureClass = new StringBuilder(Builder.BuildDisplayClass(
+                    upgradeModel.FindValue("DisplayName"), baseName, textureData.Key,
+                    string.Join("", textureData.Value.ConvertAll(i => i.ToString()).ToArray()),
+                    Models.GetPathInt(upgradeModel.FindValue("Path")).ToString(), 
+                    upgradeModel.FindValue("Tier"), upgradeModel.FindValue("Texture")));
+                }
+
+                template.Replace("/*CLASS*/", textureClass.ToString());
+            }
+
+            return template.ToString();
         }
     }
 }

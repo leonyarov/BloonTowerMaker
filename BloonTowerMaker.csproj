@@ -76,7 +76,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\BaseModel.cs" />
     <Compile Include="Data\DictionaryExtensions.cs" />
     <Compile Include="Data\ListExtensions.cs" />
     <Compile Include="Data\ModelToList.cs" />

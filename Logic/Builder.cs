@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BloonTowerMaker.Data;
+using BloonTowerMaker.Properties;
+using Il2CppSystem.IO;
 using Il2CppSystem.Runtime.Remoting.Messaging;
 
 namespace BloonTowerMaker.Logic
@@ -11,7 +13,7 @@ namespace BloonTowerMaker.Logic
     internal class Builder
     {
         
-
+        
         private static string Stringify(string src, bool inClass = false)
         {
             return inClass ? $@"""{src}""" : $"\"{src}\"";
@@ -32,6 +34,13 @@ namespace BloonTowerMaker.Logic
             return stringBuilder.ToString();
         }
 
+        public static string BuildDisplayTemplate(string tower)
+        {
+            StringBuilder sb = new StringBuilder(BuilderStrings.DISPLAY_TEXTURE_TEMPLATE);
+            sb.Replace("$tower$", tower);
+            return sb.ToString();
+        }
+
         public static string BuildDisplayClass(
             string tower, string basetower, string towertype, string typepath, string row, string tier,  string texturename)
         {
@@ -44,7 +53,9 @@ namespace BloonTowerMaker.Logic
             stringBuilder.Replace("$bot$", typepath[2].ToString());
             stringBuilder.Replace("$row$", row.RemoveWhiteSpace());
             stringBuilder.Replace("$tier$", tier.RemoveWhiteSpace());
-            stringBuilder.Replace("$texturename$", texturename.RemoveWhiteSpace());
+            stringBuilder.Replace("$texturename$", Stringify(texturename.RemoveWhiteSpace()));
+            if (MainForm.debugTextures)
+                stringBuilder.Replace("/*GET_TEXTURE*/", "node.SaveMeshTexture();");
 
             return stringBuilder.ToString();
         }

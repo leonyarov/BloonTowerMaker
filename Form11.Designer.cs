@@ -69,15 +69,5 @@ namespace BloonTowerMaker {
                 return ((System.Drawing.Point)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap toolStripDropDownButton2_Image {
-            get {
-                object obj = ResourceManager.GetObject("toolStripDropDownButton2.Image", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

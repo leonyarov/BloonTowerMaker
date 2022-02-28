@@ -34,7 +34,7 @@ namespace BloonTowerMaker.Data
             }
             catch (Exception ex)
             {
-                throw new Exception($"Cannot write projectile file: " + ex.Message);
+                throw new Exception($"Cannot write texture file: " + ex.Message);
             }
         }
 
@@ -47,7 +47,7 @@ namespace BloonTowerMaker.Data
             }
             catch (Exception err)
             {
-                throw new Exception($"Error reading {Path.GetFileNameWithoutExtension(path)} projectile file: " + err.Message);
+                throw new Exception($"Error reading {Path.GetFileNameWithoutExtension(path)} texture file: " + err.Message);
             }
         }
 

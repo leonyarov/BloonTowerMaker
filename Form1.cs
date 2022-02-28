@@ -28,12 +28,15 @@ namespace BloonTowerMaker
         private Project towerProject;
         private ModelToList<ModTower> baseTower;
         private ModelToList<ModUpgrade> upgradeTower;
+        public static bool debugTextures;
+
         public object ImageSelect { get; private set; }
 
         public MainForm()
         {
             InitializeComponent();
             models = new Models();
+            debugTextures = false;
         }
 
 
@@ -149,7 +152,7 @@ namespace BloonTowerMaker
                 var path = item.Name.Replace("btn_t", "");
                 var tempModel = new ModelToList<ModUpgrade>(Models.GetJsonPath(path));
                 item.BackgroundImage?.Dispose();
-                item.BackgroundImage = SelectImage.LoadImage(tempModel.FindValue("Display"));
+                item.BackgroundImage = SelectImage.LoadImage(tempModel.FindValue("Icon"));
                 item.Text = tempModel.FindValue("DisplayName");
             }
 
@@ -279,6 +282,11 @@ namespace BloonTowerMaker
             //data.Edit("baseTower",combo_base.SelectedItem.ToString());
             baseTower.Edit("BaseTower",combo_base.SelectedItem.ToString());
             //models.UpdateBaseModel(data, Resources.Base);
+        }
+
+        private void checkBox_DebugTextures_CheckStateChanged(object sender, EventArgs e)
+        {
+            debugTextures = checkBox_DebugTextures.Checked;
         }
     }
 }

@@ -26,6 +26,7 @@ namespace BloonTowerMaker.Logic
                 files.AddRange(Parser.ParsePaths());
                 files.Add(Parser.ParseBase());
                 files.Add(Parser.ParseMain());
+                files.Add(Parser.ParseDisplayClass());
             } catch (Exception e) {throw e;}
             //Create provider
             //CSharpCodeProvider csc = new CSharpCodeProvider();
@@ -55,8 +56,7 @@ namespace BloonTowerMaker.Logic
             try
             {
                 //Embedd path images
-                foreach (var directory in Directory.GetDirectories(project.projectPath))
-                        parameters.EmbeddedResources.AddRange(Directory.GetFiles(directory, "*.png"));
+                parameters.EmbeddedResources.AddRange(Directory.GetFiles(Path.Combine(Project.instance.projectPath,Resources.ProjectResourcesFolder), "*.png"));
 
                 //Embedd projectile images
                 //parameters.EmbeddedResources.AddRange(Directory.GetFiles(Path.Combine(Project.instance.projectPath, Resources.ProjectileFolder), "*.png"));
@@ -96,7 +96,6 @@ namespace BloonTowerMaker.Logic
                 }
                 throw new Exception(error);
             }
-           
         }
     }
 }

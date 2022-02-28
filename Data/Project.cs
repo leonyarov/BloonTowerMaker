@@ -10,6 +10,7 @@ using BloonTowerMaker.Properties;
 using System.IO;
 using System.Windows.Forms;
 using Assets.Scripts.Models.Towers;
+using Assets.Scripts.Unity.Achievements.List;
 using Newtonsoft.Json;
 
 namespace BloonTowerMaker.Data
@@ -64,6 +65,8 @@ namespace BloonTowerMaker.Data
             Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectileFolder, Resources.ProjectileWeaponFolder));
             //Create resources folder
             Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ProjectResourcesFolder));
+            //Create extracted display textures
+            //Directory.CreateDirectory(Path.Combine(initialDirectory, Resources.ExtractDisplayFolder));
             //Create project.json
             File.Create(Path.Combine(initialDirectory, Resources.ProjectileJson));
             //Create projectile.json
@@ -75,8 +78,6 @@ namespace BloonTowerMaker.Data
             using (var form = new NewProject())
             {
                 if (pathFromLast) form.path.Text = Settings.Default.LastTowerPath;
-                //
-
                 var result = form.ShowDialog();
                 if (result == DialogResult.OK)
                 {

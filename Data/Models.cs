@@ -56,6 +56,15 @@ namespace BloonTowerMaker.Data
                 return "TOP";
             return path[1] != '0' ? "MIDDLE" : "BOTTOM";
         }
+        public static int GetPathInt(string row)
+        {
+            switch (row)
+            {
+                case "TOP": return 0;
+                case "MIDDLE": return 1;
+                default: return 2;
+            }
+        }
 
         public  bool isAllowed(string path)
         {
@@ -138,7 +147,7 @@ namespace BloonTowerMaker.Data
 
             if (typeof(T) == typeof(ModTower) || typeof(T) == typeof(ModUpgrade))
             {
-                dict.Add("Display", "image");
+                //dict.Add("Display", "image");
                 dict.Add("Texture", "image");
             }
             return dict;

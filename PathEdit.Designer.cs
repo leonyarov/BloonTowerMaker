@@ -36,6 +36,7 @@ namespace BloonTowerMaker
             this.img_display = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_help = new System.Windows.Forms.Button();
             this.imageTable = new System.Windows.Forms.TableLayoutPanel();
             this.img_texture = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,7 +64,7 @@ namespace BloonTowerMaker
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btn_help = new System.Windows.Forms.Button();
+            this.help2_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.img_icon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.img_display)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -150,6 +151,7 @@ namespace BloonTowerMaker
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.help2_btn);
             this.groupBox1.Controls.Add(this.btn_help);
             this.groupBox1.Controls.Add(this.imageTable);
             this.groupBox1.Controls.Add(this.label1);
@@ -163,6 +165,18 @@ namespace BloonTowerMaker
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Model";
+            // 
+            // btn_help
+            // 
+            this.btn_help.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btn_help.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_help.Location = new System.Drawing.Point(498, 170);
+            this.btn_help.Name = "btn_help";
+            this.btn_help.Size = new System.Drawing.Size(20, 20);
+            this.btn_help.TabIndex = 9;
+            this.btn_help.Text = "?";
+            this.btn_help.UseVisualStyleBackColor = false;
+            this.btn_help.Click += new System.EventHandler(this.btn_help_Click);
             // 
             // imageTable
             // 
@@ -496,17 +510,16 @@ namespace BloonTowerMaker
             this.flowLayoutPanel4.Size = new System.Drawing.Size(795, 663);
             this.flowLayoutPanel4.TabIndex = 12;
             // 
-            // btn_help
+            // help2_btn
             // 
-            this.btn_help.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btn_help.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_help.Location = new System.Drawing.Point(513, 170);
-            this.btn_help.Name = "btn_help";
-            this.btn_help.Size = new System.Drawing.Size(20, 20);
-            this.btn_help.TabIndex = 9;
-            this.btn_help.Text = "?";
-            this.btn_help.UseVisualStyleBackColor = false;
-            this.btn_help.Click += new System.EventHandler(this.btn_help_Click);
+            this.help2_btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("help2_btn.BackgroundImage")));
+            this.help2_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.help2_btn.Location = new System.Drawing.Point(748, 158);
+            this.help2_btn.Name = "help2_btn";
+            this.help2_btn.Size = new System.Drawing.Size(32, 32);
+            this.help2_btn.TabIndex = 10;
+            this.help2_btn.UseVisualStyleBackColor = true;
+            this.help2_btn.Click += new System.EventHandler(this.help2_btn_Click);
             // 
             // PathEdit
             // 
@@ -594,5 +607,6 @@ namespace BloonTowerMaker
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.DataGridView dataGridDamage;
         private System.Windows.Forms.Button btn_help;
+        private System.Windows.Forms.Button help2_btn;
     }
 }

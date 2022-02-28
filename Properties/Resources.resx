@@ -127,6 +127,9 @@
   <data name="EmptyPropertyValue" xml:space="preserve">
     <value>(none)</value>
   </data>
+  <data name="ExtractDisplayFolder" xml:space="preserve">
+    <value>extracted</value>
+  </data>
   <data name="ImageIcon" xml:space="preserve">
     <value />
   </data>

@@ -89,6 +89,15 @@ namespace BloonTowerMaker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to extracted.
+        /// </summary>
+        internal static string ExtractDisplayFolder {
+            get {
+                return ResourceManager.GetString("ExtractDisplayFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string ImageIcon {
