@@ -21,6 +21,7 @@ namespace BloonTowerMaker
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(path.Text)) return;
             this.proj = new Project(path.Text, towername.Text, version.Text, author.Text);
             this.DialogResult = DialogResult.OK;
 

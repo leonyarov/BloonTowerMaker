@@ -1,15 +1,7 @@
 ﻿using BloonTowerMaker.Data;
-using System;
-using System.Collections.Generic;
+using BloonTowerMaker.Properties;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Assets.Scripts.Simulation;
-using BloonTowerMaker.Properties;
-using Mono.Cecil;
 
 namespace BloonTowerMaker.Logic
 {

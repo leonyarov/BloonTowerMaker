@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media;
-using Assets.Scripts.Models.ServerEvents;
-using Assets.Scripts.Models.Towers;
-using Assets.Scripts.Simulation.Track;
+﻿using Assets.Scripts.Models.Towers;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
 using BTD_Mod_Helper.Api.Towers;
-using Mono.Cecil;
+using System;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace BloonTowerMaker
 {
@@ -109,18 +98,18 @@ namespace BloonTowerMaker
             input_buttom.Value = Project.instance.BottomPathUpgrades;
 
             disablePathButton();
-            recentToolStripMenuItem.DropDown = new ToolStripDropDown();
-            foreach (var defaultRecentPath in Settings.Default.RecentPaths ?? new StringCollection())
-            {
-                if (defaultRecentPath == "none") continue;
-                var dropdown = new ToolStripMenuItem(defaultRecentPath);
-                dropdown.Click += (o, args) =>
-                {
-                    Project.LoadFromRecent(Settings.Default.RecentPaths.IndexOf(defaultRecentPath));
-                    Application.Restart();
-                };
-                recentToolStripMenuItem.DropDownItems.Add(dropdown);
-            }
+            //recentToolStripMenuItem.DropDown = new ToolStripDropDown();
+            //foreach (var defaultRecentPath in Settings.Default.RecentPaths ?? new StringCollection())
+            //{
+            //    if (defaultRecentPath == "none") continue;
+            //    var dropdown = new ToolStripMenuItem(defaultRecentPath);
+            //    dropdown.Click += (o, args) =>
+            //    {
+            //        Project.LoadFromRecent(Settings.Default.RecentPaths.IndexOf(defaultRecentPath));
+            //        Application.Restart();
+            //    };
+            //    recentToolStripMenuItem.DropDownItems.Add(dropdown);
+            //}
 
             var monkeyTypes = typeof(TowerType).GetProperties();
             foreach (var propertyInfo in monkeyTypes)
@@ -258,6 +247,7 @@ namespace BloonTowerMaker
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            this.Close();
             var path = Project.GetFolder();
             towerProject = Project.New(true);
             Application.Restart();
@@ -277,11 +267,7 @@ namespace BloonTowerMaker
 
         private void combo_base_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //data = new ModelToList<TowerModel>(Models.GetJsonPath(Resources.Base));
-            //data["baseTower"] = combo_base.SelectedItem.ToString();
-            //data.Edit("baseTower",combo_base.SelectedItem.ToString());
             baseTower.Edit("BaseTower",combo_base.SelectedItem.ToString());
-            //models.UpdateBaseModel(data, Resources.Base);
         }
 
         private void checkBox_DebugTextures_CheckStateChanged(object sender, EventArgs e)

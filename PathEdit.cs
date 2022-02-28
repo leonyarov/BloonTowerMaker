@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Assets.Scripts.Models;
-using Assets.Scripts.Models.Towers;
+﻿using Assets.Scripts.Models.Towers;
 using Assets.Scripts.Models.Towers.Behaviors.Attack;
-using Assets.Scripts.Models.Towers.Projectiles;
 using Assets.Scripts.Models.Towers.Projectiles.Behaviors;
 using Assets.Scripts.Models.Towers.Weapons;
-using Assets.Scripts.Simulation.Towers;
 using BloonTowerMaker.Data;
 using BloonTowerMaker.Logic;
 using BloonTowerMaker.Properties;
 using BTD_Mod_Helper.Api.Towers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace BloonTowerMaker
 {
@@ -90,6 +83,7 @@ namespace BloonTowerMaker
             selectedProjectiles= selectedProjectiles.loadSelected();
             foreach (DataGridViewRow row in dataGridProjectiles.Rows)
             {
+                if (selectedProjectiles.Count == 0) break;
                 if (row.Cells[1].ValueType == typeof(bool) && selectedProjectiles[row.Cells[0].Value.ToString()].Contains(path))
                     row.Cells[1].Value = true;
             }

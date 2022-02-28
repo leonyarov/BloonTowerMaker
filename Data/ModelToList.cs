@@ -48,7 +48,14 @@ namespace BloonTowerMaker.Data
 
         public string FindValue(string entry)
         {
-            return Find(entry)[2];
+            try
+            {
+                return Find(entry)[2];
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Cannot find key: {entry} in {nameof(T)} dictionary");
+            }
         }
 
         public void Edit(string entry, string value)
