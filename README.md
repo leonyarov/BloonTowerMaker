@@ -63,7 +63,7 @@
 - Select the tower and a path to assign the relevant 3D model to the upgrade path
   - For hero 3D models use 0,0,0 path
   - Any invalid path (like 5,3,0) might result in an error at mod run-time.
-- Get the texture for the path using [Debug Textures](https://github.com/millefoleon/BloonTowerMaker/edit/master/README.md#debug-textures)
+- Get the texture for the path using [Debug Textures](https://github.com/millefoleon/BloonTowerMaker/#debug-textures)
 
 # Projectile Editor Window
 <a href="url"><img src="https://user-images.githubusercontent.com/31301575/156161607-9007bb2a-b90e-4151-9d64-1e62a00cb011.png" width="400px"></a>  
@@ -76,7 +76,7 @@
   - _A name should be assigned automatically, if you dont see it, click on the projectile name inside the list to refresh the tables_)
 
 ### Projectile Sprite
-- Sprite selection works much like [In the path editor](https://github.com/millefoleon/BloonTowerMaker/edit/master/README.md#textures-icons-and-portraits)
+- Sprite selection works much like [In the path editor](https://github.com/millefoleon/BloonTowerMaker#textures-icons-and-portraits)
 
 ### Models
 - I cant guarantee you that every field will work for the projectile, but the `Damage` and `pierce` work fine. You are free to experiment
