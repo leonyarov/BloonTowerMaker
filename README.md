@@ -33,7 +33,7 @@
 
 # Path Editor Window
 <a href="url"><img src="https://user-images.githubusercontent.com/31301575/156157964-54a97898-e548-4b1e-a492-3ab1a100f1f7.png" width="400px"></a>  
-_Editing the base path is slightly different from the other paths, but mostly the same_  
+>Editing the base path is slightly different from the other paths, but mostly the same  
 ***Required Fields in Path Property:***
 - Base path
   - ```DisplayName, TopPathUpgrades,MiddlePathUpgrades,BottonPathUpgrades, Cost, Description, TowerSet, BaseTower```, Where ```TopPathUpgrades,MiddlePathUpgrades,BottonPathUpgrades, TowerSet, BaseTower``` will be automatically assigned.
