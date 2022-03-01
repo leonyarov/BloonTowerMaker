@@ -98,6 +98,6 @@
 
 # A message to other developers
 The project was made in two weeks in a time-off between semesters. I changed the code base 4 times in a rush to get the alpha version done until the semester begins -
-all while trying to learn C#, Mod helper and analyzing mods of other people.
-If you have any ideas on how to improve the project please DM me in discord `neol#6987`.
+all while trying to learn C#, Mod helper and analyzing mods of other people.  
+If you have any ideas on how to improve the project please DM me in discord `neol#6987`.  
 p.s I recently discovered that Mod helper supports json serialization for some objects. Should have read the documentation better ;-P
