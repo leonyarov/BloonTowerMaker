@@ -4,7 +4,7 @@
 <a href="url"><img src="https://user-images.githubusercontent.com/31301575/156145828-97e0fcec-1392-4fd8-9651-c2cf62224b20.png" width="200px"></a>  
 - ```Author``` name will be included in the metadata.
 - ```Tower Name ``` The name of the file and genetated .dll. Should not contain any reserved c# keywords.
-- ```Version``` Tower version that in the tower metadata.
+- ```Version``` Tower version in the tower metadata.
 - ```Project Location``` - Specifiy where the project files should be.
 
 # Main window
