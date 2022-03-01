@@ -20,9 +20,9 @@
 ### Paths
 - ```Top, Middle, Botttom``` Enables the path upgrade up to the selected index and saves the value inside the base path settings.
 ### Path selection
-- Click any path upgrade to start editing, see [Path Editor](https://github.com/millefoleon/BloonTowerMaker/new/master?readme=1#path-editor-window). ***Paragon path not supported yet***
+- Click any path upgrade to start editing, see [Path Editor](https://github.com/millefoleon/BloonTowerMaker/blob/master/README.md#path-editor-window). ***Paragon path not supported yet***
 ### Projectile Editor
-- See [Projectile Editor](https://github.com/millefoleon/BloonTowerMaker/new/master?readme=1#projectile-editor-window)
+- See [Projectile Editor](https://github.com/millefoleon/BloonTowerMaker/blob/master/README.md#projectile-editor-window)
 ### Debug Textures
 - Enabling this and generating the file will result in the *Upgrade Path* to extract the texture file for the specified *Path model* in path editor window upon mod launch.
 - Extracted textures path: ```C:\Users\*username*\AppData\LocalLow\Ninja Kiwi\BloonsTD6```
