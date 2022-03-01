@@ -32,15 +32,16 @@
 - ```Type``` Tower category
 
 # Path Editor Window
-<a href="url"><img src="https://user-images.githubusercontent.com/31301575/156157964-54a97898-e548-4b1e-a492-3ab1a100f1f7.png" width="400px"></a>  
+<a href="url"><img src="https://user-images.githubusercontent.com/31301575/156157964-54a97898-e548-4b1e-a492-3ab1a100f1f7.png" width="400px"></a>   
 >Editing the base path is slightly different from the other paths, but mostly the same  
-***Required Fields in Path Property:***
-- Base path
-  - ```DisplayName, TopPathUpgrades,MiddlePathUpgrades,BottonPathUpgrades, Cost, Description, TowerSet, BaseTower```, Where ```TopPathUpgrades,MiddlePathUpgrades,BottonPathUpgrades, TowerSet, BaseTower``` will be automatically assigned.
-- Upgrade Path
-  -  ```DisplayName, Cost, Description, Path, Tier```, Where ```Path, Tier``` will be automatically assigned
 
-> !Click the knowledge button for information about input per variable type!
+***Required Fields in Path Property: (failing to assign these values will result in compilation error)***
+- Base path
+  - ```DisplayName, TopPathUpgrades,MiddlePathUpgrades,BottonPathUpgrades, Cost, Description, TowerSet, BaseTower```, where ```TopPathUpgrades,MiddlePathUpgrades,BottonPathUpgrades, TowerSet, BaseTower``` will be automatically assigned.
+- Upgrade Path
+  -  ```DisplayName, Cost, Description, Path, Tier```, where ```Path, Tier``` will be automatically assigned
+
+> Click the knowledge button for information about input per variable type!
 
 #### Models
 - You can read about some of the models [here](https://github.com/gurrenm3/BTD-Mod-Helper/wiki/Making-a-Custom-Tower).
@@ -48,7 +49,7 @@
 
 #### Projectile Select
 - Selecting a projectile from the list will override any projectile assigned to the tower from the previous paths.
-  - Not selecting any projectile will keep them on the tower for the rest of the paths
+  - Not selecting any projectile will keep projectiles on the tower for the previous paths
 
 ### Textures, Icons and Portraits
 > using large .png files might not apply correctly or not at all!
@@ -80,7 +81,7 @@
 - I cant guarantee you that every field will work for the projectile, but the `Damage` and `pierce` work fine. You are free to experiment
 
 # Features not supported by the tool
-- Behaviours and Filters (no camo detection or abilities)
+- Behaviours and Filters (no camo detection, abilities or damage type)
 - Damage by tag (no extra damage to ceramic or moabs)
 - Rig bone removal (remove projectiles from monkeys hands)
 - Custom 3D models
@@ -90,9 +91,9 @@
 
 # Credits
 ### Special Credit to
-- gurrenm3 for the Mod Helper
-- doombubbles for the card monkey
-You were a great inspiration for the project and it couldn't exist without you 
+- @gurrenm3 for the Mod Helper
+- @doombubbles for the card monkey  
+  You were a great inspiration for the project and it couldn't exist without you 
 
 # A message to other developers
 The project was made in two weeks in a time-off between semesters. I changed the code base 4 times in a rush to get the alpha version done until the semester begins -
